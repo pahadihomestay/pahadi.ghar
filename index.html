@@ -1047,4 +1047,12 @@
             // Construct pre-filled WhatsApp message
             const message = `Hello The Pahadi Ghar! I would like to book a stay. Name: ${name}, Phone: ${phone}, Check-In: ${checkIn}, Check-Out: ${checkOut}, Room: ${roomType}, Guests: ${guestCount}, Notes: ${notes}. Please confirm availability!`;
 
-            const encodedMessage = encodeURIComponent(message); 
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "917876631873";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            window.location.href = whatsappUrl;
+        }
+    </script>
+</body>
+</html>
