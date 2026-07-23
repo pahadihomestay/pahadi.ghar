@@ -69,7 +69,8 @@
     <!-- FIXED GLASSMORPHISM HEADER -->
     <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-gold/20 text-cream transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
+         
+           <!-- Brand Logo -->
             <a href="#" class="flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center text-gold group-hover:scale-105 transition-transform">
                     <i class="fa-solid fa-mountain-sun text-lg"></i>
@@ -230,7 +231,7 @@
                     </div>
                     <!-- Secondary Overlapping Image Card -->
                     <div class="absolute -bottom-10 -left-6 sm:-left-10 z-20 w-64 sm:w-72 rounded-2xl overflow-hidden shadow-2xl border-4 border-white hidden sm:block">
-                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop" alt="Mountain Scenery Darcha" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-700">
+                        <img src="<img href="https://ibb.co/Z65TfG0r"><img src="https://i.ibb.co/Kjdy5bJg/IMG-20250609-154210736-Original.jpg" alt="IMG-20250609-154210736-Original" border="0"></a>" alt="Mountain Scenery Darcha" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-700">
                         <div class="bg-forest text-cream p-3 text-center">
                             <span class="text-xs font-serif text-gold block">Breathtaking Views</span>
                             <span class="text-xs font-light">Bhaga River & Snow Peaks</span>
@@ -243,6 +244,115 @@
             </div>
         </div>
     </section>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pahadi Ghar - Gallery Section</title>
+    <style>
+        .pahadi-gallery-section {
+            background-color: #fcf8f2; 
+            font-family: 'Georgia', serif; 
+            padding: 20px 15px; 
+            text-align: center;
+        }
+
+        .pahadi-gallery-container {
+            max-width: 850px;
+            margin: 10px auto; 
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(45, 51, 45, 0.08);
+            border: 1px solid #efe5d8;
+        }
+
+        .pahadi-title {
+            font-size: 28px; 
+            color: #1a211a; 
+            margin-bottom: 5px;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .pahadi-line {
+            width: 40px;
+            height: 3px;
+            background-color: #c28e4e; 
+            margin: 0 auto 15px auto; 
+            border-radius: 2px;
+        }
+
+        .pahadi-frame {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Ratio */
+            background-color: #f0e9df;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .pahadi-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .pahadi-slide.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="pahadi-gallery-section">
+        <div class="pahadi-gallery-container">
+            
+            <h2 class="pahadi-title">Our Gallery</h2>
+            <div class="pahadi-line"></div>
+
+            <div class="pahadi-frame">
+                <!-- Aapki di gayi 10 Photos -->
+                <img src="https://i.ibb.co/f60Ks96/IMG-1623.jpg" class="pahadi-slide active" alt="Gallery Photo 1">
+                <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="pahadi-slide" alt="Gallery Photo 2">
+                <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="pahadi-slide" alt="Gallery Photo 3">
+                <img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" class="pahadi-slide" alt="Gallery Photo 4">
+                <img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" class="pahadi-slide" alt="Gallery Photo 5">
+                <img src="https://i.ibb.co/Y4ZTSxzw/IMG-1389.jpg" class="pahadi-slide" alt="Gallery Photo 6">
+                <img src="https://i.ibb.co/6JrmWSNF/IMG-1390.jpg" class="pahadi-slide" alt="Gallery Photo 7">
+                <img src="<a href="https://ibb.co/HTP2v9Km"><img src="https://i.ibb.co/QvHcBxJs/IMG-20240211-204148-Original.jpg" class="pahadi-slide" alt="Gallery Photo 8">
+                <img src="https://i.ibb.co/VXsVpgq/photo-1566515788590-23e44a99dfc1-2.jpg" class="pahadi-slide" alt="Gallery Photo 9">
+                <img src="https://i.ibb.co/j9F2dCWs/pexels-vikashkr50-20292895-2.jpg" class="pahadi-slide" alt="Gallery Photo 10">
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.pahadi-slide');
+        const totalSlides = slides.length;
+
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Har 2 seconds me photo badlegi
+        setInterval(showNextSlide, 2000);
+    </script>
+
+</body>
+</html>
 
     <!-- FOOD & HOSPITALITY SECTION -->
     <section id="food" class="py-24 bg-alpine text-cream relative">
@@ -491,7 +601,7 @@
                     <span class="text-forest font-semibold text-xs tracking-widest uppercase block mb-2">Instant Reservation</span>
                     <h2 class="font-serif text-3xl sm:text-4xl font-bold text-alpine mb-3">Book Your Stay via WhatsApp</h2>
                     <p class="text-alpine/80 text-sm font-light">
-                        Fill in your details below and click submit. Our host Chhering Tashi will instantly receive your request on WhatsApp to confirm your booking!
+                        Fill in your details below and click submit. Our host Thinlay will instantly receive your request on WhatsApp to confirm your booking!
                     </p>
                 </div>
 
@@ -528,8 +638,8 @@
                             <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Select Room Type *</label>
                             <select id="room-type" required class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
                                 <option value="" disabled selected>Choose your room</option>
-                                <option value="Standard Room (₹2,499 / Night)">Standard Room (₹2,499 / Night)</option>
-                                <option value="Best Family Room (₹3,499 / Night)">Best Family Room (₹3,499 / Night)</option>
+                                <option value="Standard Room (₹2,499 / Night)">Normal Room</option>
+                                <option value="Best Family Room (₹3,499 / Night)">Family Room</option>
                             </select>
                         </div>
                         <!-- Number of Guests -->
@@ -1188,15 +1298,34 @@
             event.preventDefault();
 
             const name = document.getElementById('guest-name').value.trim();
+
             const phone = document.getElementById('guest-phone').value.trim();
+
             const checkIn = document.getElementById('check-in').value;
-            const checkOut = document.getElementById('check-out').value;
-            const roomType = document.getElementById('room-type').value;
-            const guestCount = document.getElementById('guest-count').value;
-            const notes = document.getElementById('guest-notes').value.trim() || 'None';
+            const checkOut = 
+
+document.getElementById('check-out').value;
+            const roomType = 
+
+
+document.getElementById('room-type').value;
+            const guestCount = 
+
+document.getElementById('guest-count').value;
+            const notes = 
+
+document.getElementById('guest-notes').value.trim() || 'None';
 
             // Construct pre-filled WhatsApp message
-            const message = `Hello The Pahadi Ghar! I would like to book a stay. Name: ${name}, Phone: ${phone}, Check-In: ${checkIn}, Check-Out: ${checkOut}, Room: ${roomType}, Guests: ${guestCount}, Notes: ${notes}. Please confirm availability!`;
+            const message = `*Hii Thinlay! I would like to book a stay at The Pahadi Ghar - Darcha*. 
+
+Name: ${name}, 
+Phone: ${phone}, 
+Check-In: ${checkIn}, 
+Check-Out: ${checkOut}, 
+Room: ${roomType}, 
+Guests: ${guestCount}, 
+Notes: ${notes}. Please confirm availability!`;
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappNumber = "917876631873";
@@ -1204,6 +1333,7 @@
 
             window.location.href = whatsappUrl;
         }
+
     </script>
 </body>
 </html>
