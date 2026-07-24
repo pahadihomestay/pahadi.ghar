@@ -43,7 +43,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .fab-container:hover .fab-options { opacity: 1; transform: translateY(-10px) scale(1); pointer-events: auto; }
         
-        /* Custom Switch Toggle Styles for Room 101 */
+        /* Custom Switch Toggle Styles */
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px; }
         .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         input:checked + .slider { background-color: #4ade80; }
@@ -53,39 +53,55 @@
 <body class="antialiased selection:bg-luxuryGold/30">
 
     <!-- ================= NAVBAR ================= -->
-    <nav class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-luxuryGold/10 shadow-sm">
+    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-luxuryGold/15 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+            <div class="flex items-center justify-between h-20 gap-2">
+                <!-- Logo & Subtext -->
                 <div class="flex-shrink-0 flex flex-col">
-                    <span class="luxury-heading text-lg sm:text-xl font-bold tracking-widest text-luxuryText flex items-center gap-2">
+                    <span class="luxury-heading text-base sm:text-lg font-bold tracking-widest text-luxuryText flex items-center gap-1.5">
                         <i class="fa-solid fa-mountain-sun text-luxuryGold"></i> THE PAHADI GHAR
                     </span>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-luxuryGold mt-0.5">Darcha • L&S</span>
+                    <span class="text-[10px] font-semibold uppercase tracking-wider text-luxuryGold mt-0.5">Darcha • L&S</span>
                 </div>
 
-                <div class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-600">
+                <!-- Desktop Navigation Links (Optimized Spacing to prevent overlapping) -->
+                <div class="hidden xl:flex items-center space-x-6 font-medium text-xs text-gray-600">
                     <a href="#about" class="hover:text-luxuryGold transition-colors">About</a>
                     <a href="#rooms" class="hover:text-luxuryGold transition-colors">Rooms</a>
                     <a href="#dining" class="hover:text-luxuryGold transition-colors">Dining</a>
                     <a href="#reviews" class="hover:text-luxuryGold transition-colors">Reviews</a>
                     <a href="#facilities" class="hover:text-luxuryGold transition-colors">Facilities</a>
                     <a href="#contact" class="hover:text-luxuryGold transition-colors">Contact</a>
-                    <button onclick="openAdminModal()" class="text-xs uppercase bg-gray-100 hover:bg-luxuryGold hover:text-white px-3 py-1.5 rounded transition-all tracking-wider font-bold text-gray-700">
+                    <button onclick="openAdminModal()" class="text-[11px] uppercase bg-gray-100 hover:bg-luxuryGold hover:text-white px-2.5 py-1 rounded transition-all tracking-wider font-bold text-gray-700">
                         <i class="fa-solid fa-lock-open mr-1"></i> Admin
                     </button>
                 </div>
 
-                <div class="hidden sm:flex items-center space-x-4">
-                    <a href="https://instagram.com/pahadi.ghar" target="_blank" class="flex items-center gap-2 text-sm font-semibold border border-luxuryGold/30 px-3 py-2 rounded-full hover:bg-luxuryGold/10 transition-all text-luxuryText">
-                        <i class="fa-brands fa-instagram text-pink-600 text-lg"></i> <span>@pahadi.ghar</span>
+                <!-- Tablet Navigation Links (For medium laptop screens) -->
+                <div class="hidden lg:flex xl:hidden items-center space-x-4 font-medium text-xs text-gray-600">
+                    <a href="#about" class="hover:text-luxuryGold transition-colors">About</a>
+                    <a href="#rooms" class="hover:text-luxuryGold transition-colors">Rooms</a>
+                    <a href="#dining" class="hover:text-luxuryGold transition-colors">Dining</a>
+                    <a href="#reviews" class="hover:text-luxuryGold transition-colors">Reviews</a>
+                    <a href="#facilities" class="hover:text-luxuryGold transition-colors">Facilities</a>
+                    <button onclick="openAdminModal()" class="text-[10px] uppercase bg-gray-100 hover:bg-luxuryGold hover:text-white px-2 py-1 rounded transition-all font-bold text-gray-700">
+                        Admin
+                    </button>
+                </div>
+
+                <!-- Right Action Buttons -->
+                <div class="hidden sm:flex items-center space-x-3">
+                    <a href="https://instagram.com/pahadi.ghar" target="_blank" class="flex items-center gap-1.5 text-xs font-semibold border border-luxuryGold/30 px-3 py-1.5 rounded-full hover:bg-luxuryGold/10 transition-all text-luxuryText">
+                        <i class="fa-brands fa-instagram text-pink-600 text-base"></i> <span>@pahadi.ghar</span>
                     </a>
-                    <a href="#rooms" class="bg-luxuryGold hover:bg-luxuryDarkGold text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-md transition-all tracking-wide">
+                    <a href="#rooms" class="bg-luxuryGold hover:bg-luxuryDarkGold text-white font-semibold text-xs px-4 py-2 rounded-full shadow-md transition-all tracking-wide">
                         Book Now
                     </a>
                 </div>
 
-                <div class="lg:hidden flex items-center space-x-3">
-                    <button onclick="openAdminModal()" class="text-xs bg-gray-100 px-2.5 py-1.5 rounded font-bold text-gray-600">Admin</button>
+                <!-- Mobile & Smaller Screen Menu Toggles -->
+                <div class="lg:hidden flex items-center space-x-2">
+                    <button onclick="openAdminModal()" class="text-xs bg-gray-100 px-2 py-1 rounded font-bold text-gray-600">Admin</button>
                     <button id="mobileMenuBtn" class="text-luxuryText focus:outline-none p-2 rounded-lg hover:bg-gray-100">
                         <i class="fa-solid fa-ellipsis-vertical text-2xl"></i>
                     </button>
@@ -93,6 +109,7 @@
             </div>
         </div>
 
+        <!-- Mobile Drawer -->
         <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-luxuryGold/20 px-4 pt-2 pb-6 space-y-3 absolute top-20 left-0 w-full shadow-xl">
             <a href="#about" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">About</a>
             <a href="#rooms" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Rooms</a>
@@ -113,7 +130,7 @@
     </nav>
 
     <!-- ================= LIVE STATUS BAR ================= -->
-    <section class="bg-amber-50/70 border-b border-amber-200/50 py-3 px-4">
+    <section class="bg-amber-50/80 border-b border-amber-200/60 py-3 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-sm">
             <div class="flex items-center gap-2 font-medium text-gray-700">
                 <i class="fa-solid fa-calendar-check text-luxuryDarkGold animate-pulse"></i>
@@ -126,86 +143,95 @@
         </div>
     </section>
 
-    <!-- ================= STATIC INFORMATION BANNER ICONS ================= -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-luxuryGold/20 rounded-2xl p-4 shadow-sm text-center">
+    <!-- ================= HERO INFO BANNER ================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-luxuryGold/20 rounded-2xl p-6 shadow-sm text-center">
             <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-                <i class="fa-solid fa-circle-info text-luxuryGold text-lg mb-1"></i>
+                <i class="fa-solid fa-circle-info text-luxuryGold text-xl mb-1.5"></i>
                 <span class="text-xs text-gray-400 font-medium">Altitude</span>
-                <span class="text-xs font-bold text-luxuryText">11,020 Feet High</span>
+                <span class="text-sm font-bold text-luxuryText">11,020 Feet High</span>
             </div>
             <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-                <i class="fa-solid fa-snowflake text-luxuryGold text-lg mb-1"></i>
+                <i class="fa-solid fa-snowflake text-luxuryGold text-xl mb-1.5"></i>
                 <span class="text-xs text-gray-400 font-medium">Climate</span>
-                <span class="text-xs font-bold text-luxuryText">Pleasant / Crisp Cold</span>
+                <span class="text-sm font-bold text-luxuryText">Pleasant / Crisp Cold</span>
             </div>
             <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-                <i class="fa-solid fa-shield-halved text-luxuryGold text-lg mb-1"></i>
+                <i class="fa-solid fa-shield-halved text-luxuryGold text-xl mb-1.5"></i>
                 <span class="text-xs text-gray-400 font-medium">Stay Format</span>
-                <span class="text-xs font-bold text-luxuryText">100% Safe Local Homestay</span>
+                <span class="text-sm font-bold text-luxuryText">100% Safe Local Homestay</span>
             </div>
             <div class="flex flex-col items-center justify-center p-2 last:border-none">
-                <i class="fa-solid fa-route text-luxuryGold text-lg mb-1"></i>
+                <i class="fa-solid fa-route text-luxuryGold text-xl mb-1.5"></i>
                 <span class="text-xs text-gray-400 font-medium">Connectivity</span>
-                <span class="text-xs font-bold text-luxuryText">Manali-Leh Highway</span>
+                <span class="text-sm font-bold text-luxuryText">Manali-Leh Highway</span>
             </div>
         </div>
     </section>
 
     <!-- ================= CHOOSE ACCOMMODATION ================= -->
-    <section id="rooms" class="max-w-md mx-auto px-4 py-12">
-        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 pl-1">CHOOSE ACCOMMODATION</h3>
+    <section id="rooms" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-10">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">CHOOSE ACCOMMODATION</h3>
+            <h2 class="luxury-heading text-3xl font-bold text-luxuryText">Our Rooms & Suites</h2>
+            <div class="w-16 h-0.5 bg-luxuryGold mx-auto mt-3"></div>
+        </div>
 
-        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/60 shadow-xl">
             <!-- ROOM 101: FAMILY SUITE CARD -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Room 101: Family Suite</h4>
-                        <p class="text-xs text-gray-500">₹<span id="price_family">3099</span> / night</p>
+            <div class="border border-gray-100 bg-luxuryLightBg/50 rounded-2xl p-5 shadow-xs flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h4 class="text-base font-bold text-gray-800">Room 101: Family Suite</h4>
+                            <p class="text-xs text-gray-500 font-semibold mt-0.5">₹<span id="price_family">3099</span> / night</p>
+                        </div>
+                        <label class="relative inline-block w-12 h-7">
+                            <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
+                            <span class="slider"></span>
+                        </label>
                     </div>
-                    <label class="relative inline-block w-12 h-7">
-                        <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
-                        <span class="slider"></span>
-                    </label>
+                    <div class="relative w-full h-52 rounded-xl overflow-hidden mt-2 bg-gray-100 shadow-sm">
+                        <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" loading="lazy" class="w-full h-full object-cover" alt="Family Room">
+                        <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded">FAMILY SUITE VIEW</div>
+                    </div>
                 </div>
-                <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
-                    <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="w-full h-full object-cover" alt="Family Room">
-                    <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">FAMILY SUITE VIEW</div>
-                </div>
-                <div class="mt-2 text-[11px] text-gray-500 space-y-0.5">
-                    <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 4-6 Persons | 2 Double Beds</p>
-                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+                <div class="mt-4 text-xs text-gray-600 space-y-1">
+                    <p><i class="fa-solid fa-users text-luxuryGold mr-1.5"></i> Best for 4-6 Persons | 2 Double Beds</p>
+                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1.5"></i> Extra Mattress &amp; Heater available on request</p>
                 </div>
             </div>
 
             <!-- COZY STANDARD ROOMS CARD -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Cozy Standard Rooms</h4>
-                        <p class="text-xs text-gray-500">Rooms 102 to 107</p>
-                        <p class="text-[11px] text-gray-400 font-medium">(₹<span id="price_standard">2099</span> / night)</p>
+            <div class="border border-gray-100 bg-luxuryLightBg/50 rounded-2xl p-5 shadow-xs flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h4 class="text-base font-bold text-gray-800">Cozy Standard Rooms</h4>
+                            <p class="text-xs text-gray-500">Rooms 102 to 107</p>
+                            <p class="text-xs text-luxuryDarkGold font-bold mt-0.5">₹<span id="price_standard">2099</span> / night</p>
+                        </div>
+                        <div class="flex items-center bg-white border border-gray-200 rounded-xl px-3 py-1.5 gap-3 shadow-xs">
+                            <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1.5 select-none focus:outline-none">−</button>
+                            <span id="standardRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[16px] text-center">0</span>
+                            <button onclick="changeStandardCount(1)" class="text-lg font-bold text-gray-600 px-1.5 select-none focus:outline-none">+</button>
+                        </div>
                     </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="standardRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStandardCount(1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    <div class="relative w-full h-52 rounded-xl overflow-hidden mt-2 bg-gray-100 shadow-sm">
+                        <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" loading="lazy" class="w-full h-full object-cover" alt="Standard Room">
+                        <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded">NORMAL ROOM VIEW</div>
                     </div>
                 </div>
-                <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
-                    <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="w-full h-full object-cover" alt="Standard Room">
-                    <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">NORMAL ROOM VIEW</div>
-                </div>
-                <div class="mt-2 text-[11px] text-gray-500 space-y-0.5">
-                    <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 2-3 Persons | 1 Double Bed</p>
-                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+                <div class="mt-4 text-xs text-gray-600 space-y-1">
+                    <p><i class="fa-solid fa-users text-luxuryGold mr-1.5"></i> Best for 2-3 Persons | 1 Double Bed</p>
+                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1.5"></i> Extra Mattress &amp; Heater available on request</p>
                 </div>
             </div>
+        </div>
 
-            <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
-
-            <button onclick="triggerReservationModalStep()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3 rounded-xl shadow transition-all tracking-wide text-xs uppercase">
+        <div class="max-w-md mx-auto mt-8">
+            <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-3 rounded-xl font-semibold text-center mb-4"></div>
+            <button onclick="triggerReservationModalStep()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 rounded-xl shadow-lg transition-all tracking-wider text-xs uppercase">
                 Proceed To Booking 
             </button>
         </div>
@@ -298,8 +324,7 @@
                         Meet Your Local Hosts:<br><span class="text-luxuryDarkGold">Chhering Tashi & Thinlay</span>
                     </h2>
                     <p class="text-gray-600 text-sm leading-relaxed">
-                        Welcome to The Pahadi Ghar - Darcha
-Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Pahadi Ghar is more than just a homestay—it’s a mountain experience. Surrounded by towering peaks and crisp, pristine skies, we offer the comfort of a home blended with authentic Himalayan hospitality. If you are looking to escape the daily hustle, breathe in the fresh mountain air, and unwind in nature's lap, welcome to your second home in the hills.
+                        Welcome to The Pahadi Ghar - Darcha. Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Pahadi Ghar is more than just a homestay—it’s a mountain experience. Surrounded by towering peaks and crisp, pristine skies, we offer the comfort of a home blended with authentic Himalayan hospitality. If you are looking to escape the daily hustle, breathe in the fresh mountain air, and unwind in nature's lap, welcome to your second home in the hills.
                     </p>
                     <div class="p-4 bg-luxuryLightBg rounded-2xl border-l-4 border-luxuryGold text-xs italic text-gray-600">
                         "A place where there are no strangers, only friends you haven't met yet."
@@ -307,10 +332,10 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div class="rounded-2xl overflow-hidden shadow h-64 border border-luxuryGold/20">
-                        <img src="https://i.ibb.co/gbxTfr0y/IMG-1603.jpg" alt="Landscape 1" class="w-full h-full object-cover">
+                        <img src="https://i.ibb.co/gbxTfr0y/IMG-1603.jpg" loading="lazy" alt="Landscape 1" class="w-full h-full object-cover">
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow h-64 border border-luxuryGold/20 mt-6">
-                        <img src="https://i.ibb.co/Kjdy5bJg/IMG-20250609-154210736-Original.jpg" alt="Landscape 2" class="w-full h-full object-cover">
+                        <img src="https://i.ibb.co/Kjdy5bJg/IMG-20250609-154210736-Original.jpg" loading="lazy" alt="Landscape 2" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -339,10 +364,10 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
             </div>
 
             <div class="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" class="w-full h-full object-cover" alt="Food 1"></div>
-                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" class="w-full h-full object-cover" alt="Food 2"></div>
-                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/Y4ZTSxzw/IMG-1389.jpg" class="w-full h-full object-cover" alt="Food 3"></div>
-                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/6JrmWSNF/IMG-1390.jpg" class="w-full h-full object-cover" alt="Food 4"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" loading="lazy" class="w-full h-full object-cover" alt="Food 1"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" loading="lazy" class="w-full h-full object-cover" alt="Food 2"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/Y4ZTSxzw/IMG-1389.jpg" loading="lazy" class="w-full h-full object-cover" alt="Food 3"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/6JrmWSNF/IMG-1390.jpg" loading="lazy" class="w-full h-full object-cover" alt="Food 4"></div>
             </div>
         </div>
     </section>
@@ -516,16 +541,16 @@ Designed by Thinleisss.
     </div>
 
     <!-- ================= ADMIN MODAL ================= -->
-    <div id="adminModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
-        <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl border flex flex-col">
-            <div class="bg-luxuryDarkBg p-4 flex items-center justify-between border-b border-luxuryGold/20">
-                <span class="luxury-heading text-sm font-bold text-white tracking-widest flex items-center gap-2">
+    <div id="adminModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-2 sm:p-4 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-5xl w-full h-[95vh] sm:h-[92vh] overflow-hidden shadow-2xl border flex flex-col">
+            <div class="bg-luxuryDarkBg p-4 flex items-center justify-between border-b border-luxuryGold/20 flex-shrink-0">
+                <span class="luxury-heading text-xs sm:text-sm font-bold text-white tracking-widest flex items-center gap-2">
                     <i class="fa-solid fa-screwdriver-wrench text-luxuryGold"></i>Admin Dashboard Console
                 </span>
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- Login Section with Inline Error -->
+            <!-- Login Section -->
             <div id="adminAuthBlock" class="p-8 flex-grow flex flex-col items-center justify-center space-y-4 max-w-sm mx-auto w-full">
                 <i class="fa-solid fa-fingerprint text-4xl text-luxuryGold mb-1"></i>
                 <h4 class="luxury-heading font-bold text-xs uppercase tracking-wide">Enter Admin Credentials</h4>
@@ -536,11 +561,10 @@ Designed by Thinleisss.
             </div>
 
             <!-- Dashboard Content Section -->
-            <div id="adminPanelWorkspace" class="hidden flex-grow overflow-y-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-gray-50">
+            <div id="adminPanelWorkspace" class="hidden flex-grow overflow-y-auto p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-gray-50">
                 
                 <!-- Left Control Box -->
                 <div class="lg:col-span-5 bg-white p-4 rounded-2xl border border-gray-200 shadow-xs space-y-4 text-xs font-medium">
-                    
                     <div id="adminWorkspaceStatus" class="hidden text-xs font-bold p-3 rounded-xl text-center"></div>
 
                     <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1"><i class="fa-solid fa-calendar-minus text-amber-600"></i> Date Locking Operations</h4>
@@ -585,10 +609,10 @@ Designed by Thinleisss.
                 </div>
 
                 <!-- Right Display Grid/Registry Box -->
-                <div class="lg:col-span-7 space-y-4">
+                <div class="lg:col-span-7 space-y-4 pb-6">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
                         <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1 mb-2"><i class="fa-solid fa-list-check text-indigo-600"></i> Active Locked Blocks Registry</h4>
-                        <div class="overflow-x-auto max-h-[35vh] overflow-y-auto" id="adminBookingsRegisterBox"></div>
+                        <div class="overflow-x-auto max-h-[40vh] overflow-y-auto border rounded-xl" id="adminBookingsRegisterBox"></div>
                     </div>
 
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
@@ -596,8 +620,8 @@ Designed by Thinleisss.
                             <h4 class="text-sm font-bold text-gray-800 flex items-center gap-1"><i class="fa-solid fa-table-cells text-teal-600"></i> Dynamic 30-Day Matrix Monitor</h4>
                             <input type="month" id="calendarMatrixMonthSelector" onchange="renderMatrixCalendar()" class="border p-1 text-xs rounded bg-white focus:outline-none">
                         </div>
-                        <div class="overflow-x-auto max-h-[25vh] overflow-y-auto">
-                            <table class="w-full text-left text-[11px] border-collapse">
+                        <div class="overflow-x-auto max-h-[30vh] overflow-y-auto border rounded-xl">
+                            <table class="w-full text-left text-[11px] border-collapse min-w-[600px]">
                                 <thead><tr class="bg-gray-100 border-b text-gray-600" id="matrixHeadRow"></tr></thead>
                                 <tbody id="matrixBodyRows" class="divide-y text-gray-700"></tbody>
                             </table>
@@ -608,9 +632,8 @@ Designed by Thinleisss.
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT FIXED ENGINE ================= -->
+    <!-- ================= JAVASCRIPT ENGINE ================= -->
     <script>
-        // --- FIREBASE INITIALIZATION CONFIGURATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyB5sE1Db_jhCAjBDOnNidZ8VtVhs6L8TSk",
             authDomain: "homestaybookings-1b28d.firebaseapp.com",
@@ -621,8 +644,9 @@ Designed by Thinleisss.
             measurementId: "G-4HVB7CVVK0"
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const database = firebase.database();
 
         let state = {
@@ -649,9 +673,8 @@ Designed by Thinleisss.
             setTimeout(() => { container.classList.add('hidden'); }, 4000);
         }
 
-        // Load data from Firebase Realtime Database
         function loadStorageState() {
-            database.ref('pahadi_ghar_state').once('value').then((snapshot) => {
+            database.ref('pahadi_ghar_state').on('value', (snapshot) => {
                 const serverData = snapshot.val();
                 if(serverData) {
                     state = serverData;
@@ -663,12 +686,15 @@ Designed by Thinleisss.
                 }
                 syncUIRates();
                 updateLiveStatusDisplay();
-            }).catch((e) => {
+                if(!document.getElementById('adminPanelWorkspace').classList.contains('hidden')) {
+                    renderBookingsRegisterList();
+                    renderMatrixCalendar();
+                }
+            }, (e) => {
                 console.error("Firebase Load Error: ", e);
             });
         }
 
-        // Save data to Firebase Realtime Database
         function saveStorageState() {
             database.ref('pahadi_ghar_state').set(state).then(() => {
                 console.log("Data successfully updated on Firebase cloud.");
@@ -873,27 +899,27 @@ Designed by Thinleisss.
         function renderBookingsRegisterList() {
             const container = document.getElementById('adminBookingsRegisterBox');
             if(!state.bookings || state.bookings.length === 0) {
-                container.innerHTML = `<p class="text-xs italic text-gray-400 p-2">No active lock entries captured inside registry.</p>`;
+                container.innerHTML = `<p class="text-xs italic text-gray-400 p-3">No active lock entries captured inside registry.</p>`;
                 return;
             }
-            let html = `<table class="w-full text-left text-xs divide-y divide-gray-200">
-                            <thead class="bg-gray-100 font-bold">
+            let html = `<table class="w-full text-left text-xs divide-y divide-gray-200 min-w-[500px]">
+                            <thead class="bg-gray-100 font-bold sticky top-0">
                                 <tr>
-                                    <th class="p-2">Room</th>
-                                    <th class="p-2">Dates Scope</th>
-                                    <th class="p-2">Log Memo / Name</th>
-                                    <th class="p-2 text-center">Action</th>
+                                    <th class="p-2.5">Room</th>
+                                    <th class="p-2.5">Dates Scope</th>
+                                    <th class="p-2.5">Log Memo / Name</th>
+                                    <th class="p-2.5 text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 font-normal">`;
             
             state.bookings.forEach(b => {
                 html += `<tr class="hover:bg-gray-50">
-                            <td class="p-2 font-bold text-gray-700">${b.roomNum}</td>
-                            <td class="p-2 text-[11px] text-gray-600">${b.checkIn} to ${b.checkOut}</td>
-                            <td class="p-2 max-w-[120px] truncate text-gray-500">${b.guestMeta}</td>
-                            <td class="p-2 text-center">
-                                <button onclick="deleteBookingBlock('${b.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 px-2 py-1 rounded-md text-[11px] font-bold transition-all">
+                            <td class="p-2.5 font-bold text-gray-700">${b.roomNum}</td>
+                            <td class="p-2.5 text-[11px] text-gray-600">${b.checkIn} to ${b.checkOut}</td>
+                            <td class="p-2.5 text-gray-500">${b.guestMeta}</td>
+                            <td class="p-2.5 text-center">
+                                <button onclick="deleteBookingBlock('${b.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 px-2.5 py-1 rounded-md text-[11px] font-bold transition-all">
                                     <i class="fa-solid fa-trash-can mr-1"></i> Clear
                                 </button>
                             </td>
