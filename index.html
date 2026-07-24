@@ -821,20 +821,26 @@ function handleBookingSubmit(event) {
             const duration = document.getElementById('calculatedDays').innerText;
 
             // FIXED WHATSAPP MESSAGE TEMPLATE
-            const textTemplate = `*The Pahadi Ghar - Darcha New Booking *\n` +
+            const textTemplate = `*The Pahadi Ghar - Darcha | New Booking Request*\n` +
+
+                                 `*👤 Guest information:* \n` +
 
                                  `Guest Name: ${name}\n` +
                                  `Contact Phone: ${phone}\n` +
                                  `Email Reference: ${email}\n` +
                                  `Home Residence Address: ${address}\n` +
-                                 `*Corridor Point Origin:* ${origin}\n` +
-                                 `*Details:* \n` +
+                                 `Comming From: ${origin}\n` +
+                
+                                 `*📆 Stay Details:* \n` +
+                
                                  `${selections.familySelected ? '-> Room 101 Family Suite Active\n' : ''}` +
                                  `${selections.standardCount > 0 ? '-> ' + selections.standardCount + ' Standard Room Units (Allocated: ' + allocationStandardRoomsArray.join(', ') + ')\n' : ''}` +
                                  `Check-In Date: ${checkIn}\n` +
                                  `Check-Out Date: ${checkOut}\n` +
                                  `Duration Scope: ${duration}\n` +
                                  `Guest Headcount: ${adults} Adults, ${children} Children`;
+
+                                  ` Please confirm availability and let us know what to do next. \n` +
 
             window.open(`https://api.whatsapp.com/send?phone=917876631873&text=${encodeURIComponent(textTemplate)}`, '_blank');
             closeBookingModal();
