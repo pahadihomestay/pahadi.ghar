@@ -455,7 +455,7 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
             <div class="w-full h-96 rounded-3xl overflow-hidden shadow-md border border-luxuryGold/20 mb-6">
                 <iframe class="w-full h-full border-0" src="https://maps.google.com/maps?q=Darcha%20Dangma,%20Himachal&t=&z=13&ie=UTF-8&iwloc=&output=embed" allowfullscreen></iframe>
             </div>
-            <a href="https://maps.google.com/?q=Darcha+Dangma+Lahaul+Spiti" target="_blank" class="inline-flex items-center gap-2 bg-luxuryText text-white px-6 py-3 rounded-full font-bold text-xs tracking-wide shadow-md hover:bg-luxuryDarkGold transition-all">
+            <a href="https://maps.app.goo.gl/VjSTarWJenUzgJJQ9?g_st=ic" target="_blank" class="inline-flex items-center gap-2 bg-luxuryText text-white px-6 py-3 rounded-full font-bold text-xs tracking-wide shadow-md hover:bg-luxuryDarkGold transition-all">
                 <i class="fa-solid fa-map-location-dot"></i> Open Live Route Directions on Google Maps
             </a>
         </div>
@@ -781,7 +781,7 @@ Designed by Thinleisss.
             }
         }
 
-        function handleBookingSubmit(event) {
+function handleBookingSubmit(event) {
             event.preventDefault();
             const checkIn = document.getElementById('checkInDate').value;
             const checkOut = document.getElementById('checkOutDate').value;
@@ -820,27 +820,26 @@ Designed by Thinleisss.
             const children = document.getElementById('countChildren').value;
             const duration = document.getElementById('calculatedDays').innerText;
 
-            // DETAILED WHATSAPP MESSAGE FORMAT RESTORED
-            const textTemplate = `*Booking Order File Received from Web Interface*\n` +
-                                 
-                                 `*Guest Name:* ${name}\n` +
-                                 `*Contact Phone:* ${phone}\n` +
-                                 `*Email Reference:* ${email}\n` +
-                                 `*Home Residence Address:* ${address}\n` +
+            // FIXED WHATSAPP MESSAGE TEMPLATE
+            const textTemplate = `*The Pahadi Ghar - Darcha New Booking *\n` +
+
+                                 `Guest Name: ${name}\n` +
+                                 `Contact Phone: ${phone}\n` +
+                                 `Email Reference: ${email}\n` +
+                                 `Home Residence Address: ${address}\n` +
                                  `*Corridor Point Origin:* ${origin}\n` +
-                                 
-                                 `*Stay Allocations Configuration:* \n` +
+                                 `*Details:* \n` +
                                  `${selections.familySelected ? '-> Room 101 Family Suite Active\n' : ''}` +
                                  `${selections.standardCount > 0 ? '-> ' + selections.standardCount + ' Standard Room Units (Allocated: ' + allocationStandardRoomsArray.join(', ') + ')\n' : ''}` +
-                                 `*Check-In Date:* ${checkIn}\n` +
-                                 `*Check-Out Date:* ${checkOut}\n` +
-                                 `*Duration Scope:* ${duration}\n` +
-                                 `*Guest Headcount:* ${adults} Adults, ${children} Children\n` +
-                                
+                                 `Check-In Date: ${checkIn}\n` +
+                                 `Check-Out Date: ${checkOut}\n` +
+                                 `Duration Scope: ${duration}\n` +
+                                 `Guest Headcount: ${adults} Adults, ${children} Children`;
 
             window.open(`https://api.whatsapp.com/send?phone=917876631873&text=${encodeURIComponent(textTemplate)}`, '_blank');
             closeBookingModal();
         }
+
 
         function updateLiveStatusDisplay() {
             const selectedDate = document.getElementById('liveCheckDate').value;
