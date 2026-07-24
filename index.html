@@ -4,1336 +4,1049 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Pahadi Ghar - Darcha | Homestay</title>
-    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase App & Realtime Database SDK CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        forest: '#2A3C34',
-                        alpine: '#1C2421',
-                        gold: '#D4AF37',
-                        cream: '#FAF7F2',
-                        sand: '#F3EFEA'
+                        luxuryGold: '#C5A880',
+                        luxuryDarkGold: '#A38456',
+                        luxuryLightBg: '#FBF9F6',
+                        luxuryText: '#2B2A27',
+                        luxuryDarkBg: '#131D1A', 
                     },
                     fontFamily: {
-                        serif: ['Cinzel', 'serif'],
-                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        .glass-header {
-            background: rgba(28, 36, 33, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .glass-card {
-            background: rgba(250, 247, 242, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .glass-dark {
-            background: rgba(42, 60, 52, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FAF7F2;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2A3C34;
-            border-radius: 4px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FBF9F6; color: #2B2A27; overflow-x: hidden; }
+        .luxury-heading { font-family: 'Cinzel', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .fab-container:hover .fab-options { opacity: 1; transform: translateY(-10px) scale(1); pointer-events: auto; }
+        
+        /* Custom Switch Toggle Styles for Room 101 */
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        input:checked + .slider { background-color: #4ade80; }
+        input:checked + .slider:before { transform: translateX(24px); }
     </style>
 </head>
-<body class="bg-cream text-alpine font-sans antialiased selection:bg-gold selection:text-white pb-20 md:pb-0">
+<body class="antialiased selection:bg-luxuryGold/30">
 
-    <!-- FIXED GLASSMORPHISM HEADER -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-gold/20 text-cream transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-         
-           <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center text-gold group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-mountain-sun text-lg"></i>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-luxuryGold/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex flex-col">
+                    <span class="luxury-heading text-lg sm:text-xl font-bold tracking-widest text-luxuryText flex items-center gap-2">
+                        <i class="fa-solid fa-mountain-sun text-luxuryGold"></i> THE PAHADI GHAR
+                    </span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-luxuryGold mt-0.5">Darcha • L&S</span>
                 </div>
-                <div>
-                    <span class="font-serif text-lg sm:text-xl font-bold tracking-wider text-cream block">THE PAHADI GHAR</span>
-                    <span class="text-[10px] sm:text-xs text-gold tracking-widest block uppercase font-medium">Darcha • Lahaul & Spiti</span>
+
+                <div class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-600">
+                    <a href="#about" class="hover:text-luxuryGold transition-colors">About</a>
+                    <a href="#rooms" class="hover:text-luxuryGold transition-colors">Rooms</a>
+                    <a href="#dining" class="hover:text-luxuryGold transition-colors">Dining</a>
+                    <a href="#reviews" class="hover:text-luxuryGold transition-colors">Reviews</a>
+                    <a href="#facilities" class="hover:text-luxuryGold transition-colors">Facilities</a>
+                    <a href="#contact" class="hover:text-luxuryGold transition-colors">Contact</a>
+                    <button onclick="openAdminModal()" class="text-xs uppercase bg-gray-100 hover:bg-luxuryGold hover:text-white px-3 py-1.5 rounded transition-all tracking-wider font-bold text-gray-700">
+                        <i class="fa-solid fa-lock-open mr-1"></i> Admin
+                    </button>
                 </div>
-            </a>
 
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wide">
-                <a href="#about" class="hover:text-gold transition-colors">About Us</a>
-                <a href="#facilities" class="hover:text-gold transition-colors">Facilities</a>
-                <a href="#rooms" class="hover:text-gold transition-colors">Rooms</a>
-                <a href="#food" class="hover:text-gold transition-colors">Dining</a>
-                <a href="#reviews" class="hover:text-gold transition-colors">Reviews</a>
-                <a href="#reach" class="hover:text-gold transition-colors">How to Reach</a>
-                <a href="#contact" class="hover:text-gold transition-colors">Contact</a>
-            </nav>
+                <div class="hidden sm:flex items-center space-x-4">
+                    <a href="https://instagram.com/pahadi.ghar" target="_blank" class="flex items-center gap-2 text-sm font-semibold border border-luxuryGold/30 px-3 py-2 rounded-full hover:bg-luxuryGold/10 transition-all text-luxuryText">
+                        <i class="fa-brands fa-instagram text-pink-600 text-lg"></i> <span>@pahadi.ghar</span>
+                    </a>
+                    <a href="#rooms" class="bg-luxuryGold hover:bg-luxuryDarkGold text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-md transition-all tracking-wide">
+                        Book Now
+                    </a>
+                </div>
 
-            <!-- Header Action CTA & Social -->
-            <div class="hidden sm:flex items-center gap-4">
-                <a href="https://instagram.com/pahadi.ghar" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-alpine transition-all">
-                    <i class="fa-brands fa-instagram"></i>
+                <div class="lg:hidden flex items-center space-x-3">
+                    <button onclick="openAdminModal()" class="text-xs bg-gray-100 px-2.5 py-1.5 rounded font-bold text-gray-600">Admin</button>
+                    <button id="mobileMenuBtn" class="text-luxuryText focus:outline-none p-2 rounded-lg hover:bg-gray-100">
+                        <i class="fa-solid fa-ellipsis-vertical text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-luxuryGold/20 px-4 pt-2 pb-6 space-y-3 absolute top-20 left-0 w-full shadow-xl">
+            <a href="#about" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">About</a>
+            <a href="#rooms" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Rooms</a>
+            <a href="#dining" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Dining</a>
+            <a href="#reviews" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Reviews</a>
+            <a href="#facilities" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Facilities</a>
+            <a href="#contact" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Contact</a>
+            <hr class="border-gray-100">
+            <div class="flex flex-col gap-3 pt-2">
+                <a href="https://instagram.com/pahadi.ghar" target="_blank" class="flex items-center gap-2 text-sm font-semibold border border-luxuryGold px-4 py-2 rounded-full text-luxuryText justify-center">
+                    <i class="fa-brands fa-instagram text-pink-600 text-lg"></i> Instagram
                 </a>
-                <a href="https://pahadihomestay.github.io/Bookings/" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-gold to-yellow-600 text-alpine font-bold text-sm tracking-wider shadow-lg hover:shadow-gold/30 hover:scale-105 transition-all">
+                <a href="#rooms" onclick="toggleMenu()" class="bg-luxuryGold text-white text-center font-semibold text-sm px-5 py-2.5 rounded-full shadow-md">
                     Book Now
                 </a>
             </div>
+        </div>
+    </nav>
 
-            <!-- Mobile Hamburger Button -->
-            <button id="menu-btn" class="lg:hidden text-cream text-2xl focus:outline-none p-2" aria-label="Toggle menu">
-                <i class="fa-solid fa-bars"></i>
+    <!-- ================= LIVE STATUS BAR ================= -->
+    <section class="bg-amber-50/70 border-b border-amber-200/50 py-3 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-sm">
+            <div class="flex items-center gap-2 font-medium text-gray-700">
+                <i class="fa-solid fa-calendar-check text-luxuryDarkGold animate-pulse"></i>
+                <span>Check Live Grid Availability</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <input type="date" id="liveCheckDate" onchange="updateLiveStatusDisplay()" class="bg-white border border-luxuryGold/30 text-xs rounded px-2 py-1 focus:outline-none">
+                <span id="liveStatusBadge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Loading slots...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STATIC INFORMATION BANNER ICONS ================= -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-luxuryGold/20 rounded-2xl p-4 shadow-sm text-center">
+            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
+                <i class="fa-solid fa-circle-info text-luxuryGold text-lg mb-1"></i>
+                <span class="text-xs text-gray-400 font-medium">Altitude</span>
+                <span class="text-xs font-bold text-luxuryText">11,020 Feet High</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
+                <i class="fa-solid fa-snowflake text-luxuryGold text-lg mb-1"></i>
+                <span class="text-xs text-gray-400 font-medium">Climate</span>
+                <span class="text-xs font-bold text-luxuryText">Pleasant / Crisp Cold</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
+                <i class="fa-solid fa-shield-halved text-luxuryGold text-lg mb-1"></i>
+                <span class="text-xs text-gray-400 font-medium">Stay Format</span>
+                <span class="text-xs font-bold text-luxuryText">100% Safe Local Homestay</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-2 last:border-none">
+                <i class="fa-solid fa-route text-luxuryGold text-lg mb-1"></i>
+                <span class="text-xs text-gray-400 font-medium">Connectivity</span>
+                <span class="text-xs font-bold text-luxuryText">Manali-Leh Highway</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CHOOSE ACCOMMODATION ================= -->
+    <section id="rooms" class="max-w-md mx-auto px-4 py-12">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 pl-1">CHOOSE ACCOMMODATION</h3>
+
+        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
+            <!-- ROOM 101: FAMILY SUITE CARD -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Room 101: Family Suite</h4>
+                        <p class="text-xs text-gray-500">₹<span id="price_family">3099</span> / night</p>
+                    </div>
+                    <label class="relative inline-block w-12 h-7">
+                        <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
+                    <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="w-full h-full object-cover" alt="Family Room">
+                    <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">FAMILY SUITE VIEW</div>
+                </div>
+                <div class="mt-2 text-[11px] text-gray-500 space-y-0.5">
+                    <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 4-6 Persons | 2 Double Beds</p>
+                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+                </div>
+            </div>
+
+            <!-- COZY STANDARD ROOMS CARD -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Cozy Standard Rooms</h4>
+                        <p class="text-xs text-gray-500">Rooms 102 to 107</p>
+                        <p class="text-[11px] text-gray-400 font-medium">(₹<span id="price_standard">2099</span> / night)</p>
+                    </div>
+                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                        <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                        <span id="standardRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                        <button onclick="changeStandardCount(1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    </div>
+                </div>
+                <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
+                    <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="w-full h-full object-cover" alt="Standard Room">
+                    <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">NORMAL ROOM VIEW</div>
+                </div>
+                <div class="mt-2 text-[11px] text-gray-500 space-y-0.5">
+                    <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 2-3 Persons | 1 Double Bed</p>
+                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+                </div>
+            </div>
+
+            <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
+
+            <button onclick="triggerReservationModalStep()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3 rounded-xl shadow transition-all tracking-wide text-xs uppercase">
+                Proceed To Booking 
             </button>
         </div>
+    </section>
 
-        <!-- Mobile Drawer Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden glass-dark border-b border-gold/20 px-6 pt-4 pb-6 space-y-4 shadow-xl">
-            <a href="#about" class="block text-cream hover:text-gold font-medium py-1 mobile-link">About Us</a>
-            <a href="#facilities" class="block text-cream hover:text-gold font-medium py-1 mobile-link">Facilities</a>
-            <a href="#rooms" class="block text-cream hover:text-gold font-medium py-1 mobile-link">Rooms</a>
-            <a href="#food" class="block text-cream hover:text-gold font-medium py-1 mobile-link">Dining</a>
-            <a href="#reviews" class="block text-cream hover:text-gold font-medium py-1 mobile-link">Reviews</a>
-            <a href="#reach" class="block text-cream hover:text-gold font-medium py-1 mobile-link">How to Reach</a>
-            <a href="#contact" class="block text-cream hover:text-gold font-medium py-1 mobile-link">Contact</a>
-            <div class="pt-4 flex items-center justify-between border-t border-gold/20">
-                <a href="https://instagram.com/pahadi.ghar" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-gold text-sm font-medium">
-                    <i class="fa-brands fa-instagram text-lg"></i> @pahadi.ghar
-                </a>
-                <a href="https://pahadihomestay.github.io/Bookings/" class="px-4 py-2 rounded-full bg-gold text-alpine font-bold text-xs uppercase tracking-wider mobile-link">
-                    Book Stay
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-alpine">
-        <!-- Background Image with Dark Gradient Overlay -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=2000&auto=format&fit=crop" alt="Himalayan Mountains Darcha" class="w-full h-full object-cover object-center scale-105 animate-pulse duration-[10000ms]">
-            <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/60 to-alpine/40"></div>
-        </div>
-
-        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-forest/80 border border-gold/40 text-gold text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
-                <i class="fa-solid fa-cloud"></i> Darcha • Lahaul & Spiti | Your Home Above the Clouds
-            </div>
+    <!-- ================= BOOKING MODAL ================= -->
+    <div id="bookingModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border p-6 relative">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-lg focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="luxury-heading text-lg font-bold text-luxuryText mb-1">Verify Stay Itinerary</h3>
+            <p class="text-xs text-luxuryGold font-semibold mb-4">Complete simple details to securely dispatch via WhatsApp</p>
             
-            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold text-cream tracking-wide mb-6 leading-tight">
-                The Pahadi Ghar <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-200 to-gold block mt-2">Darcha</span>
-            </h1>
+            <div id="modalValidationError" class="hidden mb-3 text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
 
-            <p class="text-base sm:text-xl text-cream/90 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-                Authentic Lahauli Homestay — Experience pure mountain air, starry nights, warm local hospitality, and stunning Himalayan views right at 11,000 feet.
+            <form onsubmit="handleBookingSubmit(event)" class="space-y-3.5 text-xs font-medium">
+                <div>
+                    <label class="block text-gray-600 mb-1">Full Name *</label>
+                    <input type="text" id="guestName" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-gray-600 mb-1">Phone Number *</label>
+                        <input type="tel" id="guestPhone" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-1">Email ID (Optional)</label>
+                        <input type="email" id="guestEmail" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-gray-600 mb-1">Coming From *</label>
+                        <select id="guestOrigin" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs bg-white focus:outline-none">
+                            <option value="Manali">Manali</option>
+                            <option value="Leh">Leh</option>
+                            <option value="Zanskar">Zanskar</option>
+                            <option value="Spiti">Spiti</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-1">Address *</label>
+                        <input type="text" id="guestAddress" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-gray-600 mb-1">Check-in Date *</label>
+                        <input type="date" id="checkInDate" required onchange="calculateDuration()" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-1">Check-out Date *</label>
+                        <input type="date" id="checkOutDate" required onchange="calculateDuration()" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
+                    <div class="text-center flex flex-col justify-center">
+                        <span class="block text-[9px] uppercase text-gray-400">Total Nights</span>
+                        <span id="calculatedDays" class="text-xs font-bold text-luxuryText">1 Night</span>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] text-gray-400 uppercase text-center mb-0.5">Adults</label>
+                        <select id="countAdults" class="w-full border border-gray-200 rounded bg-white p-1 text-center text-xs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] text-gray-400 uppercase text-center mb-0.5">Children</label>
+                        <select id="countChildren" class="w-full border border-gray-200 rounded bg-white p-1 text-center text-xs"><option>0</option><option>1</option><option>2</option><option>3+</option></select>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-amber-50 rounded-xl text-[11px] text-amber-800 space-y-0.5">
+                    <p class="font-bold">Summary Selection Stack:</p>
+                    <p id="formSummaryDisplayPanel">No selections matched.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold tracking-wide transition-all shadow-md">
+                    Submit Order Details via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= ABOUT PROPERTY HOST SECTION ================= -->
+    <section id="about" class="bg-white py-20 border-y border-luxuryGold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-5">
+                    <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">Timeless High Altitude Hospitality</span>
+                    <h2 class="luxury-heading text-3xl sm:text-4xl font-bold tracking-tight text-luxuryText leading-tight">
+                        Meet Your Local Hosts:<br><span class="text-luxuryDarkGold">Chhering Tashi & Thinlay</span>
+                    </h2>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Welcome to The Pahadi Ghar - Darcha
+Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Pahadi Ghar is more than just a homestay—it’s a mountain experience. Surrounded by towering peaks and crisp, pristine skies, we offer the comfort of a home blended with authentic Himalayan hospitality. If you are looking to escape the daily hustle, breathe in the fresh mountain air, and unwind in nature's lap, welcome to your second home in the hills.
+                    </p>
+                    <div class="p-4 bg-luxuryLightBg rounded-2xl border-l-4 border-luxuryGold text-xs italic text-gray-600">
+                        "A place where there are no strangers, only friends you haven't met yet."
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="rounded-2xl overflow-hidden shadow h-64 border border-luxuryGold/20">
+                        <img src="https://i.ibb.co/gbxTfr0y/IMG-1603.jpg" alt="Landscape 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow h-64 border border-luxuryGold/20 mt-6">
+                        <img src="https://i.ibb.co/Kjdy5bJg/IMG-20250609-154210736-Original.jpg" alt="Landscape 2" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DINE IN FOOD SECTION ================= -->
+    <section id="dining" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center mb-12">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">Organic Local Kitchen Culture</span>
+            <h2 class="luxury-heading text-3xl font-bold text-luxuryText mt-1">Traditional Indigenous Meals</h2>
+            <div class="w-16 h-0.5 bg-luxuryGold mx-auto mt-3"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+            <div class="space-y-4">
+                <h3 class="luxury-heading text-lg font-bold text-luxuryText">Native Organic Dining</h3>
+                <p class="text-xs text-gray-600 leading-relaxed">
+                    Savor high altitude warmth cooked carefully with premium organic grain inventories cultivated direct from mountain valley layers. We offer authentic culinary items loaded with absolute warmth and health properties.
+                </p>
+                <ul class="text-xs font-semibold text-luxuryDarkGold space-y-2">
+                    <li><i class="fa-solid fa-circle-check mr-1.5 text-[10px] text-emerald-600"></i> Local Lahauli Siddu with Pure Ghee</li>
+                    <li><i class="fa-solid fa-circle-check mr-1.5 text-[10px] text-emerald-600"></i> Mountain Thukpa & Steamed Veg Mokmoks</li>
+                    <li><i class="fa-solid fa-circle-check mr-1.5 text-[10px] text-emerald-600"></i> Traditional Butter Tea & Tsampa Porridge</li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" class="w-full h-full object-cover" alt="Food 1"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" class="w-full h-full object-cover" alt="Food 2"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/Y4ZTSxzw/IMG-1389.jpg" class="w-full h-full object-cover" alt="Food 3"></div>
+                <div class="rounded-xl overflow-hidden h-44 bg-gray-100 shadow-xs"><img src="https://i.ibb.co/6JrmWSNF/IMG-1390.jpg" class="w-full h-full object-cover" alt="Food 4"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= GUEST REVIEWS SLIDER ================= -->
+    <section id="reviews" class="bg-gray-50 py-16 overflow-hidden border-t border-luxuryGold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8">
+            <h2 class="luxury-heading text-2xl font-bold text-luxuryText">Loved By 1000+ Happy Travellers</h2>
+            <div class="flex items-center justify-center gap-1 mt-2 text-amber-500 font-bold text-sm">
+                <i class="fa-solid fa-star"></i> 4.9 / 5 Verified Overall Guest Score
+            </div>
+        </div>
+
+        <div class="relative w-full flex overflow-x-hidden py-2">
+            <div id="reviewRow" class="flex space-x-6 whitespace-nowrap transition-transform duration-500 ease-in-out px-4">
+                <!-- Review cards dynamic inject -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FACILITIES SECTION ================= -->
+    <section id="facilities" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center mb-16">
+            <h2 class="luxury-heading text-3xl font-bold text-luxuryText">Amenities</h2>
+            <div class="w-16 h-0.5 bg-luxuryGold mx-auto mt-3"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center text-xs font-bold uppercase tracking-wider text-luxuryText">
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-couch text-2xl text-luxuryGold mb-3"></i>
+                <h4>Cozy Stay</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-restroom text-2xl text-luxuryGold mb-3"></i>
+                <h4>Attached Washroom</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+               <i class="fa-solid fa-square-parking text-2xl text-luxuryGold mb-3"></i>
+                <h4>Safe Parking</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-kitchen-set text-2xl text-luxuryGold mb-3"></i>
+                <h4>Kitchen Access</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-fire-burner text-2xl text-luxuryGold mb-3"></i>
+                <h4>Room Heater</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-wifi text-2xl text-luxuryGold mb-3"></i>
+                <h4>Free WiFi</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-faucet-drip text-2xl text-luxuryGold mb-3"></i>
+                <h4>Hot Water</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-binoculars text-2xl text-luxuryGold mb-3"></i>
+                <h4>Window View</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-person-hiking text-2xl text-luxuryGold mb-3"></i>
+                <h4>Guided Tracks</h4>
+            </div>
+            <div class="p-6 bg-white border border-luxuryGold/10 rounded-2xl shadow-xs hover:scale-105 hover:border-luxuryGold transition-all">
+                <i class="fa-solid fa-campground text-2xl text-luxuryGold mb-3"></i>
+                <h4>Bonfire Nights</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MAP SECTION ================= -->
+    <section class="bg-white py-16 border-t border-luxuryGold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="luxury-heading text-2xl font-bold text-luxuryText mb-1">Location & Route Coordinates</h2>
+            <p class="text-xs text-gray-500 mb-6 flex items-center justify-center gap-1">
+                <i class="fa-solid fa-location-dot text-red-500"></i> Darcha Dangma, Lahaul & Spiti, Himachal Pradesh, India - 175132
+            </p>
+            <div class="w-full h-96 rounded-3xl overflow-hidden shadow-md border border-luxuryGold/20 mb-6">
+                <iframe class="w-full h-full border-0" src="https://maps.google.com/maps?q=Darcha%20Dangma,%20Himachal&t=&z=13&ie=UTF-8&iwloc=&output=embed" allowfullscreen></iframe>
+            </div>
+            <a href="https://maps.google.com/?q=Darcha+Dangma+Lahaul+Spiti" target="_blank" class="inline-flex items-center gap-2 bg-luxuryText text-white px-6 py-3 rounded-full font-bold text-xs tracking-wide shadow-md hover:bg-luxuryDarkGold transition-all">
+                <i class="fa-solid fa-map-location-dot"></i> Open Live Route Directions on Google Maps
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer id="contact" class="bg-luxuryDarkBg text-gray-300 py-16 px-6 sm:px-8 border-t-2 border-luxuryGold/20">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full border border-luxuryGold/40 flex items-center justify-center bg-luxuryGold/10">
+                    <i class="fa-solid fa-mountain-sun text-luxuryGold text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="luxury-heading text-lg font-bold text-white tracking-widest">THE PAHADI GHAR</h3>
+                    <p class="text-xs text-luxuryGold tracking-widest uppercase">Darcha • Lahaul & Spiti</p>
+                </div>
+            </div>
+
+            <p class="text-sm text-gray-400 font-light max-w-xl leading-relaxed">
+                Your Home Above the Clouds. Authentic Lahauli hospitality at Darcha, Lahaul & Spiti, Himachal Pradesh.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://pahadihomestay.github.io/Bookings/" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gold hover:bg-yellow-500 text-alpine font-bold text-base tracking-wider shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-calendar-check"></i> Book Your Stay
+            <div class="flex items-center space-x-3">
+                <a href="https://instagram.com/pahadi.ghar" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-luxuryGold text-gray-400 hover:text-luxuryGold transition-all">
+                    <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-full bg-forest/80 hover:bg-forest text-cream border border-gold/40 font-semibold text-base tracking-wider backdrop-blur-md hover:scale-105 transition-all flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-compass"></i> Explore Homestay
+                <a href="https://wa.me/917876631873" target="_blank" class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-luxuryGold text-gray-400 hover:text-luxuryGold transition-all">
+                    <i class="fa-brands fa-whatsapp"></i>
                 </a>
             </div>
 
-            <!-- Quick Trust Badges -->
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-cream/80 text-xs sm:text-sm border-t border-gold/20 pt-8">
-                <div class="flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-star text-gold"></i>
-                    <span>4.9 / 5.0 Rating</span>
-                </div>
-                <div class="flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-shield-heart text-gold"></i>
-                    <span>100% Authentic Lahauli</span>
-                </div>
-                <div class="flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-mug-hot text-gold"></i>
-                    <span>Organic Farm Food</span>
-                </div>
-                <div class="flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-fire text-gold"></i>
-                    <span>Bonfire & Stargazing</span>
-                </div>
-            </div>
-        </div>
-    </section>
+            <hr class="border-gray-800/60">
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="py-24 bg-cream relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Text Column -->
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-forest/10 text-forest font-semibold text-xs tracking-wider uppercase">
-                        <i class="fa-solid fa-house-chimney-user text-gold"></i> Our Story & Hosts
-                    </div>
-                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-alpine leading-tight">
-                        Welcome to Darcha Dangma
-                    </h2>
-                    <p class="text-alpine/80 text-base sm:text-lg leading-relaxed font-light">
-                        Experience authentic Lahauli hospitality with pure air, starry nights, and panoramic views of the turquoise Bhaga River and snow-capped peaks. Located at the gateway of Zanskar and Shinkula, our homestay is your perfect high-altitude sanctuary.
-                    </p>
-                    
-                    <div class="p-6 rounded-2xl bg-white border border-gold/30 shadow-sm space-y-3">
-                        <h3 class="font-serif font-bold text-lg text-forest flex items-center gap-2">
-                            <i class="fa-solid fa-users text-gold"></i> Hosted By Local Experts
-                        </h3>
-                        <p class="text-alpine/80 text-sm leading-relaxed">
-                            Your stay is personally looked after by <strong class="text-alpine font-semibold">Chhering Tashi and Thinlay</strong> — a warm-hearted local host family dedicated to making you feel right at home above the clouds.
-                        </p>
-                    </div>
-
-                    <div class="flex items-center gap-6 pt-2">
-                        <div>
-                            <span class="block font-serif text-3xl font-bold text-forest">11,000+</span>
-                            <span class="text-xs text-alpine/70 font-medium uppercase">Feet Altitude</span>
-                        </div>
-                        <div class="h-10 w-px bg-gold/40"></div>
-                        <div>
-                            <span class="block font-serif text-3xl font-bold text-forest">1000+</span>
-                            <span class="text-xs text-alpine/70 font-medium uppercase">Happy Travelers</span>
-                        </div>
-                        <div class="h-10 w-px bg-gold/40"></div>
-                        <div>
-                            <span class="block font-serif text-3xl font-bold text-forest">100%</span>
-                            <span class="text-xs text-alpine/70 font-medium uppercase">Local Organic</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Visuals Column -->
-                <div class="lg:col-span-6 relative">
-                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                        <img src="https://i.ibb.co/gbxTfr0y/IMG-1603.jpg" alt="Pahadi Ghar Exterior" class="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <!-- Secondary Overlapping Image Card -->
-                    <div class="absolute -bottom-10 -left-6 sm:-left-10 z-20 w-64 sm:w-72 rounded-2xl overflow-hidden shadow-2xl border-4 border-white hidden sm:block">
-                        <img src="<img href="https://ibb.co/Z65TfG0r"><img src="https://i.ibb.co/Kjdy5bJg/IMG-20250609-154210736-Original.jpg"  alt="Mountain Scenery Darcha" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-700">
-                        <div class="bg-forest text-cream p-3 text-center">
-                            <span class="text-xs font-serif text-gold block">Breathtaking Views</span>
-                            <span class="text-xs font-light">Bhaga River & Snow Peaks</span>
-                        </div>
-                    </div>
-                    <!-- Decorative background badge -->
-                    <div class="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-gold/10 border border-gold/30 -z-0"></div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Pahadi Ghar - Gallery Section</title>
-    <style>
-        .pahadi-gallery-section {
-            background-color: #fcf8f2; 
-            font-family: 'Georgia', serif; 
-            padding: 20px 15px; 
-            text-align: center;
-        }
-
-        .pahadi-gallery-container {
-            max-width: 850px;
-            margin: 10px auto; 
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(45, 51, 45, 0.08);
-            border: 1px solid #efe5d8;
-        }
-
-        .pahadi-title {
-            font-size: 28px; 
-            color: #1a211a; 
-            margin-bottom: 5px;
-            font-weight: normal;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .pahadi-line {
-            width: 40px;
-            height: 3px;
-            background-color: #c28e4e; 
-            margin: 0 auto 15px auto; 
-            border-radius: 2px;
-        }
-
-        .pahadi-frame {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Ratio */
-            background-color: #f0e9df;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .pahadi-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .pahadi-slide.active {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-
-    <section class="pahadi-gallery-section">
-        <div class="pahadi-gallery-container">
-            
-            <h2 class="pahadi-title">Our Gallery</h2>
-            <div class="pahadi-line"></div>
-
-            <div class="pahadi-frame">
-                <!-- Aapki di gayi 10 Photos -->
-                <img src="https://i.ibb.co/f60Ks96/IMG-1623.jpg" class="pahadi-slide active" alt="Gallery Photo 1">
-                <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="pahadi-slide" alt="Gallery Photo 2">
-                <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="pahadi-slide" alt="Gallery Photo 3">
-                <img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" class="pahadi-slide" alt="Gallery Photo 4">
-                <img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" class="pahadi-slide" alt="Gallery Photo 5">
-                <img src="https://i.ibb.co/Y4ZTSxzw/IMG-1389.jpg" class="pahadi-slide" alt="Gallery Photo 6">
-                <img src="https://i.ibb.co/6JrmWSNF/IMG-1390.jpg" class="pahadi-slide" alt="Gallery Photo 7">
-                <img src="<a href="https://ibb.co/HTP2v9Km"><img src="https://i.ibb.co/QvHcBxJs/IMG-20240211-204148-Original.jpg" class="pahadi-slide" alt="Gallery Photo 8">
-                <img src="https://i.ibb.co/VXsVpgq/photo-1566515788590-23e44a99dfc1-2.jpg" class="pahadi-slide" alt="Gallery Photo 9">
-                <img src="https://i.ibb.co/j9F2dCWs/pexels-vikashkr50-20292895-2.jpg" class="pahadi-slide" alt="Gallery Photo 10">
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.pahadi-slide');
-        const totalSlides = slides.length;
-
-        function showNextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % totalSlides;
-            slides[currentSlide].classList.add('active');
-        }
-
-        // Har 2 seconds me photo badlegi
-        setInterval(showNextSlide, 2000);
-    </script>
-
-</body>
-</html>
-
-    <!-- FOOD & HOSPITALITY SECTION -->
-    <section id="food" class="py-24 bg-alpine text-cream relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-semibold text-xs tracking-widest uppercase block mb-3">Authentic Flavors</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold mb-6">Comfortable Stay & Home Cooked Food</h2>
-                <p class="text-cream/80 text-base sm:text-lg font-light leading-relaxed">
-                    Cozy rooms built with traditional stones and wood. Savor farm-to-table organic Himachali meals including authentic Thukpa, Siddu, local herbal tea, and fresh organic vegetables harvested with love.
-                </p>
-            </div>
-
-            <!-- 4-Image Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Item 1 -->
-                <div class="group relative rounded-2xl overflow-hidden shadow-xl h-80 border border-gold/20">
-                    <img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" alt="Traditional Meals" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/30 to-transparent opacity-90"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <span class="text-xs text-gold font-semibold uppercase tracking-wider block mb-1">Local Cuisine</span>
-                        <h3 class="font-serif text-lg font-bold text-cream">Traditional Himachali Thali</h3>
-                    </div>
-                </div>
-                <!-- Item 2 -->
-                <div class="group relative rounded-2xl overflow-hidden shadow-xl h-80 border border-gold/20">
-                    <img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" alt="Fresh Local Food" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/30 to-transparent opacity-90"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <span class="text-xs text-gold font-semibold uppercase tracking-wider block mb-1">Non Veg</span>
-                        <h3 class="font-serif text-lg font-bold text-cream">Taste of Mountains </h3>
-                    </div>
-                </div>
-                <!-- Item 3 -->
-                <div class="group relative rounded-2xl overflow-hidden shadow-xl h-80 border border-gold/20">
-                    <img src="https://i.ibb.co/Y4ZTSxzw/IMG-1389.jpg" alt="Organic Himachali Food" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/30 to-transparent opacity-90"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <span class="text-xs text-gold font-semibold uppercase tracking-wider block mb-1">Specialty Dish</span>
-                        <h3 class="font-serif text-lg font-bold text-cream">Lahauli Traditional Food</h3>
-                    </div>
-                </div>
-                <!-- Item 4 -->
-                <div class="group relative rounded-2xl overflow-hidden shadow-xl h-80 border border-gold/20">
-                    <img src="https://i.ibb.co/6JrmWSNF/IMG-1390.jpg" alt="Hot Delicacies & Tea" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/30 to-transparent opacity-90"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6">
-                        <span class="text-xs text-gold font-semibold uppercase tracking-wider block mb-1">Local Food</span>
-                        <h3 class="font-serif text-lg font-bold text-cream">Local Lahauli Food</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ROOMS & PRICING SECTION -->
-    <section id="rooms" class="py-24 bg-cream relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-forest font-semibold text-xs tracking-widest uppercase block mb-3">Accommodation</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-alpine mb-6">Cozy Rooms & Tariffs</h2>
-                <p class="text-alpine/80 text-base sm:text-lg font-light leading-relaxed">
-                    Designed with traditional warmth and modern comfort to keep you snug and comfortable amidst high-altitude alpine weather.
-                </p>
-            </div>
-
-            <!-- 2 Room Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                
-                <!-- Room 1: Standard Room -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-gold/30 flex flex-col justify-between hover:shadow-2xl transition-shadow">
-                    <div>
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" alt="Standard Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                            <div class="absolute top-4 right-4 bg-forest text-gold px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border border-gold/40">
-                                Best for 2-3 Persons
-                            </div>
-                        </div>
-                        <div class="p-8 space-y-4">
-                            <h3 class="font-serif text-2xl font-bold text-alpine">Standard Room</h3>
-                            <div class="flex items-baseline gap-2">
-                                <span class="font-serif text-3xl font-bold text-forest">₹2,499</span>
-                                <span class="text-alpine/60 text-sm font-medium">/ Night</span>
-                            </div>
-                            <p class="text-alpine/80 text-sm font-light leading-relaxed">
-                                Cozy and comfortable room designed for couples and small families seeking warmth and peace in the mountains.
-                            </p>
-                            <ul class="space-y-2 pt-2 text-sm text-alpine/90">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> 1 King Size Double Bed</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Extra Single Bed on request</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Attached Western Washroom</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-utensils text-gold"></i> Meals extra as per choice (local food on demand)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="p-8 pt-0">
-                        <a href="https://pahadihomestay.github.io/Bookings/" target="_blank" rel="noopener noreferrer" onclick="window.open('https://pahadihomestay.github.io/Bookings/', '_blank'); return false;" class="w-full py-3.5 rounded-xl bg-forest hover:bg-alpine text-cream font-bold text-sm tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-bookmark"></i> Book Standard Room
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Room 2: Best Family Room -->
-                <div class="bg-white rounded-3xl overflow-hidden shadow-xl border-2 border-gold flex flex-col justify-between hover:shadow-2xl transition-shadow relative">
-                    <div class="absolute top-0 right-0 bg-gold text-alpine font-bold text-xs uppercase px-4 py-1 rounded-bl-xl tracking-wider z-10 shadow-md">
-                        Most Popular
-                    </div>
-                    <div>
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" alt="Best Family Room" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                            <div class="absolute top-4 left-4 bg-forest text-gold px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border border-gold/40">
-                                Best for 5-6 Persons
-                            </div>
-                        </div>
-                        <div class="p-8 space-y-4">
-                            <h3 class="font-serif text-2xl font-bold text-alpine">Best Family Room</h3>
-                            <div class="flex items-baseline gap-2">
-                                <span class="font-serif text-3xl font-bold text-forest">₹3,499</span>
-                                <span class="text-alpine/60 text-sm font-medium">/ Night</span>
-                            </div>
-                            <p class="text-alpine/80 text-sm font-light leading-relaxed">
-                                Spacious family sanctuary featuring multiple beds and extra heating facilities, ideal for families and trekking groups.
-                            </p>
-                            <ul class="space-y-2 pt-2 text-sm text-alpine/90">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> 2 Double Beds (King Size)</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> 1 Extra Single Bed</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gold"></i> Room Heater facility on request</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-utensils text-gold"></i> Meals extra as per choice (local food on demand)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="p-8 pt-0">
-                        <a href="https://pahadihomestay.github.io/Bookings/" target="_blank" rel="noopener noreferrer" onclick="window.open('https://pahadihomestay.github.io/Bookings/', '_blank'); return false;" class="w-full py-3.5 rounded-xl bg-gold hover:bg-yellow-500 text-alpine font-bold text-sm tracking-wider transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer">
-                            <i class="fa-solid fa-bookmark"></i> Book Family Room
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FACILITIES GRID SECTION -->
-    <section id="facilities" class="py-24 bg-forest text-cream relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-semibold text-xs tracking-widest uppercase block mb-3">Amenities & Comfort</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold mb-6">Thoughtful Facilities For Your Stay</h2>
-                <p class="text-cream/80 text-base sm:text-lg font-light leading-relaxed">
-                    We ensure you have all essential modern comforts while soaking in the pristine wilderness of Darcha.
-                </p>
-            </div>
-
-            <!-- 10 Facilities Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                <!-- 1 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-house-chimney"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Cozy Stay</h3>
-                    <p class="text-cream/70 text-xs font-light">Warm wooden & stone rooms</p>
-                </div>
-                <!-- 2 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-restroom"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Attached Washrooms</h3>
-                    <p class="text-cream/70 text-xs font-light">Clean western bathrooms</p>
-                </div>
-                <!-- 3 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-square-parking"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Safe Parking</h3>
-                    <p class="text-cream/70 text-xs font-light">Secure space for vehicles & bikes</p>
-                </div>
-                <!-- 4 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-kitchen-set"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Kitchen Access</h3>
-                    <p class="text-cream/70 text-xs font-light">Organic home kitchen</p>
-                </div>
-                <!-- 5 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-temperature-arrow-up"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Room Heater</h3>
-                    <p class="text-cream/70 text-xs font-light">Available on request</p>
-                </div>
-                <!-- 6 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-wifi"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Free Wi-Fi</h3>
-                    <p class="text-cream/70 text-xs font-light">Stay connected in hills</p>
-                </div>
-                <!-- 7 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-shower"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Hot Water</h3>
-                    <p class="text-cream/70 text-xs font-light">Hot water availability</p>
-                </div>
-                <!-- 8 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-mountain"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">View Balcony</h3>
-                    <p class="text-cream/70 text-xs font-light">River & peak panoramas</p>
-                </div>
-                <!-- 9 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-person-hiking"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Guided Treks</h3>
-                    <p class="text-cream/70 text-xs font-light">Local trekking assistance</p>
-                </div>
-                <!-- 10 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 hover:border-gold transition-all group hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-xl mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-fire"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-base text-cream mb-1">Bonfire Night</h3>
-                    <p class="text-cream/70 text-xs font-light">Stargazing & campfire</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FULLY WORKING WHATSAPP BOOKING FORM -->
-    <section id="booking-form-anchor" class="py-24 bg-cream relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-3xl shadow-2xl border border-gold/40 p-8 sm:p-12 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-48 h-48 bg-gold/10 rounded-full blur-2xl -z-0"></div>
-
-                <div class="text-center max-w-2xl mx-auto mb-10 relative z-10">
-                    <span class="text-forest font-semibold text-xs tracking-widest uppercase block mb-2">For Booking Enquiries </span>
-                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-alpine mb-3">Booking enquiry via WhatsApp</h2>
-                    <p class="text-alpine/80 text-sm font-light">
-                        Fill in your details below and click submit. Our host Thinlay will instantly receive your request on WhatsApp to confirm your booking!
-                    </p>
-                </div>
-
-                <form id="whatsapp-booking-form" onsubmit="sendWhatsAppBooking(event)" class="space-y-6 relative z-10">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Full Name -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Full Name *</label>
-                            <input type="text" id="guest-name" required placeholder="e.g. Rahul Sharma" class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
-                        </div>
-                        <!-- Phone Number -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Phone Number (+91) *</label>
-                            <input type="tel" id="guest-phone" required placeholder="9876543210" class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Check-In Date -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Check-In Date *</label>
-                            <input type="date" id="check-in" required class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
-                        </div>
-                        <!-- Check-Out Date -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Check-Out Date *</label>
-                            <input type="date" id="check-out" required class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Room Type -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Select Room Type *</label>
-                            <select id="room-type" required class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
-                                <option value="" disabled selected>Choose your room</option>
-                                <option value="Standard Room">Normal Room</option>
-                                <option value="Family Room">Family Room</option>
-                            </select>
-                        </div>
-                        <!-- Number of Guests -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Number of Guests (1 to 10) *</label>
-                            <input type="number" id="guest-count" min="1" max="10" required placeholder="2" class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm">
-                        </div>
-                    </div>
-
-                    <!-- Special Requests -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-alpine mb-2">Special Requests / Notes</label>
-                        <textarea id="guest-notes" rows="3" placeholder="Mention food preferences, transport help, heater requirement, etc." class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-alpine focus:outline-none focus:border-forest text-sm"></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-base tracking-wider shadow-lg flex items-center justify-center gap-3 transition-all hover:scale-[1.01]">
-                        <i class="fa-brands fa-whatsapp text-2xl"></i> Send Booking Enquiry 
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10 GUEST REVIEWS SECTION -->
-    <section id="reviews" class="py-24 bg-alpine text-cream relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-semibold text-xs tracking-widest uppercase block mb-3">Testimonials</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold mb-6">Loved by Travelers Worldwide</h2>
-                
-                <!-- Rating Header -->
-                <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-forest border border-gold/40 shadow-xl">
-                    <span class="font-serif text-2xl font-bold text-gold">4.9 / 5.0</span>
-                    <div class="flex text-gold text-sm">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <span class="text-cream/80 text-sm font-medium border-l border-gold/30 pl-3">1000+ Happy Guests</span>
-                </div>
-            </div>
-
-            <!-- Responsive Grid of 10 Reviews -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Review 1 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "Chhering Tashi and family made our stay unforgettable. The home-cooked Thukpa and warm hospitality at 11,000 feet was just what we needed after our ride through Atal Tunnel!"
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">AK</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Amit Kumar</h4>
-                            <span class="text-xs text-gold/80 font-medium">Manali</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 2 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "Incredible location right by the Bhaga River. Clean rooms, cozy bedding, and mesmerizing starry skies at night. Best homestay in Darcha by far!"
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">RS</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Rohan Sharma</h4>
-                            <span class="text-xs text-gold/80 font-medium">Chandigarh</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 3 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "We stayed in the Family Room and it was extremely comfortable. Thinlay provided hot organic meals on demand. Highly recommend to all travelers heading to Zanskar."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">PP</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Priya Patel</h4>
-                            <span class="text-xs text-gold/80 font-medium">Ahmedabad</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 4 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "A true hidden gem! Secure parking for our bikes, instant room heater arrangement, and wonderful conversations with the host family around the evening bonfire."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">VS</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Vikram Singh</h4>
-                            <span class="text-xs text-gold/80 font-medium">Delhi</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 5 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "The views of snow-capped peaks from the room balcony are breathtaking. The organic Himachali food felt so healthy and pure. Will definitely return!"
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">SD</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Sneha Das</h4>
-                            <span class="text-xs text-gold/80 font-medium">Kolkata</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 6 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "Perfect base camp before crossing Shinkula Pass! Clean western washrooms, fast Wi-Fi, and extremely welcoming hosts. Five stars all the way."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">KM</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Karan Mehta</h4>
-                            <span class="text-xs text-gold/80 font-medium">Mumbai</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 7 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "The local herbal tea served in the evening was divine. Chhering Tashi also helped us plan our trek to Deepak Tal. Outstanding hospitality!"
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">AJ</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Ananya Joshi</h4>
-                            <span class="text-xs text-gold/80 font-medium">Pune</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 8 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "As a solo traveler, safety and comfort were my top priorities. The Pahadi Ghar exceeded my expectations. Felt completely at home in Lahaul."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">DV</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Deepak Verma</h4>
-                            <span class="text-xs text-gold/80 font-medium">Shimla</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 9 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "Unmatched tranquility and warmth. The rooms are warm, well-maintained, and the food tastes just like home. Can't wait to visit again next summer."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">MR</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Meera Rao</h4>
-                            <span class="text-xs text-gold/80 font-medium">Bengaluru</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review 10 -->
-                <div class="glass-dark p-6 rounded-2xl border border-gold/20 flex flex-col justify-between md:col-span-2 lg:col-span-1">
-                    <div>
-                        <div class="flex text-gold text-xs mb-3">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="text-cream/90 text-sm font-light leading-relaxed mb-6">
-                            "Authentic Lahauli culture at its best! The hosts treated us like family. Their organic Siddu and local storytelling made our Himachal trip truly magical."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-4 border-t border-gold/10">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center font-bold text-gold text-sm">TN</div>
-                        <div>
-                            <h4 class="font-serif font-bold text-sm text-cream">Tenzin Norbu</h4>
-                            <span class="text-xs text-gold/80 font-medium">Leh</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- NEAREST ATTRACTIONS & EXACT DISTANCES -->
-    <section class="py-24 bg-cream relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-forest font-semibold text-xs tracking-widest uppercase block mb-3">Explore Surroundings</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-alpine mb-6">Nearest Attractions & Distances</h2>
-                <p class="text-alpine/80 text-base sm:text-lg font-light leading-relaxed">
-                    The Pahadi Ghar Darcha is centrally located to explore high Himalayan passes, pristine alpine lakes, and ancient monasteries.
-                </p>
-            </div>
-
-            <!-- Featured Attraction Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div class="relative rounded-3xl overflow-hidden shadow-xl h-72 group">
-                    <img src="https://i.ibb.co/VXsVpgq/photo-1566515788590-23e44a99dfc1-2.jpg" alt="Deepak Tal Lakes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-8">
-                        <span class="text-xs text-gold font-bold uppercase tracking-wider block mb-1">Baralacha La Pass (45Km)</span>
-                        <h3 class="font-serif text-2xl font-bold text-cream">Deepak Tal & High Altitude Lakes</h3>
-                    </div>
-                </div>
-                <div class="relative rounded-3xl overflow-hidden shadow-xl h-72 group">
-                    <img src="https://i.ibb.co/j9F2dCWs/pexels-vikashkr50-20292895-2.jpg" alt="High Himalayan Passes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-alpine via-alpine/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-8">
-                        <span class="text-xs text-gold font-bold uppercase tracking-wider block mb-1">Gombo Ranjan (55Km)</span>
-                        <h3 class="font-serif text-2xl font-bold text-cream">Shinkula Top & Zanskhar Gateway </h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Distance Badge List -->
-            <div class="bg-white rounded-3xl shadow-xl border border-gold/30 p-8 sm:p-12">
-                <h3 class="font-serif text-2xl font-bold text-alpine mb-8 text-center">Complete Distance Guide from Homestay</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Bhaga River Bank</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">0 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Darcha, Barsi Bridge</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">0 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Jispa Valley</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">8 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Deepak Tal Lake</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">15 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Shashur Monastery</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">30 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Zanskar Valley Gateway</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">30 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Kardang Monastery</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">35 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Suraj Tal Lake</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">39 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Shinkula Pass</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">42 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Baralacha La Pass</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">45 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Gombo Ranjan</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">55 Km</span>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded-xl bg-cream border border-gold/20">
-                        <span class="text-alpine font-medium text-sm"><i class="fa-solid fa-location-dot text-gold mr-2"></i> Trilokinath Temple</span>
-                        <span class="font-bold text-forest text-sm bg-gold/20 px-3 py-1 rounded-full">78 Km</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- HOW TO REACH & LOCATION MAP -->
-    <section id="reach" class="py-24 bg-alpine text-cream relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-gold font-semibold text-xs tracking-widest uppercase block mb-3">Travel Guide</span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold mb-6">How to Reach Darcha</h2>
-                <p class="text-cream/80 text-base sm:text-lg font-light leading-relaxed">
-                    Plan your journey across spectacular mountain passes and scenic highways to reach our doorstep.
-                </p>
-            </div>
-
-            <!-- 3 Travel Guides -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <div class="glass-dark p-8 rounded-3xl border border-gold/20 space-y-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-2xl">
-                        <i class="fa-solid fa-road"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-xl text-cream">By Road</h3>
-                    <p class="text-cream/80 text-sm font-light leading-relaxed">
-                        Drive or take a bus along the Manali-Leh Highway via the magnificent Atal Tunnel and Jispa. Well-connected for cars, SUVs, and bikes.
-                    </p>
-                </div>
-                <div class="glass-dark p-8 rounded-3xl border border-gold/20 space-y-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-2xl">
-                        <i class="fa-solid fa-plane"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-xl text-cream">By Air</h3>
-                    <p class="text-cream/80 text-sm font-light leading-relaxed">
-                        Fly into Bhuntar Airport (Kullu), located approximately 150 km away. From the airport, hire a taxi or take local transport via Manali.
-                    </p>
-                </div>
-                <div class="glass-dark p-8 rounded-3xl border border-gold/20 space-y-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gold/20 border border-gold flex items-center justify-center text-gold text-2xl">
-                        <i class="fa-solid fa-train"></i>
-                    </div>
-                    <h3 class="font-serif font-bold text-xl text-cream">By Rail</h3>
-                    <p class="text-cream/80 text-sm font-light leading-relaxed">
-                        Chandigarh Railway Station is the nearest major railhead. From Chandigarh, scenic road trips via Mandi and Manali lead up to Darcha.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Location Banner & Google Maps CTA -->
-            <div class="bg-forest rounded-3xl border border-gold/40 p-8 sm:p-12 text-center max-w-4xl mx-auto shadow-2xl space-y-6">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/20 border border-gold text-gold text-xs font-semibold uppercase tracking-wider">
-                    <i class="fa-solid fa-map-pin"></i> Exact Location
-                </div>
-                <h3 class="font-serif text-2xl sm:text-3xl font-bold text-cream">
-                    Darcha Dangma, Lahaul & Spiti, Himachal Pradesh, India
-                </h3>
-                <p class="text-cream/80 text-sm max-w-xl mx-auto font-light">
-                    Click below to open our exact pin in Google Maps for seamless GPS navigation all the way to our doorstep.
-                </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <a href="https://maps.app.goo.gl/wD4LpifNPN3zkyzZ8" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gold hover:bg-yellow-500 text-alpine font-bold text-base tracking-wider shadow-lg transition-all hover:scale-105">
-                        <i class="fa-solid fa-map-location-dot"></i> Open in Google Maps
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer id="contact" class="bg-alpine text-cream border-t border-gold/20 pt-16 pb-24 md:pb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-gold/20">
-                
-                <!-- Col 1: Brand Info -->
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 border border-gold flex items-center justify-center text-gold">
-                            <i class="fa-solid fa-mountain-sun text-lg"></i>
-                        </div>
-                        <span class="font-serif text-lg font-bold tracking-wider text-cream">THE PAHADI GHAR</span>
-                    </div>
-                    <p class="text-cream/70 text-xs font-light leading-relaxed">
-                        Your Home Above the Clouds. Authentic Lahauli hospitality at Darcha, Lahaul & Spiti, Himachal Pradesh.
-                    </p>
-                    <div class="flex items-center gap-3 pt-2">
-                        <a href="https://instagram.com/pahadi.ghar" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-alpine transition-all">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="https://wa.me/917876631873" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-forest border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-alpine transition-all">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Col 2: Quick Links -->
-                <div class="space-y-4">
-                    <h4 class="font-serif font-bold text-base text-gold uppercase tracking-wider">Quick Links</h4>
-                    <ul class="space-y-2 text-xs font-medium text-cream/80">
-                        <li><a href="#about" class="hover:text-gold transition-colors">About Homestay</a></li>
-                        <li><a href="#facilities" class="hover:text-gold transition-colors">Amenities & Facilities</a></li>
-                        <li><a href="#rooms" class="hover:text-gold transition-colors">Rooms & Tariffs</a></li>
-                        <li><a href="#food" class="hover:text-gold transition-colors">Organic Dining</a></li>
-                        <li><a href="#reviews" class="hover:text-gold transition-colors">Guest Reviews</a></li>
+                    <h4 class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-400 font-medium">
+                        <li><a href="#about" class="hover:text-white transition-colors">About Homestay</a></li>
+                        <li><a href="#facilities" class="hover:text-white transition-colors">Amenities & Facilities</a></li>
+                        <li><a href="#rooms" class="hover:text-white transition-colors">Rooms & Tariffs</a></li>
+                        <li><a href="#dining" class="hover:text-white transition-colors">Organic Dining</a></li>
+                        <li><a href="#reviews" class="hover:text-white transition-colors">Guest Reviews</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Contact Details -->
-                <div class="space-y-4">
-                    <h4 class="font-serif font-bold text-base text-gold uppercase tracking-wider">Contact Hosts</h4>
-                    <div class="space-y-3 text-xs text-cream/80 font-light">
-                        <p><strong class="text-cream font-semibold">Hosts:</strong> Chhering Tashi & Thinlay</p>
-                        <p class="flex items-center gap-2">
-                            <i class="fa-solid fa-phone text-gold"></i>
-                            <a href="tel:+917876631873" class="hover:text-gold">+91 9418776308</a>
-                        </p>
-                        <p class="flex items-center gap-2">
-                            <i class="fa-solid fa-phone text-gold"></i>
-                            <a href="tel:+919418776308" class="hover:text-gold">+91 7876631873</a>
-                        </p>
-                        <p class="flex items-center gap-2">
-                            <i class="fa-solid fa-envelope text-gold"></i>
-                            <a href="mailto:pahadighar.darcha@gmail.com" class="hover:text-gold">pahadighar.darcha@gmail.com</a>
-                        </p>
-                    </div>
+                <div>
+                    <h4 class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold mb-4">Contact Hosts</h4>
+                    <p class="text-xs font-semibold text-gray-300 mb-3">Hosts: Chhering Tashi & Thinlay</p>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-luxuryGold text-xs"></i> +91 9418776308</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-luxuryGold text-xs"></i> +91 7876631873</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-luxuryGold text-xs"></i> pahadighar.darcha@gmail.com</li>
+                    </ul>
                 </div>
-
-                <!-- Col 4: Address & Instagram -->
-                <div class="space-y-4">
-                    <h4 class="font-serif font-bold text-base text-gold uppercase tracking-wider">Location & Social</h4>
-                    <p class="text-xs text-cream/80 font-light leading-relaxed">
-                        Darcha Dangma, Lahaul & Spiti, Himachal Pradesh, India - 175132.
-                    </p>
-                    <p class="text-xs text-cream/80">
-                        Instagram: <a href="https://instagram.com/pahadi.ghar" target="_blank" rel="noopener noreferrer" class="text-gold font-medium hover:underline">@pahadi.ghar</a>
-                    </p>
-                </div>
-
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream/60 font-light">
-                <p>&copy; 2022 The Pahadi Ghar - Darcha. All Rights Reserved.</p>
-                <p class="mt-2 sm:mt-0">Designed by Thinleisss.</p>
+            <hr class="border-gray-800/60">
+
+            <div class="space-y-2">
+                <h4 class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold">Location & Social</h4>
+                <p class="text-xs text-gray-400 font-light leading-relaxed">
+                    Darcha Dangma, Lahaul & Spiti, Himachal Pradesh, India - 175132.
+                </p>
+                <p class="text-xs text-gray-400">
+                    Instagram: <a href="https://instagram.com/pahadi.ghar" target="_blank" class="text-luxuryGold hover:underline">@pahadi.ghar</a>
+                </p>
+            </div>
+
+            <div class="pt-6 text-center text-[10px] text-gray-600 tracking-wider uppercase font-medium">
+                © 2022 The Pahadi Ghar Darcha. All Rights Reserved.
+Designed by Thinleisss.
             </div>
         </div>
     </footer>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floating Contact Button</title>
-    <style>
-        /* FAB Container Styling */
-        .fab-container {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 999999;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        /* Main Floating Button */
-        .fab-main {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            border-radius: 50%;
-            border: none;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .fab-main:hover {
-            transform: scale(1.08);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .fab-main svg {
-            width: 28px;
-            height: 28px;
-            fill: #ffffff;
-            transition: transform 0.4s ease;
-        }
-
-        /* Options Wrapper (Hidden by default) */
-        .fab-options {
-            position: absolute;
-            bottom: 75px;
-            right: 5px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px) scale(0.8);
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Active State when Tapped/Clicked */
-        .fab-container.active .fab-options {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .fab-container.active .fab-main svg {
-            transform: rotate(45deg);
-        }
-
-        /* Individual Action Buttons (Call & WhatsApp) */
-        .fab-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .fab-btn:hover {
-            transform: scale(1.12);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .fab-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: #ffffff;
-        }
-
-        /* Specific Button Colors */
-        .call-btn {
-            background: linear-gradient(135deg, #007aff, #0056b3);
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25d366, #20ba5a);
-        }
-
-        /* Pulse Animation */
-        @keyframes pulse-animation {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
-        }
-
-        .fab-main {
-            animation: pulse-animation 2.5s infinite;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Floating Action Button Structure -->
-    <div class="fab-container" id="fabContainer">
-        <!-- Sub Buttons (Call & WhatsApp) -->
-        <div class="fab-options">
-            <!-- Call Button -->
-            <a href="tel:+919418776308" class="fab-btn call-btn" title="Call Us">
-                <svg viewBox="0 0 24 24">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                </svg>
+    <!-- ================= FAB CONTACT HUBS ================= -->
+    <div class="fixed bottom-6 right-6 z-50 fab-container flex flex-col items-end">
+        <div class="fab-options opacity-0 scale-95 pointer-events-none transition-all duration-300 flex flex-col space-y-2.5 mb-3 transform origin-bottom">
+            <a href="tel:+919418776308" class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white shadow-xl hover:scale-110 transition-transform">
+                <i class="fa-solid fa-phone"></i>
             </a>
-            <!-- WhatsApp Button -->
-            <a href="https://wa.me/917876631873" target="_blank" rel="noopener noreferrer" class="fab-btn whatsapp-btn" title="Chat on WhatsApp">
-                <svg viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                </svg>
+            <a href="https://wa.me/917876631873" target="_blank" class="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500 text-white shadow-xl hover:scale-110 transition-transform">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
             </a>
         </div>
-
-        <!-- Main Toggle Button with Modern Chat Lines Icon -->
-        <button class="fab-main" id="fabMain" aria-label="Toggle Contact Menu">
-            <svg viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
-            </svg>
+        <button class="w-14 h-14 rounded-full bg-luxuryGold text-white flex items-center justify-center shadow-2xl hover:bg-luxuryDarkGold transition-all focus:outline-none">
+            <i class="fa-solid fa-comments text-lg"></i>
         </button>
     </div>
 
-    <!-- JavaScript for Mobile & Desktop Compatibility -->
+    <!-- ================= ADMIN MODAL ================= -->
+    <div id="adminModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl border flex flex-col">
+            <div class="bg-luxuryDarkBg p-4 flex items-center justify-between border-b border-luxuryGold/20">
+                <span class="luxury-heading text-sm font-bold text-white tracking-widest flex items-center gap-2">
+                    <i class="fa-solid fa-screwdriver-wrench text-luxuryGold"></i>Admin Dashboard Console
+                </span>
+                <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Login Section with Inline Error -->
+            <div id="adminAuthBlock" class="p-8 flex-grow flex flex-col items-center justify-center space-y-4 max-w-sm mx-auto w-full">
+                <i class="fa-solid fa-fingerprint text-4xl text-luxuryGold mb-1"></i>
+                <h4 class="luxury-heading font-bold text-xs uppercase tracking-wide">Enter Admin Credentials</h4>
+                <div id="adminAuthError" class="hidden w-full text-center text-xs bg-red-50 text-red-700 p-2 rounded-lg font-bold"></div>
+                <input type="text" id="adminUser" placeholder="Username" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:outline-none">
+                <input type="password" id="adminPass" placeholder="Password" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:outline-none">
+                <button onclick="processAdminLogin()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white py-2.5 rounded-lg font-bold text-xs uppercase transition-all">Login</button>
+            </div>
+
+            <!-- Dashboard Content Section -->
+            <div id="adminPanelWorkspace" class="hidden flex-grow overflow-y-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-gray-50">
+                
+                <!-- Left Control Box -->
+                <div class="lg:col-span-5 bg-white p-4 rounded-2xl border border-gray-200 shadow-xs space-y-4 text-xs font-medium">
+                    
+                    <div id="adminWorkspaceStatus" class="hidden text-xs font-bold p-3 rounded-xl text-center"></div>
+
+                    <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1"><i class="fa-solid fa-calendar-minus text-amber-600"></i> Date Locking Operations</h4>
+                    <div>
+                        <label class="block text-gray-600 mb-1">Select Target Room Inventory Cells</label>
+                        <div class="grid grid-cols-3 gap-1.5" id="adminRoomSelectionList"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-gray-600 mb-1">Lock From Date</label>
+                            <input type="date" id="lockInDate" class="w-full border border-gray-200 p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-1">Lock To Date</label>
+                            <input type="date" id="lockOutDate" class="w-full border border-gray-200 p-2 rounded text-xs">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-gray-600 mb-1">Guest Reference Notes</label>
+                        <textarea id="lockGuestDetails" rows="2" placeholder="Guest Name, metadata log items..." class="w-full border border-gray-200 p-2 rounded text-xs focus:outline-none"></textarea>
+                    </div>
+                    <button onclick="saveAdminLockBlock()" class="w-full bg-luxuryText text-white py-2.5 rounded-lg font-bold transition-all hover:bg-luxuryDarkGold">
+                        Execute Calendar Lock Vector
+                    </button>
+
+                    <hr class="my-3">
+
+                    <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1"><i class="fa-solid fa-tags text-luxuryGold"></i> Base Rates Override Tool</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-gray-600 mb-1">Family Price (₹)</label>
+                            <input type="number" id="inputPriceFamily" class="w-full border border-gray-200 p-2 rounded text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-gray-600 mb-1">Standard Price (₹)</label>
+                            <input type="number" id="inputPriceStandard" class="w-full border border-gray-200 p-2 rounded text-xs">
+                        </div>
+                    </div>
+                    <button onclick="saveAdminRates()" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-bold transition-all hover:bg-emerald-700">
+                        Commit Pricing Override Updates
+                    </button>
+                </div>
+
+                <!-- Right Display Grid/Registry Box -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
+                        <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1 mb-2"><i class="fa-solid fa-list-check text-indigo-600"></i> Active Locked Blocks Registry</h4>
+                        <div class="overflow-x-auto max-h-[35vh] overflow-y-auto" id="adminBookingsRegisterBox"></div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b pb-2 mb-2">
+                            <h4 class="text-sm font-bold text-gray-800 flex items-center gap-1"><i class="fa-solid fa-table-cells text-teal-600"></i> Dynamic 30-Day Matrix Monitor</h4>
+                            <input type="month" id="calendarMatrixMonthSelector" onchange="renderMatrixCalendar()" class="border p-1 text-xs rounded bg-white focus:outline-none">
+                        </div>
+                        <div class="overflow-x-auto max-h-[25vh] overflow-y-auto">
+                            <table class="w-full text-left text-[11px] border-collapse">
+                                <thead><tr class="bg-gray-100 border-b text-gray-600" id="matrixHeadRow"></tr></thead>
+                                <tbody id="matrixBodyRows" class="divide-y text-gray-700"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT FIXED ENGINE ================= -->
     <script>
-        const fabContainer = document.getElementById('fabContainer');
-        const fabMain = document.getElementById('fabMain');
+        // --- FIREBASE INITIALIZATION CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5sE1Db_jhCAjBDOnNidZ8VtVhs6L8TSk",
+            authDomain: "homestaybookings-1b28d.firebaseapp.com",
+            projectId: "homestaybookings-1b28d",
+            storageBucket: "homestaybookings-1b28d.firebasestorage.app",
+            messagingSenderId: "29544087150",
+            appId: "1:29544087150:web:27786d8c32c10d24b1f07f",
+            measurementId: "G-4HVB7CVVK0"
+        };
 
-        fabMain.addEventListener('click', function(e) {
-            e.stopPropagation();
-            fabContainer.classList.toggle('active');
-        });
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-        document.addEventListener('click', function(e) {
-            if (!fabContainer.contains(e.target)) {
-                fabContainer.classList.remove('active');
+        let state = {
+            bookings: [], 
+            prices: { family: 3099, standard: 2099 } 
+        };
+
+        let selections = {
+            familySelected: false,
+            standardCount: 0
+        };
+
+        function showAdminStatus(message, isError) {
+            const container = document.getElementById('adminWorkspaceStatus');
+            if(!container) return;
+            container.innerText = message;
+            container.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-emerald-50', 'text-emerald-700');
+            
+            if(isError) {
+                container.classList.add('bg-red-50', 'text-red-700');
+            } else {
+                container.classList.add('bg-emerald-50', 'text-emerald-700');
             }
-        });
-    </script>
-</body>
-</html>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // Toggle Mobile Hamburger Drawer Menu
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Fully working WhatsApp booking integration function (Fixed)
-        function sendWhatsAppBooking(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('guest-name').value.trim();
-
-            const phone = document.getElementById('guest-phone').value.trim();
-
-            const checkIn = document.getElementById('check-in').value;
-            const checkOut = 
-
-document.getElementById('check-out').value;
-            const roomType = 
-
-
-document.getElementById('room-type').value;
-            const guestCount = 
-
-document.getElementById('guest-count').value;
-            const notes = 
-
-document.getElementById('guest-notes').value.trim() || 'None';
-
-            // Construct pre-filled WhatsApp message
-            const message = `*Hii Thinlay! I would like to book a stay at The Pahadi Ghar - Darcha*. 
-
-Name: ${name}, 
-Phone: ${phone}, 
-Check-In: ${checkIn}, 
-Check-Out: ${checkOut}, 
-Room: ${roomType}, 
-Guests: ${guestCount}, 
-Notes: ${notes}. Please confirm availability!`;
-
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappNumber = "917876631873";
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-            window.location.href = whatsappUrl;
+            setTimeout(() => { container.classList.add('hidden'); }, 4000);
         }
 
+        // Load data from Firebase Realtime Database
+        function loadStorageState() {
+            database.ref('pahadi_ghar_state').once('value').then((snapshot) => {
+                const serverData = snapshot.val();
+                if(serverData) {
+                    state = serverData;
+                } else {
+                    state.bookings = [
+                        { id: "seed-1", roomNum: 101, checkIn: "2026-07-25", checkOut: "2026-07-28", guestMeta: "Amit (Manali) - Sample Log Entry" }
+                    ];
+                    saveStorageState();
+                }
+                syncUIRates();
+                updateLiveStatusDisplay();
+            }).catch((e) => {
+                console.error("Firebase Load Error: ", e);
+            });
+        }
+
+        // Save data to Firebase Realtime Database
+        function saveStorageState() {
+            database.ref('pahadi_ghar_state').set(state).then(() => {
+                console.log("Data successfully updated on Firebase cloud.");
+            }).catch((error) => {
+                console.error("Firebase Save Error: ", error);
+            });
+        }
+
+        function syncUIRates() {
+            document.getElementById('price_family').innerText = state.prices.family;
+            document.getElementById('price_standard').innerText = state.prices.standard;
+            document.getElementById('inputPriceFamily').value = state.prices.family;
+            document.getElementById('inputPriceStandard').value = state.prices.standard;
+        }
+
+        function handleFamilyToggleInteraction() {
+            selections.familySelected = document.getElementById('familySuiteToggle').checked;
+        }
+
+        function changeStandardCount(amount) {
+            let nextVal = selections.standardCount + amount;
+            if (nextVal >= 0 && nextVal <= 6) { 
+                selections.standardCount = nextVal;
+                document.getElementById('standardRoomsCountDisplay').innerText = selections.standardCount;
+            }
+        }
+
+        function dateRangeOverlaps(a_start, a_end, b_start, b_end) {
+            return new Date(a_start) < new Date(b_end) && new Date(b_start) < new Date(a_end);
+        }
+
+        function verifyRoomAvailability(roomNum, checkIn, checkOut) {
+            for(let block of state.bookings) {
+                if(Number(block.roomNum) === Number(roomNum)) {
+                    if(dateRangeOverlaps(block.checkIn, block.checkOut, checkIn, checkOut)) return false;
+                }
+            }
+            return true;
+        }
+
+        function triggerReservationModalStep() {
+            const errBox = document.getElementById('bookingValidationError');
+            errBox.classList.add('hidden');
+
+            if(!selections.familySelected && selections.standardCount === 0) {
+                errBox.innerText = "Please turn ON the Family Suite toggle or select standard rooms first.";
+                errBox.classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('checkInDate').value = "2026-07-25";
+            document.getElementById('checkOutDate').value = "2026-07-26";
+            calculateDuration();
+
+            let summaryText = "";
+            if(selections.familySelected) summaryText += `• Room 101 Family Suite Allocation Active\n`;
+            if(selections.standardCount > 0) summaryText += `• ${selections.standardCount} Cozy Standard Room Module Units Requested`;
+            document.getElementById('formSummaryDisplayPanel').innerText = summaryText;
+
+            document.getElementById('modalValidationError').classList.add('hidden');
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() { document.getElementById('bookingModal').classList.add('hidden'); }
+        function toggleMenu() { document.getElementById('mobileDrawer').classList.toggle('hidden'); }
+        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
+
+        function calculateDuration() {
+            const ci = document.getElementById('checkInDate').value;
+            const co = document.getElementById('checkOutDate').value;
+            if(ci && co) {
+                const diffTime = Math.abs(new Date(co) - new Date(ci));
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                document.getElementById('calculatedDays').innerText = `${diffDays} Night${diffDays > 1 ? 's':''}`;
+            }
+        }
+
+        function handleBookingSubmit(event) {
+            event.preventDefault();
+            const checkIn = document.getElementById('checkInDate').value;
+            const checkOut = document.getElementById('checkOutDate').value;
+            const modalErr = document.getElementById('modalValidationError');
+            modalErr.classList.add('hidden');
+
+            if(selections.familySelected) {
+                if(!verifyRoomAvailability(101, checkIn, checkOut)) {
+                    modalErr.innerText = "Room 101 Family Suite is already reserved inside this date path.";
+                    modalErr.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            let allocationStandardRoomsArray = [];
+            if(selections.standardCount > 0) {
+                for(let r = 102; r <= 107; r++) {
+                    if(verifyRoomAvailability(r, checkIn, checkOut)) {
+                        allocationStandardRoomsArray.push(r);
+                        if(allocationStandardRoomsArray.length === selections.standardCount) break;
+                    }
+                }
+                if(allocationStandardRoomsArray.length < selections.standardCount) {
+                    modalErr.innerText = `Only ${allocationStandardRoomsArray.length} Standard room(s) left vacant for these dates.`;
+                    modalErr.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            const name = document.getElementById('guestName').value;
+            const phone = document.getElementById('guestPhone').value;
+            const email = document.getElementById('guestEmail').value || 'N/A';
+            const origin = document.getElementById('guestOrigin').value;
+            const address = document.getElementById('guestAddress').value;
+            const adults = document.getElementById('countAdults').value;
+            const children = document.getElementById('countChildren').value;
+            const duration = document.getElementById('calculatedDays').innerText;
+
+            const textTemplate = `*Booking Order File Received from Web Interface*\n` +
+                                 `----------------------------------------\n` +
+                                 `*Guest Name:* ${name}\n` +
+                                 `*Contact Phone:* ${phone}\n` +
+                                 `*Email Reference:* ${email}\n` +
+                                 `*Home Residence Address:* ${address}\n` +
+                                 `*Corridor Point Origin:* ${origin}\n` +
+                                 `----------------------------------------\n` +
+                                 `*Stay Allocations Configuration:* \n` +
+                                 `${selections.familySelected ? '-> Room 101 Family Suite Active\n' : ''}` +
+                                 `${selections.standardCount > 0 ? '-> ' + selections.standardCount + ' Standard Room Units (Allocated: ' + allocationStandardRoomsArray.join(', ') + ')\n' : ''}` +
+                                 `*Check-In Date:* ${checkIn}\n` +
+                                 `*Check-Out Date:* ${checkOut}\n` +
+                                 `*Duration Scope:* ${duration}\n` +
+                                 `*Guest Headcount:* ${adults} Adults, ${children} Children\n` +
+                                 `----------------------------------------`;
+
+            window.open(`https://api.whatsapp.com/send?phone=917876631873&text=${encodeURIComponent(textTemplate)}`, '_blank');
+            closeBookingModal();
+        }
+
+        function updateLiveStatusDisplay() {
+            const selectedDate = document.getElementById('liveCheckDate').value;
+            if(!selectedDate) return;
+
+            let bookedCounter = 0;
+            let familyRoomBooked = false;
+
+            for(let b of state.bookings) {
+                if(dateRangeOverlaps(b.checkIn, b.checkOut, selectedDate, selectedDate)) {
+                    bookedCounter++;
+                    if(Number(b.roomNum) === 101) familyRoomBooked = true;
+                }
+            }
+
+            const badge = document.getElementById('liveStatusBadge');
+            if(bookedCounter >= 7) {
+                badge.className = "bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded";
+                badge.innerText = "ALL UNITS FULL";
+            } else {
+                badge.className = "bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded";
+                badge.innerText = `${6 - (bookedCounter - (familyRoomBooked ? 1 : 0))} Standard Free | Family: ${familyRoomBooked ? 'Locked':'Vacant'}`;
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+            document.getElementById('adminAuthBlock').classList.remove('hidden');
+            document.getElementById('adminPanelWorkspace').classList.add('hidden');
+            document.getElementById('adminAuthError').classList.add('hidden');
+        }
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        function processAdminLogin() {
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            const loginErr = document.getElementById('adminAuthError');
+
+            if(user === 'pahadi.ghar' && pass === '123890') {
+                loginErr.classList.add('hidden');
+                document.getElementById('adminAuthBlock').classList.add('hidden');
+                document.getElementById('adminPanelWorkspace').classList.remove('hidden');
+                
+                document.getElementById('calendarMatrixMonthSelector').value = "2026-07";
+                document.getElementById('lockInDate').value = "2026-07-25";
+                document.getElementById('lockOutDate').value = "2026-07-26";
+                
+                renderAdminRoomCheckboxes();
+                renderBookingsRegisterList();
+                renderMatrixCalendar();
+                showAdminStatus("Welcome Back! System Matrix Connected Successfully.", false);
+            } else { 
+                loginErr.innerText = "Invalid Operational Security Keys!";
+                loginErr.classList.remove('hidden');
+            }
+        }
+
+        function renderAdminRoomCheckboxes() {
+            const box = document.getElementById('adminRoomSelectionList');
+            box.innerHTML = `<label class="flex items-center gap-1 bg-amber-50 p-1.5 rounded border cursor-pointer"><input type="checkbox" name="adminRooms" value="101"> 101(F)</label>`;
+            for(let r = 102; r <= 107; r++) {
+                box.innerHTML += `<label class="flex items-center gap-1 bg-gray-50 p-1.5 rounded border cursor-pointer"><input type="checkbox" name="adminRooms" value="${r}"> ${r}(S)</label>`;
+            }
+        }
+
+        function renderBookingsRegisterList() {
+            const container = document.getElementById('adminBookingsRegisterBox');
+            if(!state.bookings || state.bookings.length === 0) {
+                container.innerHTML = `<p class="text-xs italic text-gray-400 p-2">No active lock entries captured inside registry.</p>`;
+                return;
+            }
+            let html = `<table class="w-full text-left text-xs divide-y divide-gray-200">
+                            <thead class="bg-gray-100 font-bold">
+                                <tr>
+                                    <th class="p-2">Room</th>
+                                    <th class="p-2">Dates Scope</th>
+                                    <th class="p-2">Log Memo / Name</th>
+                                    <th class="p-2 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 font-normal">`;
+            
+            state.bookings.forEach(b => {
+                html += `<tr class="hover:bg-gray-50">
+                            <td class="p-2 font-bold text-gray-700">${b.roomNum}</td>
+                            <td class="p-2 text-[11px] text-gray-600">${b.checkIn} to ${b.checkOut}</td>
+                            <td class="p-2 max-w-[120px] truncate text-gray-500">${b.guestMeta}</td>
+                            <td class="p-2 text-center">
+                                <button onclick="deleteBookingBlock('${b.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 px-2 py-1 rounded-md text-[11px] font-bold transition-all">
+                                    <i class="fa-solid fa-trash-can mr-1"></i> Clear
+                                </button>
+                            </td>
+                         </tr>`;
+            });
+            container.innerHTML = html + `</tbody></table>`;
+        }
+
+        function saveAdminLockBlock() {
+            const checkIn = document.getElementById('lockInDate').value;
+            const checkOut = document.getElementById('lockOutDate').value;
+            const meta = document.getElementById('lockGuestDetails').value || "Manual Blockout";
+
+            if(!checkIn || !checkOut) { 
+                showAdminStatus("Error: Missing target lock dates!", true); 
+                return; 
+            }
+
+            if(new Date(checkIn) >= new Date(checkOut)) {
+                showAdminStatus("Error: Check-out must be after Check-in!", true);
+                return;
+            }
+
+            let targetedRooms = [];
+            document.getElementsByName('adminRooms').forEach(cb => { if(cb.checked) targetedRooms.push(Number(cb.value)); });
+            if(targetedRooms.length === 0) { 
+                showAdminStatus("Error: Pick at least one target room cell!", true); 
+                return; 
+            }
+
+            for(let roomNum of targetedRooms) {
+                if(!verifyRoomAvailability(roomNum, checkIn, checkOut)) {
+                    showAdminStatus(`Conflict Error: Room ${roomNum} is already blocked on these dates.`, true);
+                    return;
+                }
+            }
+
+            targetedRooms.forEach(room => {
+                state.bookings.push({
+                    id: 'lock-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                    roomNum: room, 
+                    checkIn: checkIn, 
+                    checkOut: checkOut, 
+                    guestMeta: meta
+                });
+            });
+
+            saveStorageState();
+            renderBookingsRegisterList();
+            renderMatrixCalendar();
+            updateLiveStatusDisplay();
+            
+            document.getElementById('lockGuestDetails').value = "";
+            document.getElementsByName('adminRooms').forEach(cb => cb.checked = false);
+
+            showAdminStatus("Success: Selected dates locked inside configuration matrix!", false);
+        }
+
+        function deleteBookingBlock(id) {
+            state.bookings = state.bookings.filter(b => b.id !== id);
+            saveStorageState();
+            renderBookingsRegisterList();
+            renderMatrixCalendar();
+            updateLiveStatusDisplay();
+            showAdminStatus("Success: Room unlocked and registry entry dropped.", false);
+        }
+
+        function saveAdminRates() {
+            state.prices.family = Number(document.getElementById('inputPriceFamily').value);
+            state.prices.standard = Number(document.getElementById('inputPriceStandard').value);
+            saveStorageState();
+            syncUIRates();
+            showAdminStatus("Success: Base tariff structures overridden.", false);
+        }
+
+        function renderMatrixCalendar() {
+            const yearMonthStr = document.getElementById('calendarMatrixMonthSelector').value;
+            if(!yearMonthStr) return;
+            const [year, month] = yearMonthStr.split('-').map(Number);
+            const totalDays = new Date(year, month, 0).getDate();
+
+            const headRow = document.getElementById('matrixHeadRow');
+            headRow.innerHTML = `<th class="p-1 border-r bg-gray-200 text-center">Room</th>`;
+            for(let d = 1; d <= totalDays; d++) { headRow.innerHTML += `<th class="p-0.5 text-center text-[9px] w-5">${d}</th>`; }
+
+            const bodyRows = document.getElementById('matrixBodyRows');
+            bodyRows.innerHTML = '';
+            let roomsArray = [101, 102, 103, 104, 105, 106, 107];
+
+            roomsArray.forEach(room => {
+                let rowHtml = `<tr><td class="p-1 font-bold border-r bg-white text-center">${room}</td>`;
+                for(let d = 1; d <= totalDays; d++) {
+                    let padDay = d < 10 ? '0' + d : '' + d;
+                    let cellDate = `${year}-${month < 10 ? '0'+month : month}-${padDay}`;
+                    let cellOccupied = false;
+
+                    for(let b of state.bookings) {
+                        if(Number(b.roomNum) === room) {
+                            if(new Date(cellDate) >= new Date(b.checkIn) && new Date(cellDate) < new Date(b.checkOut)) { cellOccupied = true; break; }
+                        }
+                    }
+                    rowHtml += `<td class="p-0 text-center"><div class="py-1 text-[9px] font-bold select-none ${cellOccupied ? 'bg-red-500 text-white':'bg-emerald-50 text-emerald-700'}">${cellOccupied ? 'L':'-'}</div></td>`;
+                }
+                bodyRows.innerHTML += rowHtml + `</tr>`;
+            });
+        }
+
+        function seedReviewsSliderMatrixEngine() {
+            const targetTrack = document.getElementById('reviewRow');
+            const locations = ['Delhi', 'Chandigarh', 'Mumbai', 'Manali', 'Leh'];
+            const travelers = ['Amit Sharma', 'Priya Patel', 'Rohan Verma', 'Vikram Singh', 'Neha Dhillon'];
+            const reviewsLogText = [
+                "Absolutely stellar stay options! Room 101 view vectors are gorgeous.",
+                "Authentic native slow cooked Lahauli dishes were deeply delicious.",
+                "Incredibly pristine spaces. Chhering bhaiya handles logistics smoothly.",
+                "Secure parking zones and robust running hot water networks function fully.",
+                "Smooth booking confirmation channels. Perfect mountain escape paths."
+            ];
+
+            let cumulativeHTML = '';
+            for(let i=0; i<20; i++) {
+                let name = travelers[i % travelers.length];
+                let loc = locations[i % locations.length];
+                let text = reviewsLogText[i % reviewsLogText.length];
+                cumulativeHTML += `
+                <div class="inline-block bg-white border border-luxuryGold/10 p-5 rounded-2xl shadow-xs min-w-[280px] sm:min-w-[310px] whitespace-normal">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-luxuryGold/20 flex items-center justify-center text-xs font-bold text-luxuryDarkGold uppercase">${name[0]}</div>
+                        <div>
+                            <h5 class="text-xs font-bold text-luxuryText">${name}</h5>
+                            <p class="text-[9px] text-gray-400 font-medium"><i class="fa-solid fa-location-dot"></i> Traveler from ${loc}</p>
+                        </div>
+                    </div>
+                    <div class="flex text-amber-500 text-[10px] mb-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-gray-600 italic">"${text}"</p>
+                </div>`;
+            }
+            targetTrack.innerHTML = cumulativeHTML;
+
+            let translationIndexOffset = 0;
+            setInterval(() => {
+                translationIndexOffset++;
+                if (translationIndexOffset >= 15) translationIndexOffset = 0;
+                targetTrack.style.transform = `translateX(${translationIndexOffset * -150}px)`;
+            }, 1500);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStorageState();
+            seedReviewsSliderMatrixEngine();
+            document.getElementById('liveCheckDate').value = "2026-07-25";
+            updateLiveStatusDisplay();
+        });
     </script>
 </body>
 </html>
