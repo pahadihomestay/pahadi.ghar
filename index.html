@@ -551,7 +551,7 @@ Designed by Thinleisss.
         <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl border flex flex-col">
             <div class="bg-luxuryDarkBg p-4 flex items-center justify-between border-b border-luxuryGold/20">
                 <span class="luxury-heading text-sm font-bold text-white tracking-widest flex items-center gap-2">
-                    <i class="fa-solid fa-screwdriver-wrench text-luxuryGold"></i>Admin Dashboard Console (Firebase Connected)
+                    <i class="fa-solid fa-screwdriver-wrench text-luxuryGold"></i>Admin Dashboard Console 
                 </span>
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -822,13 +822,13 @@ Designed by Thinleisss.
 
             // DETAILED WHATSAPP MESSAGE FORMAT RESTORED
             const textTemplate = `*Booking Order File Received from Web Interface*\n` +
-                                 `----------------------------------------\n` +
+                                 
                                  `*Guest Name:* ${name}\n` +
                                  `*Contact Phone:* ${phone}\n` +
                                  `*Email Reference:* ${email}\n` +
                                  `*Home Residence Address:* ${address}\n` +
                                  `*Corridor Point Origin:* ${origin}\n` +
-                                 `----------------------------------------\n` +
+                                 
                                  `*Stay Allocations Configuration:* \n` +
                                  `${selections.familySelected ? '-> Room 101 Family Suite Active\n' : ''}` +
                                  `${selections.standardCount > 0 ? '-> ' + selections.standardCount + ' Standard Room Units (Allocated: ' + allocationStandardRoomsArray.join(', ') + ')\n' : ''}` +
@@ -836,7 +836,7 @@ Designed by Thinleisss.
                                  `*Check-Out Date:* ${checkOut}\n` +
                                  `*Duration Scope:* ${duration}\n` +
                                  `*Guest Headcount:* ${adults} Adults, ${children} Children\n` +
-                                 `----------------------------------------`;
+                                
 
             window.open(`https://api.whatsapp.com/send?phone=917876631873&text=${encodeURIComponent(textTemplate)}`, '_blank');
             closeBookingModal();
