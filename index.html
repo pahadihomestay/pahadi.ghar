@@ -144,7 +144,7 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-sm">
             <div class="flex items-center gap-2 font-medium text-gray-700">
                 <i class="fa-solid fa-calendar-check text-luxuryDarkGold animate-pulse"></i>
-                <span>Check Live Grid Availability</span>
+                <span>Check Live Availability</span>
             </div>
             <div class="flex items-center gap-3">
                 <input type="date" id="liveCheckDate" onchange="updateLiveStatusDisplay()" class="bg-white border border-luxuryGold/30 text-xs rounded px-2 py-1 focus:outline-none">
@@ -233,91 +233,17 @@
                 </div>
             </div>
 
-            <!-- Booking Section Inline Warning Box -->
+           <!-- Booking Section Inline Warning Box -->
             <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
 
-            <button onclick="triggerReservationModalStep()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3 rounded-xl shadow transition-all tracking-wide text-xs uppercase">
-                Proceed To Booking 
-            </button>
-        </div>
+            <div style="margin: 15px 0; width: 100%; text-align: center;">
+                <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" style="display: block; width: 100%; background-color: #bfa15f; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    PROCEED TO BOOKING
+                </a>
+            </div>
+        </section>
+         
     </section>
-
-    <!-- ================= BOOKING MODAL ================= -->
-    <div id="bookingModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
-        <div class="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border p-6 relative">
-            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-lg focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="luxury-heading text-lg font-bold text-luxuryText mb-1">Verify Stay Itinerary</h3>
-            <p class="text-xs text-luxuryGold font-semibold mb-4">Complete simple details to securely dispatch via WhatsApp</p>
-            
-            <div id="modalValidationError" class="hidden mb-3 text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
-
-            <form onsubmit="handleBookingSubmit(event)" class="space-y-3.5 text-xs font-medium">
-                <div>
-                    <label class="block text-gray-600 mb-1">Full Name *</label>
-                    <input type="text" id="guestName" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-gray-600 mb-1">Phone Number *</label>
-                        <input type="tel" id="guestPhone" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-gray-600 mb-1">Email ID (Optional)</label>
-                        <input type="email" id="guestEmail" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-gray-600 mb-1">Coming From *</label>
-                        <select id="guestOrigin" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs bg-white focus:outline-none">
-                            <option value="Manali">Manali</option>
-                            <option value="Leh">Leh</option>
-                            <option value="Zanskar">Zanskar</option>
-                            <option value="Spiti">Spiti</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-gray-600 mb-1">Address *</label>
-                        <input type="text" id="guestAddress" required class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-luxuryGold focus:outline-none">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-gray-600 mb-1">Check-in Date *</label>
-                        <input type="date" id="checkInDate" required onchange="calculateDuration()" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-gray-600 mb-1">Check-out Date *</label>
-                        <input type="date" id="checkOutDate" required onchange="calculateDuration()" class="w-full border border-gray-200 rounded-lg p-2.5 text-xs focus:outline-none">
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 gap-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
-                    <div class="text-center flex flex-col justify-center">
-                        <span class="block text-[9px] uppercase text-gray-400">Total Nights</span>
-                        <span id="calculatedDays" class="text-xs font-bold text-luxuryText">1 Night</span>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] text-gray-400 uppercase text-center mb-0.5">Adults</label>
-                        <select id="countAdults" class="w-full border border-gray-200 rounded bg-white p-1 text-center text-xs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] text-gray-400 uppercase text-center mb-0.5">Children</label>
-                        <select id="countChildren" class="w-full border border-gray-200 rounded bg-white p-1 text-center text-xs"><option>0</option><option>1</option><option>2</option><option>3+</option></select>
-                    </div>
-                </div>
-
-                <div class="p-3 bg-amber-50 rounded-xl text-[11px] text-amber-800 space-y-0.5">
-                    <p class="font-bold">Summary Selection Stack:</p>
-                    <p id="formSummaryDisplayPanel">No selections matched.</p>
-                </div>
-
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold tracking-wide transition-all shadow-md">
-                    Submit Order Details via WhatsApp
-                </button>
-            </form>
-        </div>
-    </div>
 
     <!-- ================= ABOUT PROPERTY HOST SECTION ================= -->
     <section id="about" class="bg-white py-20 border-y border-luxuryGold/10">
@@ -1098,5 +1024,3 @@ function handleBookingSubmit(event) {
             setTimeout(() => { loadStorageState(); }, 500);
         });
     </script>
-</body>
-</html>
