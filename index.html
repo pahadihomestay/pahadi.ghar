@@ -508,10 +508,15 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
                         <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-luxuryGold text-xs"></i> +91 9418776308</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-luxuryGold text-xs"></i> +91 7876631873</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-luxuryGold text-xs"></i> pahadighar.darcha@gmail.com</li>
+                        <!-- Gmail ke theek niche naya Admin link -->
+                        <li class="pt-1">
+                            <a href="APKA_NYA_LINK_YAHAN_DALEN" target="_blank" class="inline-flex items-center gap-2 text-luxuryGold hover:text-white transition-colors font-semibold">
+                                <i class="fa-solid fa-lock text-[10px]"></i> <span>Admin Portal Link</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-            </div>
-
+                
             <hr class="border-gray-800/60">
 
             <div class="space-y-2">
@@ -822,6 +827,7 @@ function handleBookingSubmit(event) {
 
             // FIXED WHATSAPP MESSAGE TEMPLATE
             const textTemplate = `*The Pahadi Ghar - Darcha | New Booking Request*\n` +
+                
 
                                  `*👤 Guest information:* \n` +
 
@@ -839,8 +845,7 @@ function handleBookingSubmit(event) {
                                  `Check-Out Date: ${checkOut}\n` +
                                  `Duration Scope: ${duration}\n` +
                                  `Guest Headcount: ${adults} Adults, ${children} Children`;
-
-                                  ` Please confirm availability and let us know what to do next. \n` +
+    
 
             window.open(`https://api.whatsapp.com/send?phone=917876631873&text=${encodeURIComponent(textTemplate)}`, '_blank');
             closeBookingModal();
