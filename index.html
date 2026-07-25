@@ -68,19 +68,93 @@
         .luxury-heading { font-family: 'Cinzel', serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .fab-container:hover .fab-options { opacity: 1; transform: translateY(-10px) scale(1); pointer-events: auto; }
+        
+        /* Fixed Click-to-Toggle FAB Behavior */
+        .fab-options { opacity: 0; transform: translateY(10px) scale(0.95); pointer-events: none; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fab-container.active .fab-options { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
         
         /* Custom Switch Toggle Styles for Room 101 */
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px; }
         .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         input:checked + .slider { background-color: #4ade80; }
         input:checked + .slider:before { transform: translateX(24px); }
+
+        /* Exact Balanced Spacing (Equal Top & Bottom Gap: 16px) & Exact Mouse Arrow Pointer as requested */
+        .stay-btn-wrapper {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 28rem;
+            margin: 16px auto 16px auto; 
+        }
+
+        @keyframes cursorBounceAnim {
+            0% {
+                transform: translate(-50%, 25px) scale(0.9);
+                opacity: 0;
+            }
+            30% {
+                transform: translate(-50%, 0px) scale(1.1);
+                opacity: 1;
+            }
+            60% {
+                transform: translate(-50%, -6px) scale(1);
+                opacity: 1;
+            }
+            85% {
+                transform: translate(-50%, 15px) scale(0.95);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translate(-50%, 25px) scale(0.9);
+                opacity: 0;
+            }
+        }
+
+        .real-cursor-pointer {
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: 20;
+            font-size: 26px;
+            color: #C5A880;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+            animation: cursorBounceAnim 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .animated-stay-btn {
+            display: block;
+            width: 100%;
+            background-color: #C5A880;
+            color: #ffffff;
+            padding: 15px 0;
+            border-radius: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(197,168,128,0.3);
+            transition: transform 0.15s ease, background-color 0.2s ease;
+        }
+        
+        @keyframes btnPressEffect {
+            0%, 55%, 100% { transform: scale(1); }
+            60% { transform: scale(0.97); background-color: #A38456; }
+            70% { transform: scale(1); }
+        }
+
+        .animated-stay-btn {
+            animation: btnPressEffect 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-luxuryGold/30">
 
     <!-- ================= NAVBAR ================= -->
-    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-luxuryGold/10 shadow-sm">
+    <nav class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-luxuryGold/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0 flex flex-col">
@@ -154,7 +228,7 @@
     </section>
 
     <!-- ================= STATIC INFORMATION BANNER ICONS ================= -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-luxuryGold/20 rounded-2xl p-4 shadow-sm text-center">
             <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
                 <i class="fa-solid fa-circle-info text-luxuryGold text-lg mb-1"></i>
@@ -177,11 +251,22 @@
                 <span class="text-xs font-bold text-luxuryText">Manali-Leh Highway</span>
             </div>
         </div>
+
+        <!-- BALANCED SPACING & EXACT MOUSE POINTER ARROW (MATCHING REFERENCE IMAGE) -->
+        <div class="stay-btn-wrapper">
+            <a href="#rooms" class="animated-stay-btn">
+                BOOK YOUR STAY
+            </a>
+            <!-- Exact Arrow Mouse Pointer matching user uploaded photo -->
+            <div class="real-cursor-pointer">
+                <i class="fa-solid fa-arrow-pointer"></i>
+            </div>
+        </div>
     </section>
 
     <!-- ================= CHOOSE ACCOMMODATION ================= -->
-    <section id="rooms" class="max-w-md mx-auto px-4 py-12">
-        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 pl-1">CHOOSE ACCOMMODATION</h3>
+    <section id="rooms" class="max-w-md mx-auto px-4 py-3 scroll-mt-20">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 pl-1">CHOOSE ACCOMMODATION</h3>
 
         <!-- Main Inner Holder Box System -->
         <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
@@ -237,11 +322,11 @@
             <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
 
             <div style="margin: 15px 0; width: 100%; text-align: center;">
-                <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" style="display: block; width: 100%; background-color: #bfa15f; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" style="display: block; width: 100%; background-color: #C5A880; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     PROCEED TO BOOKING
                 </a>
             </div>
-        </section>
+        </div>
          
     </section>
 
@@ -434,7 +519,6 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
                         <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-luxuryGold text-xs"></i> +91 9418776308</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-luxuryGold text-xs"></i> +91 7876631873</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-luxuryGold text-xs"></i> pahadighar.darcha@gmail.com</li>
-                        <!-- Gmail ke theek niche naya Admin link -->
                         <li class="pt-1">
                             <a href="https://pahadihomestay.github.io/Bookings/" target="_blank" class="inline-flex items-center gap-2 text-luxuryGold hover:text-white transition-colors font-semibold">
                                 <i class="fa-solid fa-lock text-[10px]"></i> <span>Admin Portal</span>
@@ -442,6 +526,7 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
                         </li>
                     </ul>
                 </div>
+            </div>
                 
             <hr class="border-gray-800/60">
 
@@ -462,9 +547,9 @@ Designed by Thinleisss.
         </div>
     </footer>
 
-    <!-- ================= FAB CONTACT HUBS ================= -->
-    <div class="fixed bottom-6 right-6 z-50 fab-container flex flex-col items-end">
-        <div class="fab-options opacity-0 scale-95 pointer-events-none transition-all duration-300 flex flex-col space-y-2.5 mb-3 transform origin-bottom">
+    <!-- ================= FIXED FAB CONTACT HUBS (CLICK TO TOGGLE FIX) ================= -->
+    <div id="fabContainer" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div class="fab-options flex flex-col space-y-2.5 mb-3 transform origin-bottom">
             <a href="tel:+919418776308" class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white shadow-xl hover:scale-110 transition-transform">
                 <i class="fa-solid fa-phone"></i>
             </a>
@@ -472,7 +557,7 @@ Designed by Thinleisss.
                 <i class="fa-brands fa-whatsapp text-xl"></i>
             </a>
         </div>
-        <button class="w-14 h-14 rounded-full bg-luxuryGold text-white flex items-center justify-center shadow-2xl hover:bg-luxuryDarkGold transition-all focus:outline-none">
+        <button onclick="toggleFabMenu(event)" class="w-14 h-14 rounded-full bg-luxuryGold text-white flex items-center justify-center shadow-2xl hover:bg-luxuryDarkGold transition-all focus:outline-none">
             <i class="fa-solid fa-comments text-lg"></i>
         </button>
     </div>
@@ -503,7 +588,6 @@ Designed by Thinleisss.
                 <!-- Left Control Box -->
                 <div class="lg:col-span-5 bg-white p-4 rounded-2xl border border-gray-200 shadow-xs space-y-4 text-xs font-medium">
                     
-                    <!-- New App-wide Workspace Notification Status Block -->
                     <div id="adminWorkspaceStatus" class="hidden text-xs font-bold p-3 rounded-xl text-center"></div>
 
                     <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1"><i class="fa-solid fa-calendar-minus text-amber-600"></i> Date Locking Operations</h4>
@@ -551,7 +635,6 @@ Designed by Thinleisss.
                 <div class="lg:col-span-7 space-y-4">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
                         <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1 mb-2"><i class="fa-solid fa-list-check text-indigo-600"></i> Active Locked Blocks Registry</h4>
-                        <!-- Mobile Friendly Responsive Scroll & Expanded Text Area -->
                         <div class="overflow-x-auto max-h-[35vh] overflow-y-auto border border-gray-100 rounded-lg" id="adminBookingsRegisterBox"></div>
                     </div>
 
@@ -583,6 +666,20 @@ Designed by Thinleisss.
             familySelected: false,
             standardCount: 0
         };
+
+        // Fixed FAB click-to-toggle handler and outside-click closer
+        function toggleFabMenu(event) {
+            event.stopPropagation();
+            const container = document.getElementById('fabContainer');
+            container.classList.toggle('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const container = document.getElementById('fabContainer');
+            if (container && !container.contains(e.target)) {
+                container.classList.remove('active');
+            }
+        });
 
         function showAdminStatus(message, isError) {
             const container = document.getElementById('adminWorkspaceStatus');
@@ -675,108 +772,8 @@ Designed by Thinleisss.
             return true;
         }
 
-        function triggerReservationModalStep() {
-            const errBox = document.getElementById('bookingValidationError');
-            errBox.classList.add('hidden');
-
-            if(!selections.familySelected && selections.standardCount === 0) {
-                errBox.innerText = "Please turn ON the Family Suite toggle or select standard rooms first.";
-                errBox.classList.remove('hidden');
-                return;
-            }
-            
-            document.getElementById('checkInDate').value = "2026-07-25";
-            document.getElementById('checkOutDate').value = "2026-07-26";
-            calculateDuration();
-
-            let summaryText = "";
-            if(selections.familySelected) summaryText += `• Room 101 Family Suite Allocation Active\n`;
-            if(selections.standardCount > 0) summaryText += `• ${selections.standardCount} Cozy Standard Room Module Units Requested`;
-            document.getElementById('formSummaryDisplayPanel').innerText = summaryText;
-
-            document.getElementById('modalValidationError').classList.add('hidden');
-            document.getElementById('bookingModal').classList.remove('hidden');
-        }
-
-        function closeBookingModal() { document.getElementById('bookingModal').classList.add('hidden'); }
         function toggleMenu() { document.getElementById('mobileDrawer').classList.toggle('hidden'); }
         document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
-
-        function calculateDuration() {
-            const ci = document.getElementById('checkInDate').value;
-            const co = document.getElementById('checkOutDate').value;
-            if(ci && co) {
-                const diffTime = Math.abs(new Date(co) - new Date(ci));
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                document.getElementById('calculatedDays').innerText = `${diffDays} Night${diffDays > 1 ? 's':''}`;
-            }
-        }
-
-function handleBookingSubmit(event) {
-            event.preventDefault();
-            const checkIn = document.getElementById('checkInDate').value;
-            const checkOut = document.getElementById('checkOutDate').value;
-            const modalErr = document.getElementById('modalValidationError');
-            modalErr.classList.add('hidden');
-
-            if(selections.familySelected) {
-                if(!verifyRoomAvailability(101, checkIn, checkOut)) {
-                    modalErr.innerText = "Room 101 Family Suite is already reserved inside this date path.";
-                    modalErr.classList.remove('hidden');
-                    return;
-                }
-            }
-
-            let allocationStandardRoomsArray = [];
-            if(selections.standardCount > 0) {
-                for(let r = 102; r <= 107; r++) {
-                    if(verifyRoomAvailability(r, checkIn, checkOut)) {
-                        allocationStandardRoomsArray.push(r);
-                        if(allocationStandardRoomsArray.length === selections.standardCount) break;
-                    }
-                }
-                if(allocationStandardRoomsArray.length < selections.standardCount) {
-                    modalErr.innerText = `Only ${allocationStandardRoomsArray.length} Standard room(s) left vacant for these dates.`;
-                    modalErr.classList.remove('hidden');
-                    return;
-                }
-            }
-
-            const name = document.getElementById('guestName').value;
-            const phone = document.getElementById('guestPhone').value;
-            const email = document.getElementById('guestEmail').value || 'N/A';
-            const origin = document.getElementById('guestOrigin').value;
-            const address = document.getElementById('guestAddress').value;
-            const adults = document.getElementById('countAdults').value;
-            const children = document.getElementById('countChildren').value;
-            const duration = document.getElementById('calculatedDays').innerText;
-
-            // FIXED WHATSAPP MESSAGE TEMPLATE
-            const textTemplate = `*The Pahadi Ghar - Darcha | New Booking Request*\n` +
-                
-
-                                 `*👤 Guest information:* \n` +
-
-                                 `Guest Name: ${name}\n` +
-                                 `Contact Phone: ${phone}\n` +
-                                 `Email Reference: ${email}\n` +
-                                 `Home Residence Address: ${address}\n` +
-                                 `Comming From: ${origin}\n` +
-                
-                                 `*📆 Stay Details:* \n` +
-                
-                                 `${selections.familySelected ? '-> Room 101 Family Suite Active\n' : ''}` +
-                                 `${selections.standardCount > 0 ? '-> ' + selections.standardCount + ' Standard Room Units (Allocated: ' + allocationStandardRoomsArray.join(', ') + ')\n' : ''}` +
-                                 `Check-In Date: ${checkIn}\n` +
-                                 `Check-Out Date: ${checkOut}\n` +
-                                 `Duration Scope: ${duration}\n` +
-                                 `Guest Headcount: ${adults} Adults, ${children} Children`;
-    
-
-            window.open(`https://api.whatsapp.com/send?phone=917876631873&text=${encodeURIComponent(textTemplate)}`, '_blank');
-            closeBookingModal();
-        }
-
 
         function updateLiveStatusDisplay() {
             const selectedDate = document.getElementById('liveCheckDate').value;
@@ -842,7 +839,6 @@ function handleBookingSubmit(event) {
             }
         }
 
-        // MOBILE FRIENDLY GUEST REGISTER LIST WITH FULL DETAILS VISIBILITY
         function renderBookingsRegisterList() {
             const container = document.getElementById('adminBookingsRegisterBox');
             if(!state.bookings || state.bookings.length === 0) {
@@ -1024,3 +1020,5 @@ function handleBookingSubmit(event) {
             setTimeout(() => { loadStorageState(); }, 500);
         });
     </script>
+</body>
+</html>
