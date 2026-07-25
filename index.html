@@ -76,7 +76,6 @@
         input:checked + .slider { background-color: #4ade80; }
         input:checked + .slider:before { transform: translateX(24px); }
 
-        /* Exact Balanced Spacing (Equal Top & Bottom Gap: 16px) & Exact Mouse Arrow Pointer as requested */
         .stay-btn-wrapper {
             position: relative;
             display: block;
@@ -86,26 +85,11 @@
         }
 
         @keyframes cursorBounceAnim {
-            0% {
-                transform: translate(-50%, 25px) scale(0.9);
-                opacity: 0;
-            }
-            30% {
-                transform: translate(-50%, 0px) scale(1.1);
-                opacity: 1;
-            }
-            60% {
-                transform: translate(-50%, -6px) scale(1);
-                opacity: 1;
-            }
-            85% {
-                transform: translate(-50%, 15px) scale(0.95);
-                opacity: 0.6;
-            }
-            100% {
-                transform: translate(-50%, 25px) scale(0.9);
-                opacity: 0;
-            }
+            0% { transform: translate(-50%, 25px) scale(0.9); opacity: 0; }
+            30% { transform: translate(-50%, 0px) scale(1.1); opacity: 1; }
+            60% { transform: translate(-50%, -6px) scale(1); opacity: 1; }
+            85% { transform: translate(-50%, 15px) scale(0.95); opacity: 0.6; }
+            100% { transform: translate(-50%, 25px) scale(0.9); opacity: 0; }
         }
 
         .real-cursor-pointer {
@@ -119,6 +103,12 @@
             color: #C5A880;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
             animation: cursorBounceAnim 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes btnPressEffect {
+            0%, 55%, 100% { transform: scale(1); }
+            60% { transform: scale(0.97); background-color: #A38456; }
+            70% { transform: scale(1); }
         }
 
         .animated-stay-btn {
@@ -135,15 +125,6 @@
             text-align: center;
             box-shadow: 0 6px 12px rgba(197,168,128,0.3);
             transition: transform 0.15s ease, background-color 0.2s ease;
-        }
-        
-        @keyframes btnPressEffect {
-            0%, 55%, 100% { transform: scale(1); }
-            60% { transform: scale(0.97); background-color: #A38456; }
-            70% { transform: scale(1); }
-        }
-
-        .animated-stay-btn {
             animation: btnPressEffect 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
         }
     </style>
@@ -249,12 +230,10 @@
             </div>
         </div>
 
-        <!-- BALANCED SPACING & EXACT MOUSE POINTER ARROW (MATCHING REFERENCE IMAGE) -->
         <div class="stay-btn-wrapper">
             <a href="#rooms" class="animated-stay-btn">
                 BOOK YOUR STAY
             </a>
-            <!-- Exact Arrow Mouse Pointer matching user uploaded photo -->
             <div class="real-cursor-pointer">
                 <i class="fa-solid fa-arrow-pointer"></i>
             </div>
@@ -265,9 +244,10 @@
     <section id="rooms" class="max-w-md mx-auto px-4 py-3 scroll-mt-20">
         <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 pl-1">CHOOSE ACCOMMODATION</h3>
 
-        <!-- Main Inner Holder Box System -->
         <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
             
+            <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
+
             <!-- ROOM 101: FAMILY SUITE CARD -->
             <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
                 <div class="flex justify-between items-start mb-3">
@@ -298,7 +278,6 @@
                         <p class="text-xs text-gray-500">Rooms 102 to 107</p>
                         <p class="text-[11px] text-gray-400 font-medium">(₹<span id="price_standard">2099</span> / night)</p>
                     </div>
-                    <!-- Counter Increment Engine -->
                     <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
                         <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
                         <span id="standardRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
@@ -315,16 +294,12 @@
                 </div>
             </div>
 
-           <!-- Booking Section Inline Warning Box -->
-            <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
-
             <div style="margin: 15px 0; width: 100%; text-align: center;">
                 <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" style="display: block; width: 100%; background-color: #C5A880; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     PROCEED TO BOOKING
                 </a>
             </div>
         </div>
-         
     </section>
 
     <!-- ================= ABOUT PROPERTY HOST SECTION ================= -->
@@ -338,7 +313,7 @@
                     </h2>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Welcome to The Pahadi Ghar - Darcha
-Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Pahadi Ghar is more than just a homestay—it’s a mountain experience. Surrounded by towering peaks and crisp, pristine skies, we offer the comfort of a home blended with authentic Himalayan hospitality. If you are looking to escape the daily hustle, breathe in the fresh mountain air, and unwind in nature's lap, welcome to your second home in the hills.
+                        Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Pahadi Ghar is more than just a homestay—it’s a mountain experience. Surrounded by towering peaks and crisp, pristine skies, we offer the comfort of a home blended with authentic Himalayan hospitality. If you are looking to escape the daily hustle, breathe in the fresh mountain air, and unwind in nature's lap, welcome to your second home in the hills.
                     </p>
                     <div class="p-4 bg-luxuryLightBg rounded-2xl border-l-4 border-luxuryGold text-xs italic text-gray-600">
                         "A place where there are no strangers, only friends you haven't met yet."
@@ -396,9 +371,7 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
         </div>
 
         <div class="relative w-full flex overflow-x-hidden py-2">
-            <div id="reviewRow" class="flex space-x-6 whitespace-nowrap transition-transform duration-500 ease-in-out px-4">
-                <!-- Review cards dynamic inject -->
-            </div>
+            <div id="reviewRow" class="flex space-x-6 whitespace-nowrap transition-transform duration-500 ease-in-out px-4"></div>
         </div>
     </section>
 
@@ -539,7 +512,7 @@ Nestled amidst the serene and majestic landscapes of the Lahaul Valley, The Paha
 
             <div class="pt-6 text-center text-[10px] text-gray-600 tracking-wider uppercase font-medium">
                 © 2022 The Pahadi Ghar Darcha. All Rights Reserved.
-Designed by Thinleisss.
+                Designed by Thinleisss.
             </div>
         </div>
     </footer>
@@ -688,9 +661,7 @@ Designed by Thinleisss.
                         if(!state.bookings) state.bookings = [];
                         if(!state.prices) state.prices = { family: 3099, standard: 2099 };
                     } else {
-                        state.bookings = [
-                            { id: "seed-1", roomNum: 101, checkIn: "2026-07-25", checkOut: "2026-07-28", guestMeta: "Amit (Manali) - Sample Log Entry" }
-                        ];
+                        state.bookings = [];
                         await saveStorageState();
                     }
                 } else {
@@ -698,9 +669,7 @@ Designed by Thinleisss.
                     if(localData) {
                         state = JSON.parse(localData);
                     } else {
-                        state.bookings = [
-                            { id: "seed-1", roomNum: 101, checkIn: "2026-07-25", checkOut: "2026-07-28", guestMeta: "Amit (Manali) - Sample Log Entry" }
-                        ];
+                        state.bookings = [];
                         await saveStorageState();
                     }
                 }
@@ -758,28 +727,47 @@ Designed by Thinleisss.
         function toggleMenu() { document.getElementById('mobileDrawer').classList.toggle('hidden'); }
         document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
 
+        // Updated Real-time status update matching strict singular/plural format requirements
         function updateLiveStatusDisplay() {
-            const selectedDate = document.getElementById('liveCheckDate').value;
-            if(!selectedDate) return;
+            const selectedDateInput = document.getElementById('liveCheckDate');
+            if(!selectedDateInput || !selectedDateInput.value) return;
+            const selectedDate = selectedDateInput.value;
 
-            let bookedCounter = 0;
-            let familyRoomBooked = false;
+            let standardBookedCount = 0;
+            let familyBooked = false;
 
+            // Check bookings for the chosen date
             for(let b of state.bookings) {
-                if(dateRangeOverlaps(b.checkIn, b.checkOut, selectedDate, selectedDate)) {
-                    bookedCounter++;
-                    if(Number(b.roomNum) === 101) familyRoomBooked = true;
+                if(new Date(selectedDate) >= new Date(b.checkIn) && new Date(selectedDate) < new Date(b.checkOut)) {
+                    let rNum = Number(b.roomNum);
+                    if(rNum === 101) {
+                        familyBooked = true;
+                    } else if(rNum >= 102 && rNum <= 107) {
+                        standardBookedCount++;
+                    }
                 }
             }
 
+            let standardFreeCount = 6 - standardBookedCount;
+            if(standardFreeCount < 0) standardFreeCount = 0;
+
             const badge = document.getElementById('liveStatusBadge');
-            if(bookedCounter >= 7) {
-                badge.className = "bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded";
-                badge.innerText = "ALL UNITS FULL";
+            
+            let standardText = "";
+            if(standardFreeCount === 6) {
+                standardText = "6 Standard Free";
+            } else if(standardFreeCount === 1) {
+                standardText = "1 Standard Free";
+            } else if(standardFreeCount > 1) {
+                standardText = `${standardFreeCount} Standard Free`;
             } else {
-                badge.className = "bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded";
-                badge.innerText = `${6 - (bookedCounter - (familyRoomBooked ? 1 : 0))} Standard Free | Family: ${familyRoomBooked ? 'Locked':'Vacant'}`;
+                standardText = "All Standard Rooms Booked";
             }
+
+            let familyText = familyBooked ? "Booked" : "Vacant";
+
+            badge.className = (standardFreeCount === 0 && familyBooked) ? "bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded" : "bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded";
+            badge.innerText = `${standardText} | Family: ${familyText}`;
         }
 
         function openAdminModal() {
@@ -800,9 +788,14 @@ Designed by Thinleisss.
                 document.getElementById('adminAuthBlock').classList.add('hidden');
                 document.getElementById('adminPanelWorkspace').classList.remove('hidden');
                 
-                document.getElementById('calendarMatrixMonthSelector').value = "2026-07";
-                document.getElementById('lockInDate').value = "2026-07-25";
-                document.getElementById('lockOutDate').value = "2026-07-26";
+                // Get exact local date string for admin inputs
+                const todayStr = new Date().toLocaleDateString('en-CA');
+                document.getElementById('calendarMatrixMonthSelector').value = todayStr.slice(0, 7);
+                document.getElementById('lockInDate').value = todayStr;
+                
+                let tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                document.getElementById('lockOutDate').value = tomorrow.toLocaleDateString('en-CA');
                 
                 renderAdminRoomCheckboxes();
                 renderBookingsRegisterList();
@@ -960,7 +953,7 @@ Designed by Thinleisss.
             const reviewsLogText = [
                 "Absolutely stellar stay options! Room 101 view vectors are gorgeous.",
                 "Authentic native slow cooked Lahauli dishes were deeply delicious.",
-                "Incredibly pristine spaces. Chhering bhaiya handles logistics smoothly.",
+                "Incredibly pristine spaces. Chering bhaiya handles logistics smoothly.",
                 "Secure parking zones and robust running hot water networks function fully.",
                 "Smooth booking confirmation channels. Perfect mountain escape paths."
             ];
@@ -993,14 +986,23 @@ Designed by Thinleisss.
             }, 1500);
         }
 
+        // Auto initialize live status immediately when page scripts load
+        function initPageOnLoad() {
+            const todayStr = new Date().toLocaleDateString('en-CA');
+            const liveDateEl = document.getElementById('liveCheckDate');
+            if(liveDateEl) {
+                liveDateEl.value = todayStr;
+            }
+            seedReviewsSliderMatrixEngine();
+            loadStorageState();
+        }
+
         window.addEventListener('firebase-ready', () => {
             loadStorageState();
         });
 
         window.addEventListener('DOMContentLoaded', () => {
-            seedReviewsSliderMatrixEngine();
-            document.getElementById('liveCheckDate').value = "2026-07-25";
-            setTimeout(() => { loadStorageState(); }, 500);
+            initPageOnLoad();
         });
     </script>
 </body>
