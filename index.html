@@ -148,6 +148,7 @@
                     <a href="#dining" class="hover:text-luxuryGold transition-colors">Dining</a>
                     <a href="#reviews" class="hover:text-luxuryGold transition-colors">Reviews</a>
                     <a href="#facilities" class="hover:text-luxuryGold transition-colors">Facilities</a>
+                    <a href="#attractions" class="hover:text-luxuryGold transition-colors">Attractions</a>
                     <a href="#contact" class="hover:text-luxuryGold transition-colors">Contact</a>
                     <button onclick="openAdminModal()" class="text-xs uppercase bg-gray-100 hover:bg-luxuryGold hover:text-white px-3 py-1.5 rounded transition-all tracking-wider font-bold text-gray-700">
                         <i class="fa-solid fa-lock-open mr-1"></i> Admin
@@ -158,7 +159,7 @@
                     <a href="https://instagram.com/pahadi.ghar" target="_blank" class="flex items-center gap-2 text-sm font-semibold border border-luxuryGold/30 px-3 py-2 rounded-full hover:bg-luxuryGold/10 transition-all text-luxuryText">
                         <i class="fa-brands fa-instagram text-pink-600 text-lg"></i> <span>@pahadi.ghar</span>
                     </a>
-                    <a href="#rooms" class="bg-luxuryGold hover:bg-luxuryDarkGold text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-md transition-all tracking-wide">
+                    <a href="https://pahadihomestay.github.io/pahadi.ghar/" target="_blank" class="bg-luxuryGold hover:bg-luxuryDarkGold text-white font-semibold text-sm px-5 py-2.5 rounded-full shadow-md transition-all tracking-wide">
                         Book Now
                     </a>
                 </div>
@@ -178,13 +179,14 @@
             <a href="#dining" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Dining</a>
             <a href="#reviews" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Reviews</a>
             <a href="#facilities" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Facilities</a>
+            <a href="#attractions" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Attractions</a>
             <a href="#contact" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Contact</a>
             <hr class="border-gray-100">
             <div class="flex flex-col gap-3 pt-2">
                 <a href="https://instagram.com/pahadi.ghar" target="_blank" class="flex items-center gap-2 text-sm font-semibold border border-luxuryGold px-4 py-2 rounded-full text-luxuryText justify-center">
                     <i class="fa-brands fa-instagram text-pink-600 text-lg"></i> Instagram
                 </a>
-                <a href="#rooms" onclick="toggleMenu()" class="bg-luxuryGold text-white text-center font-semibold text-sm px-5 py-2.5 rounded-full shadow-md">
+                <a href="https://pahadihomestay.github.io/pahadi.ghar/" target="_blank" class="bg-luxuryGold text-white text-center font-semibold text-sm px-5 py-2.5 rounded-full shadow-md">
                     Book Now
                 </a>
             </div>
@@ -231,7 +233,7 @@
         </div>
 
         <div class="stay-btn-wrapper">
-            <a href="#rooms" class="animated-stay-btn">
+            <a href="https://pahadihomestay.github.io/pahadi.ghar/" target="_blank" class="animated-stay-btn">
                 BOOK YOUR STAY
             </a>
             <div class="real-cursor-pointer">
@@ -253,7 +255,7 @@
                 <div class="flex justify-between items-start mb-3">
                     <div>
                         <h4 class="text-sm font-bold text-gray-800">Room 101: Family Suite</h4>
-                        <p class="text-xs text-gray-500">₹<span id="price_family">3099</span> / night</p>
+                    <p class="text-xs text-gray-500 font-bold" style="color: #C5A880;">₹ <span id="price_family"></span> / night</p>
                     </div>
                     <label class="relative inline-block w-12 h-7">
                         <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
@@ -276,7 +278,7 @@
                     <div>
                         <h4 class="text-sm font-bold text-gray-800">Cozy Standard Rooms</h4>
                         <p class="text-xs text-gray-500">Rooms 102 to 107</p>
-                        <p class="text-[11px] text-gray-400 font-medium">(₹<span id="price_standard">2099</span> / night)</p>
+                      <p class="text-[11px] font-medium" style="color: #C5A880;">₹ <span id="price_standard"></span> / night</p>
                     </div>
                     <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
                         <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
@@ -295,7 +297,7 @@
             </div>
 
             <div style="margin: 15px 0; width: 100%; text-align: center;">
-                <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" style="display: block; width: 100%; background-color: #C5A880; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <a href="https://pahadihomestay.github.io/pahadi.ghar/" target="_blank" style="display: block; width: 100%; background-color: #C5A880; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     PROCEED TO BOOKING
                 </a>
             </div>
@@ -364,7 +366,7 @@
     <!-- ================= GUEST REVIEWS SLIDER ================= -->
     <section id="reviews" class="bg-gray-50 py-16 overflow-hidden border-t border-luxuryGold/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8">
-            <h2 class="luxury-heading text-2xl font-bold text-luxuryText">Loved By 1000+ Happy Travellers</h2>
+            <h2 class="luxury-heading text-2xl font-bold text-luxuryText">Loved By 2000+ Happy Travellers</h2>
             <div class="flex items-center justify-center gap-1 mt-2 text-amber-500 font-bold text-sm">
                 <i class="fa-solid fa-star"></i> 4.9 / 5 Verified Overall Guest Score
             </div>
@@ -426,6 +428,45 @@
         </div>
     </section>
 
+    <!-- ================= NEAREST ATTRACTIONS SECTION ================= -->
+    <section id="attractions" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">Explore Surroundings</span>
+            <h2 class="luxury-heading text-3xl font-bold text-luxuryText mt-1">Nearest Attractions</h2>
+            <div class="w-16 h-0.5 bg-luxuryGold mx-auto mt-2"></div>
+        </div>
+
+        <div class="bg-white border border-luxuryGold/20 rounded-3xl p-4 sm:p-6 shadow-md relative">
+            <!-- Photo Frame Container -->
+            <div class="relative w-full h-72 sm:h-96 rounded-2xl overflow-hidden bg-gray-900 shadow-inner group">
+                <img id="attractionImage" src="" alt="Attraction Photo" class="w-full h-full object-cover transition-opacity duration-500 ease-in-out">
+                
+                <!-- Gradient Overlay for Text Readability -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                <!-- Place Name Tag -->
+                <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-luxuryGold bg-black/40 px-2.5 py-1 rounded-full border border-luxuryGold/30">FEATURED SPOTS</span>
+                        <h3 id="attractionTitle" class="luxury-heading text-xl sm:text-2xl font-bold text-white mt-2 drop-shadow-md">Loading...</h3>
+                    </div>
+                    <span id="attractionCounter" class="text-xs font-semibold text-gray-300 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full self-start sm:self-auto">1 / 10</span>
+                </div>
+
+                <!-- Navigation Buttons (Prev / Next) -->
+                <button onclick="prevAttractionPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-luxuryGold text-white flex items-center justify-center transition-all border border-white/20 focus:outline-none shadow-lg">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                <button onclick="nextAttractionPhoto()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-luxuryGold text-white flex items-center justify-center transition-all border border-white/20 focus:outline-none shadow-lg">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Thumbnail Indicators / Dots -->
+            <div id="attractionDots" class="flex items-center justify-center gap-1.5 mt-4 flex-wrap"></div>
+        </div>
+    </section>
+
     <!-- ================= MAP SECTION ================= -->
     <section class="bg-white py-16 border-t border-luxuryGold/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -476,6 +517,7 @@
                     <ul class="space-y-2.5 text-xs text-gray-400 font-medium">
                         <li><a href="#about" class="hover:text-white transition-colors">About Homestay</a></li>
                         <li><a href="#facilities" class="hover:text-white transition-colors">Amenities & Facilities</a></li>
+                        <li><a href="#attractions" class="hover:text-white transition-colors">Nearest Attractions</a></li>
                         <li><a href="#rooms" class="hover:text-white transition-colors">Rooms & Tariffs</a></li>
                         <li><a href="#dining" class="hover:text-white transition-colors">Organic Dining</a></li>
                         <li><a href="#reviews" class="hover:text-white transition-colors">Guest Reviews</a></li>
@@ -636,6 +678,87 @@
             familySelected: false,
             standardCount: 0
         };
+
+        // Nearest Attractions 10 Photos Data Array
+        const attractionsData = [
+            { name: "Baralacha La Pass", image: "https://i.ibb.co/F4RPCxLk/IMG-1724.jpg" },
+            { name: "Shinkula Top", image: "https://i.ibb.co/PGYZJ2fB/IMG-1736.jpg" },
+            { name: "Gombo Ranjan", image: "https://i.ibb.co/5gVwRSZQ/IMG-1726.jpg" },
+            { name: "Deepak & Suraj Tal", image: "https://i.ibb.co/bj51Nc4R/IMG-1727.jpg" },
+            { name: "Zanskhar Gateway", image: "https://i.ibb.co/M5ntYPX1/IMG-1729.jpg" },
+            { name: "Darcha Monastery", image: "https://i.ibb.co/7dvLL8NV/IMG-1730.jpg" },
+            { name: "Jispa Valley", image: "https://i.ibb.co/bgDMVnLT/IMG-1733.jpg" },
+            { name: "Shashur Monastery", image: "https://i.ibb.co/zTq13Tk8/IMG-1731.jpg" },
+            { name: "Kardang Monastery", image: "https://i.ibb.co/fV5KKxtL/IMG-1734.jpg" },
+            { name: "Trilokinath Temple", image: "https://i.ibb.co/NdrDdVSv/IMG-1735.jpg" }
+        ];
+
+        let currentAttractionIndex = 0;
+        let attractionTimer = null;
+
+        function updateAttractionSlide(index) {
+            currentAttractionIndex = (index + attractionsData.length) % attractionsData.length;
+            const imgEl = document.getElementById('attractionImage');
+            const titleEl = document.getElementById('attractionTitle');
+            const counterEl = document.getElementById('attractionCounter');
+
+            if(imgEl && titleEl && counterEl) {
+                imgEl.style.opacity = '0.3';
+                setTimeout(() => {
+                    imgEl.src = attractionsData[currentAttractionIndex].image;
+                    titleEl.innerText = attractionsData[currentAttractionIndex].name;
+                    counterEl.innerText = `${currentAttractionIndex + 1} / ${attractionsData.length}`;
+                    imgEl.style.opacity = '1';
+                }, 200);
+            }
+            updateAttractionDots();
+        }
+
+        function nextAttractionPhoto() {
+            resetAttractionTimer();
+            updateAttractionSlide(currentAttractionIndex + 1);
+        }
+
+        function prevAttractionPhoto() {
+            resetAttractionTimer();
+            updateAttractionSlide(currentAttractionIndex - 1);
+        }
+
+        function resetAttractionTimer() {
+            clearInterval(attractionTimer);
+            attractionTimer = setInterval(() => {
+                updateAttractionSlide(currentAttractionIndex + 1);
+            }, 3000);
+        }
+
+        function initAttractionSlider() {
+            const dotsContainer = document.getElementById('attractionDots');
+            if(dotsContainer) {
+                dotsContainer.innerHTML = '';
+                attractionsData.forEach((_, idx) => {
+                    const dot = document.createElement('button');
+                    dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentAttractionIndex ? 'bg-luxuryGold w-6' : 'bg-gray-300 hover:bg-gray-400'}`;
+                    dot.onclick = () => {
+                        resetAttractionTimer();
+                        updateAttractionSlide(idx);
+                    };
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            updateAttractionSlide(0);
+            attractionTimer = setInterval(() => {
+                updateAttractionSlide(currentAttractionIndex + 1);
+            }, 3000);
+        }
+
+        function updateAttractionDots() {
+            const dotsContainer = document.getElementById('attractionDots');
+            if(dotsContainer && dotsContainer.children.length > 0) {
+                Array.from(dotsContainer.children).forEach((dot, idx) => {
+                    dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentAttractionIndex ? 'bg-luxuryGold w-6' : 'bg-gray-300 hover:bg-gray-400'}`;
+                });
+            }
+        }
 
         function showAdminStatus(message, isError) {
             const container = document.getElementById('adminWorkspaceStatus');
@@ -994,6 +1117,7 @@
                 liveDateEl.value = todayStr;
             }
             seedReviewsSliderMatrixEngine();
+            initAttractionSlider();
             loadStorageState();
         }
 
