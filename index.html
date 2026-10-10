@@ -152,7 +152,6 @@
                 <div class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-600">
                     <a href="#about" class="hover:text-luxuryGold transition-colors">About</a>
                     <a href="#store" class="hover:text-luxuryGold transition-colors">Store</a>
-                    <a href="#cab-booking" class="hover:text-luxuryGold transition-colors">Book Cab</a>
                     <a href="#rooms" class="hover:text-luxuryGold transition-colors">Rooms</a>
                     <a href="#dining" class="hover:text-luxuryGold transition-colors">Dining</a>
                     <a href="#reviews" class="hover:text-luxuryGold transition-colors">Reviews</a>
@@ -184,9 +183,7 @@
         <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-luxuryGold/20 px-4 pt-2 pb-6 space-y-3 absolute top-20 left-0 w-full shadow-xl">
             <a href="#about" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">About</a>
             <a href="#store" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Store</a>
-            <a href="#cab-booking" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Book Cab</a>
             <a href="#rooms" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Rooms</a>
-            <a href="#dining" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Dining</a>
             <a href="#reviews" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Reviews</a>
             <a href="#facilities" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Facilities</a>
             <a href="#attractions" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Attractions</a>
@@ -456,61 +453,6 @@
         </div>
     </section>
 
-    <!-- ================= BOOK CAB SECTION ================= -->
-    <section id="cab-booking" class="max-w-md mx-auto px-4 py-6 scroll-mt-20">
-        <div class="text-center mb-6">
-            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">HIGH ALTITUDE CAB SERVICES</span>
-            <h2 class="luxury-heading text-2xl font-bold text-luxuryText mt-1">Book A Cab</h2>
-            <div class="w-12 h-0.5 bg-luxuryGold mx-auto mt-2"></div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-4 text-xs">
-            <div>
-                <label class="block font-bold text-gray-700 mb-1"><i class="fa-solid fa-route text-luxuryGold mr-1"></i> Select Route</label>
-                <select id="cabRouteSelect" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 font-medium focus:outline-none focus:border-luxuryGold">
-                    <option value="" disabled selected>Select Route</option>
-                    <option value="Manali to Darcha">Manali to Darcha</option>
-                    <option value="Darcha to Manali">Darcha to Manali</option>
-                    <option value="Darcha to Baralacha La">Darcha to Baralacha La (via Deepak Tal)</option>
-                    <option value="Darcha to Shinkula Pass">Darcha to Shinkula Pass</option>
-                    <option value="Darcha to Gombo Ranjan">Darcha to Gombo Ranjan</option>
-                    <option value="Darcha to Ladakh / Leh">Darcha to Ladakh / Leh</option>
-                    <option value="Darcha to Padum (Zanskar)">Darcha to Padum (Zanskar)</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block font-bold text-gray-700 mb-1"><i class="fa-solid fa-car text-luxuryGold mr-1"></i> Vehicle Type</label>
-                <input type="text" value="4x4 Cab (Mandatory for Terrain)" disabled class="w-full border border-gray-200 rounded-xl p-3 bg-gray-50 text-luxuryDarkGold font-bold cursor-not-allowed">
-            </div>
-
-            <!-- TRAVEL DATE & PICKUP TIME - SEPARATE CLEAN BLOCKS -->
-            <div class="space-y-3">
-                <div>
-                    <label class="block font-bold text-gray-700 mb-1"><i class="fa-regular fa-calendar text-luxuryGold mr-1"></i> Travel Date</label>
-                    <input type="date" id="cabDateInput" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 focus:outline-none focus:border-luxuryGold">
-                </div>
-                <div>
-                    <label class="block font-bold text-gray-700 mb-1"><i class="fa-regular fa-clock text-luxuryGold mr-1"></i> Pickup Time</label>
-                    <input type="time" id="cabTimeInput" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 focus:outline-none focus:border-luxuryGold">
-                </div>
-            </div>
-
-            <div>
-                <label class="block font-bold text-gray-700 mb-1"><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Total Passengers</label>
-                <input type="number" id="cabGuestsInput" min="1" max="15" placeholder="Enter number of passengers" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 focus:outline-none focus:border-luxuryGold">
-            </div>
-
-            <div class="bg-amber-50/80 p-3.5 rounded-xl border border-amber-200/80 flex justify-between items-center shadow-xs">
-                <span class="font-bold text-gray-700"><i class="fa-solid fa-tag text-amber-600 mr-1"></i> Fare Estimate:</span>
-                <span class="font-bold text-amber-800 text-xs text-right">- (Custom Quote on WhatsApp)</span>
-            </div>
-
-            <button onclick="openCabCheckoutModal()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Send Cab Booking Request
-            </button>
-        </div>
-    </section>
 
     <!-- ================= DINE IN FOOD SECTION ================= -->
     <section id="dining" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -808,7 +750,6 @@
                     <ul class="space-y-2.5 text-xs text-gray-400 font-medium">
                         <li><a href="#about" class="hover:text-white transition-colors">About Homestay</a></li>
                         <li><a href="#store" class="hover:text-white transition-colors">Lahauli Store</a></li>
-                        <li><a href="#cab-booking" class="hover:text-white transition-colors">Book Cab</a></li>
                         <li><a href="#facilities" class="hover:text-white transition-colors">Amenities & Facilities</a></li>
                         <li><a href="#attractions" class="hover:text-white transition-colors">Nearest Attractions</a></li>
                         <li><a href="#rooms" class="hover:text-white transition-colors">Rooms & Tariffs</a></li>
@@ -1112,62 +1053,6 @@
             let url = `https://wa.me/917876631873?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
             closeStoreCheckoutModal();
-        }
-
-        function openCabCheckoutModal() {
-            let routeSelect = document.getElementById('cabRouteSelect');
-            let route = routeSelect.value;
-            let date = document.getElementById('cabDateInput').value;
-            let time = document.getElementById('cabTimeInput').value;
-
-            if (!route) {
-                alert('Please select a route.');
-                routeSelect.focus();
-                return;
-            }
-
-            if (!date || !time) {
-                alert('Please select travel date and pickup time.');
-                return;
-            }
-
-            document.getElementById('cabCheckoutModal').classList.remove('hidden');
-        }
-
-        function closeCabCheckoutModal() {
-            document.getElementById('cabCheckoutModal').classList.add('hidden');
-        }
-
-        function confirmAndSendCabInquiry() {
-            let name = document.getElementById('cabCustName').value.trim();
-            let phone = document.getElementById('cabCustPhone').value.trim();
-            let address = document.getElementById('cabCustAddress').value.trim();
-
-            if (!name || !phone || !address) {
-                alert('Please fill in your Name, Phone Number, and Pickup Address.');
-                return;
-            }
-
-            let route = document.getElementById('cabRouteSelect').value;
-            let date = document.getElementById('cabDateInput').value;
-            let time = document.getElementById('cabTimeInput').value;
-            let guests = document.getElementById('cabGuestsInput').value || 'Not specified';
-
-            let msg = `Hello! I want to book a 4x4 Cab with The Pahadi Ghar:\n\n`;
-            msg += `👤 Customer Name: ${name}\n`;
-            msg += `📞 Phone Number: ${phone}\n`;
-            msg += `📍 Pickup Address: ${address}\n\n`;
-            msg += `🚗 *Cab Booking Details:*\n`;
-            msg += `• Route: ${route}\n`;
-            msg += `• Vehicle Type: 4x4 Cab (Mandatory for Terrain)\n`;
-            msg += `• Travel Date: ${date}\n`;
-            msg += `• Pickup Time: ${time}\n`;
-            msg += `• Total Passengers: ${guests}\n\n`;
-            msg += `Please confirm availability and share fare quote!`;
-
-            let url = `https://wa.me/917876631873?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
-            closeCabCheckoutModal();
         }
 
         // Nearest Attractions 10 Photos Data Array
