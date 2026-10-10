@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Pahadi Ghar - Darcha | Homestay</title>
     <link rel="icon" type="image/jpeg" href="favicon.png.jpg">
     <meta property="og:image" content="homestay.jpg">
@@ -70,8 +70,13 @@
         .luxury-heading { font-family: 'Cinzel', serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .fab-container:hover .fab-options { opacity: 1; transform: translateY(-10px) scale(1); pointer-events: auto; }
         
+        /* Prevent Auto-zoom on iOS modal inputs only */
+        #storeCheckoutModal input, #storeCheckoutModal textarea,
+        #cabCheckoutModal input, #cabCheckoutModal textarea {
+            font-size: 16px !important;
+        }
+
         /* Custom Switch Toggle Styles for Room 101 */
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px; }
         .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
@@ -146,6 +151,8 @@
 
                 <div class="hidden lg:flex items-center space-x-8 font-medium text-sm text-gray-600">
                     <a href="#about" class="hover:text-luxuryGold transition-colors">About</a>
+                    <a href="#store" class="hover:text-luxuryGold transition-colors">Store</a>
+                    <a href="#cab-booking" class="hover:text-luxuryGold transition-colors">Book Cab</a>
                     <a href="#rooms" class="hover:text-luxuryGold transition-colors">Rooms</a>
                     <a href="#dining" class="hover:text-luxuryGold transition-colors">Dining</a>
                     <a href="#reviews" class="hover:text-luxuryGold transition-colors">Reviews</a>
@@ -176,6 +183,8 @@
 
         <div id="mobileDrawer" class="hidden lg:hidden bg-white border-b border-luxuryGold/20 px-4 pt-2 pb-6 space-y-3 absolute top-20 left-0 w-full shadow-xl">
             <a href="#about" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">About</a>
+            <a href="#store" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Store</a>
+            <a href="#cab-booking" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Book Cab</a>
             <a href="#rooms" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Rooms</a>
             <a href="#dining" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Dining</a>
             <a href="#reviews" onclick="toggleMenu()" class="block py-2 text-base font-medium text-gray-700 hover:text-luxuryGold">Reviews</a>
@@ -217,12 +226,11 @@
                 <span class="text-xs font-bold text-luxuryText">11,020 Feet</span>
             </div>
             <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-    <!-- FontAwesome Bed Icon -->
-    <i class="fa-solid fa-bed text-luxuryGold text-lg mb-1"></i>
-    <span class="text-xs text-gray-400 font-medium">Stay</span>
-    <span class="text-xs font-bold text-luxuryText">Cozy & Comfortable Stay</span>
-</div>
-          <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
+                <i class="fa-solid fa-bed text-luxuryGold text-lg mb-1"></i>
+                <span class="text-xs text-gray-400 font-medium">Stay</span>
+                <span class="text-xs font-bold text-luxuryText">Cozy & Comfortable Stay</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
                 <i class="fa-solid fa-shield-halved text-luxuryGold text-lg mb-1"></i>
                 <span class="text-xs text-gray-400 font-medium">Stay Format</span>
                 <span class="text-xs font-bold text-luxuryText">100% Safe Local Homestay</span>
@@ -333,6 +341,174 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ================= LOCAL STORE SECTION ================= -->
+    <section id="store" class="max-w-md mx-auto px-4 py-8 scroll-mt-20">
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">AUTHENTIC LOCAL PRODUCTS</span>
+            <h2 class="luxury-heading text-2xl font-bold text-luxuryText mt-1">Lahauli Organic Store</h2>
+            <div class="w-12 h-0.5 bg-luxuryGold mx-auto mt-2"></div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
+            <!-- Seabuckthorn Juice 500ml -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Seabuckthorn Juice (500ml)</h4>
+                        <p class="text-xs text-luxuryGold font-bold">₹ 599</p>
+                    </div>
+                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                        <button onclick="changeStoreQty('sb500', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                        <span id="qty_sb500" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                        <button onclick="changeStoreQty('sb500', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    </div>
+                </div>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                    <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-image mr-1"></i> Photo Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- Seabuckthorn Juice 1L -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Seabuckthorn Juice (1 Litre)</h4>
+                        <p class="text-xs text-luxuryGold font-bold">₹ 999</p>
+                    </div>
+                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                        <button onclick="changeStoreQty('sb1000', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                        <span id="qty_sb1000" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                        <button onclick="changeStoreQty('sb1000', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    </div>
+                </div>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                    <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-image mr-1"></i> Photo Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- Lahauli Handcrafted Socks -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Socks</h4>
+                        <p class="text-xs text-luxuryGold font-bold">₹ 300</p>
+                    </div>
+                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                        <button onclick="changeStoreQty('socks', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                        <span id="qty_socks" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                        <button onclick="changeStoreQty('socks', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    </div>
+                </div>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                    <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-image mr-1"></i> Photo Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- Lahauli Handcrafted Gloves -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Gloves</h4>
+                        <p class="text-xs text-luxuryGold font-bold">₹ 250</p>
+                    </div>
+                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                        <button onclick="changeStoreQty('gloves', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                        <span id="qty_gloves" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                        <button onclick="changeStoreQty('gloves', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    </div>
+                </div>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                    <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-image mr-1"></i> Photo Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- Lahauli Handcrafted Mufflers -->
+            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Mufflers</h4>
+                        <p class="text-xs text-luxuryGold font-bold">₹ 350</p>
+                    </div>
+                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                        <button onclick="changeStoreQty('mufflers', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                        <span id="qty_mufflers" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                        <button onclick="changeStoreQty('mufflers', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                    </div>
+                </div>
+                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                    <span class="text-xs text-gray-400 font-semibold"><i class="fa-regular fa-image mr-1"></i> Photo Coming Soon</span>
+                </div>
+            </div>
+
+            <!-- STORE CART SUMMARY -->
+            <div class="border-t border-gray-200 pt-3">
+                <h5 class="text-xs font-bold text-gray-700 uppercase mb-2"><i class="fa-solid fa-basket-shopping text-luxuryGold mr-1"></i> Selected Items Summary:</h5>
+                <div id="storeCartSummary" class="text-xs text-gray-600 italic bg-gray-50 p-3 rounded-xl border border-gray-100 min-h-[48px]">
+                    No items selected yet.
+                </div>
+                <button onclick="openStoreCheckoutModal()" class="mt-3 w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Send Purchase Inquiry
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BOOK CAB SECTION ================= -->
+    <section id="cab-booking" class="max-w-md mx-auto px-4 py-6 scroll-mt-20">
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">HIGH ALTITUDE CAB SERVICES</span>
+            <h2 class="luxury-heading text-2xl font-bold text-luxuryText mt-1">Book A Cab</h2>
+            <div class="w-12 h-0.5 bg-luxuryGold mx-auto mt-2"></div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-4 text-xs">
+            <div>
+                <label class="block font-bold text-gray-700 mb-1"><i class="fa-solid fa-route text-luxuryGold mr-1"></i> Select Route</label>
+                <select id="cabRouteSelect" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 font-medium focus:outline-none focus:border-luxuryGold">
+                    <option value="" disabled selected>Select Route</option>
+                    <option value="Manali to Darcha">Manali to Darcha</option>
+                    <option value="Darcha to Manali">Darcha to Manali</option>
+                    <option value="Darcha to Baralacha La">Darcha to Baralacha La (via Deepak Tal)</option>
+                    <option value="Darcha to Shinkula Pass">Darcha to Shinkula Pass</option>
+                    <option value="Darcha to Gombo Ranjan">Darcha to Gombo Ranjan</option>
+                    <option value="Darcha to Ladakh / Leh">Darcha to Ladakh / Leh</option>
+                    <option value="Darcha to Padum (Zanskar)">Darcha to Padum (Zanskar)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block font-bold text-gray-700 mb-1"><i class="fa-solid fa-car text-luxuryGold mr-1"></i> Vehicle Type</label>
+                <input type="text" value="4x4 Cab (Mandatory for Terrain)" disabled class="w-full border border-gray-200 rounded-xl p-3 bg-gray-50 text-luxuryDarkGold font-bold cursor-not-allowed">
+            </div>
+
+            <!-- TRAVEL DATE & PICKUP TIME - SEPARATE CLEAN BLOCKS -->
+            <div class="space-y-3">
+                <div>
+                    <label class="block font-bold text-gray-700 mb-1"><i class="fa-regular fa-calendar text-luxuryGold mr-1"></i> Travel Date</label>
+                    <input type="date" id="cabDateInput" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 focus:outline-none focus:border-luxuryGold">
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-700 mb-1"><i class="fa-regular fa-clock text-luxuryGold mr-1"></i> Pickup Time</label>
+                    <input type="time" id="cabTimeInput" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 focus:outline-none focus:border-luxuryGold">
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-bold text-gray-700 mb-1"><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Total Passengers</label>
+                <input type="number" id="cabGuestsInput" min="1" max="15" placeholder="Enter number of passengers" class="w-full border border-gray-300 rounded-xl p-3 bg-white text-gray-800 focus:outline-none focus:border-luxuryGold">
+            </div>
+
+            <div class="bg-amber-50/80 p-3.5 rounded-xl border border-amber-200/80 flex justify-between items-center shadow-xs">
+                <span class="font-bold text-gray-700"><i class="fa-solid fa-tag text-amber-600 mr-1"></i> Fare Estimate:</span>
+                <span class="font-bold text-amber-800 text-xs text-right">- (Custom Quote on WhatsApp)</span>
+            </div>
+
+            <button onclick="openCabCheckoutModal()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Send Cab Booking Request
+            </button>
         </div>
     </section>
 
@@ -631,6 +807,8 @@
                     <h4 class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold mb-4">Quick Links</h4>
                     <ul class="space-y-2.5 text-xs text-gray-400 font-medium">
                         <li><a href="#about" class="hover:text-white transition-colors">About Homestay</a></li>
+                        <li><a href="#store" class="hover:text-white transition-colors">Lahauli Store</a></li>
+                        <li><a href="#cab-booking" class="hover:text-white transition-colors">Book Cab</a></li>
                         <li><a href="#facilities" class="hover:text-white transition-colors">Amenities & Facilities</a></li>
                         <li><a href="#attractions" class="hover:text-white transition-colors">Nearest Attractions</a></li>
                         <li><a href="#rooms" class="hover:text-white transition-colors">Rooms & Tariffs</a></li>
@@ -675,15 +853,65 @@
     </footer>
 
     <div class="fixed bottom-7 right-6 z-50 flex flex-col items-center space-y-4">
-    <!-- Call Button (57px) -->
-    <a href="tel:+919418776308" class="flex items-center justify-center w-[57px] h-[57px] rounded-full bg-blue-600 text-white shadow-xl hover:scale-110 transition-transform">
-        <i class="fa-solid fa-phone text-xl"></i>
-    </a>
-    <!-- WhatsApp Button (57px) -->
-    <a href="https://wa.me/917876631873" target="_blank" class="flex items-center justify-center w-[57px] h-[57px] rounded-full bg-emerald-500 text-white shadow-xl hover:scale-110 transition-transform">
-        <i class="fa-brands fa-whatsapp text-2xl"></i>
-    </a>
-</div>
+        <!-- Call Button (57px) -->
+        <a href="tel:+919418776308" class="flex items-center justify-center w-[57px] h-[57px] rounded-full bg-blue-600 text-white shadow-xl hover:scale-110 transition-transform">
+            <i class="fa-solid fa-phone text-xl"></i>
+        </a>
+        <!-- WhatsApp Button (57px) -->
+        <a href="https://wa.me/917876631873" target="_blank" class="flex items-center justify-center w-[57px] h-[57px] rounded-full bg-emerald-500 text-white shadow-xl hover:scale-110 transition-transform">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- ================= STORE CHECKOUT MODAL ================= -->
+    <div id="storeCheckoutModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border flex flex-col p-6 space-y-4 text-xs">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="luxury-heading font-bold text-sm text-luxuryText"><i class="fa-solid fa-basket-shopping text-luxuryGold mr-1"></i> Complete Purchase Inquiry</h3>
+                <button onclick="closeStoreCheckoutModal()" class="text-gray-400 hover:text-black text-lg focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">Your Full Name</label>
+                <input type="text" id="storeCustName" placeholder="Enter your name" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">Phone / WhatsApp Number</label>
+                <input type="tel" id="storeCustPhone" placeholder="Enter phone number" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">Delivery Address</label>
+                <textarea id="storeCustAddress" rows="2" placeholder="Enter your full shipping address" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base"></textarea>
+            </div>
+            <button onclick="confirmAndSendStoreInquiry()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Send Order via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= CAB CHECKOUT MODAL ================= -->
+    <div id="cabCheckoutModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border flex flex-col p-6 space-y-4 text-xs">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="luxury-heading font-bold text-sm text-luxuryText"><i class="fa-solid fa-car text-luxuryGold mr-1"></i> Complete Cab Booking Request</h3>
+                <button onclick="closeCabCheckoutModal()" class="text-gray-400 hover:text-black text-lg focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">Your Full Name</label>
+                <input type="text" id="cabCustName" placeholder="Enter your name" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">Phone / WhatsApp Number</label>
+                <input type="tel" id="cabCustPhone" placeholder="Enter phone number" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base">
+            </div>
+            <div>
+                <label class="block font-bold text-gray-700 mb-1">Pickup Address / Hotel Location</label>
+                <textarea id="cabCustAddress" rows="2" placeholder="Enter your pickup address or hotel name" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base"></textarea>
+            </div>
+            <button onclick="confirmAndSendCabInquiry()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Send Cab Request via WhatsApp
+            </button>
+        </div>
+    </div>
 
     <!-- ================= ADMIN MODAL ================= -->
     <div id="adminModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
@@ -789,6 +1017,158 @@
             familySelected: false,
             standardCount: 0
         };
+
+        let storeItems = {
+            sb500: { name: "Seabuckthorn Juice (500ml)", price: 599, qty: 0, image: "Seabuckthorn Juice 500ml" },
+            sb1000: { name: "Seabuckthorn Juice (1 Litre)", price: 999, qty: 0, image: "Seabuckthorn Juice 1L" },
+            socks: { name: "Lahauli Woolen Socks", price: 300, qty: 0, image: "Woolen Socks Photo Link" },
+            gloves: { name: "Lahauli Woolen Gloves", price: 250, qty: 0, image: "Woolen Gloves Photo Link" },
+            mufflers: { name: "Lahauli Woolen Mufflers", price: 350, qty: 0, image: "Woolen Mufflers Photo Link" }
+        };
+
+        function changeStoreQty(itemKey, delta) {
+            let nextQty = storeItems[itemKey].qty + delta;
+            if (nextQty >= 0) {
+                storeItems[itemKey].qty = nextQty;
+                document.getElementById(`qty_${itemKey}`).innerText = nextQty;
+                updateStoreCartSummary();
+            }
+        }
+
+        function updateStoreCartSummary() {
+            const summaryBox = document.getElementById('storeCartSummary');
+            let selectedList = [];
+            let totalPrice = 0;
+
+            for (let key in storeItems) {
+                let item = storeItems[key];
+                if (item.qty > 0) {
+                    let costStr = item.price > 0 ? ` (₹${item.price * item.qty})` : '';
+                    selectedList.push(`• ${item.name} x ${item.qty}${costStr}`);
+                    totalPrice += item.price * item.qty;
+                }
+            }
+
+            if (selectedList.length === 0) {
+                summaryBox.innerHTML = 'No items selected yet.';
+            } else {
+                let html = selectedList.join('<br>');
+                if (totalPrice > 0) {
+                    html += `<br><strong class="text-luxuryGold font-bold mt-1 inline-block">Estimated Total: ₹${totalPrice}</strong>`;
+                }
+                summaryBox.innerHTML = html;
+            }
+        }
+
+        function openStoreCheckoutModal() {
+            let hasItems = false;
+            for (let key in storeItems) {
+                if (storeItems[key].qty > 0) { hasItems = true; break; }
+            }
+            if (!hasItems) {
+                alert('Please add at least one item to cart before sending inquiry.');
+                return;
+            }
+            document.getElementById('storeCheckoutModal').classList.remove('hidden');
+        }
+
+        function closeStoreCheckoutModal() {
+            document.getElementById('storeCheckoutModal').classList.add('hidden');
+        }
+
+        function confirmAndSendStoreInquiry() {
+            let name = document.getElementById('storeCustName').value.trim();
+            let phone = document.getElementById('storeCustPhone').value.trim();
+            let address = document.getElementById('storeCustAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('Please fill in your Name, Phone Number, and Delivery Address.');
+                return;
+            }
+
+            let selectedList = [];
+            let totalPrice = 0;
+
+            for (let key in storeItems) {
+                let item = storeItems[key];
+                if (item.qty > 0) {
+                    let priceInfo = item.price > 0 ? ` @ ₹${item.price} = ₹${item.price * item.qty}` : '';
+                    selectedList.push(`- ${item.name} x ${item.qty}${priceInfo}`);
+                    totalPrice += item.price * item.qty;
+                }
+            }
+
+            let msg = `Hello! I want to purchase items from The Pahadi Ghar Store:\n\n`;
+            msg += `👤 Customer Name: ${name}\n`;
+            msg += `📞 Phone Number: ${phone}\n`;
+            msg += `📍 Delivery Address: ${address}\n\n`;
+            msg += `📦 *Ordered Items:*\n`;
+            msg += selectedList.join('\n');
+            if (totalPrice > 0) {
+                msg += `\n\n💰 Total Price: ₹${totalPrice}`;
+            }
+            msg += `\n\nPlease confirm my order and share payment details!`;
+
+            let url = `https://wa.me/917876631873?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+            closeStoreCheckoutModal();
+        }
+
+        function openCabCheckoutModal() {
+            let routeSelect = document.getElementById('cabRouteSelect');
+            let route = routeSelect.value;
+            let date = document.getElementById('cabDateInput').value;
+            let time = document.getElementById('cabTimeInput').value;
+
+            if (!route) {
+                alert('Please select a route.');
+                routeSelect.focus();
+                return;
+            }
+
+            if (!date || !time) {
+                alert('Please select travel date and pickup time.');
+                return;
+            }
+
+            document.getElementById('cabCheckoutModal').classList.remove('hidden');
+        }
+
+        function closeCabCheckoutModal() {
+            document.getElementById('cabCheckoutModal').classList.add('hidden');
+        }
+
+        function confirmAndSendCabInquiry() {
+            let name = document.getElementById('cabCustName').value.trim();
+            let phone = document.getElementById('cabCustPhone').value.trim();
+            let address = document.getElementById('cabCustAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('Please fill in your Name, Phone Number, and Pickup Address.');
+                return;
+            }
+
+            let route = document.getElementById('cabRouteSelect').value;
+            let date = document.getElementById('cabDateInput').value;
+            let time = document.getElementById('cabTimeInput').value;
+            let guests = document.getElementById('cabGuestsInput').value || 'Not specified';
+
+            let msg = `Hello! I want to book a 4x4 Cab with The Pahadi Ghar:\n\n`;
+            msg += `👤 Customer Name: ${name}\n`;
+            msg += `📞 Phone Number: ${phone}\n`;
+            msg += `📍 Pickup Address: ${address}\n\n`;
+            msg += `🚗 *Cab Booking Details:*\n`;
+            msg += `• Route: ${route}\n`;
+            msg += `• Vehicle Type: 4x4 Cab (Mandatory for Terrain)\n`;
+            msg += `• Travel Date: ${date}\n`;
+            msg += `• Pickup Time: ${time}\n`;
+            msg += `• Total Passengers: ${guests}\n\n`;
+            msg += `Please confirm availability and share fare quote!`;
+
+            let url = `https://wa.me/917876631873?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+            closeCabCheckoutModal();
+        }
 
         // Nearest Attractions 10 Photos Data Array
         const attractionsData = [
