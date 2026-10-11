@@ -77,12 +77,6 @@
             font-size: 16px !important;
         }
 
-        /* Custom Switch Toggle Styles for Room 101 */
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        input:checked + .slider { background-color: #4ade80; }
-        input:checked + .slider:before { transform: translateX(24px); }
-
         .stay-btn-wrapper {
             position: relative;
             display: block;
@@ -276,10 +270,11 @@
                                     <span id="discount_family" class="bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded"></span>
                                 </div>
                             </div>
-                            <label class="relative inline-block w-12 h-7">
-                                <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
-                                <span class="slider"></span>
-                            </label>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeFamilyCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="familyRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeFamilyCount(1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
                         </div>
                         <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
                             <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="w-full h-full object-cover" alt="Family Room">
@@ -942,7 +937,7 @@
         };
 
         let selections = {
-            familySelected: false,
+            familyCount: 0,
             standardCount: 0
         };
 
@@ -1207,8 +1202,12 @@
             }
         }
 
-        function handleFamilyToggleInteraction() {
-            selections.familySelected = document.getElementById('familySuiteToggle').checked;
+        function changeFamilyCount(amount) {
+            let nextVal = selections.familyCount + amount;
+            if (nextVal >= 0 && nextVal <= 1) { 
+                selections.familyCount = nextVal;
+                document.getElementById('familyRoomsCountDisplay').innerText = selections.familyCount;
+            }
         }
 
         function changeStandardCount(amount) {
