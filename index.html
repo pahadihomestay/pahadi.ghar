@@ -249,62 +249,82 @@
         </div>
     </section>
 
-    <!-- ================= CHOOSE ACCOMMODATION ================= -->
-    <section id="rooms" class="max-w-md mx-auto px-4 py-3 scroll-mt-20">
-        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 pl-1">CHOOSE ACCOMMODATION</h3>
+    <!-- ================= CHOOSE ACCOMMODATION (PC side-by-side grid, Mobile vertical with Strikethrough & % Off Deal) ================= -->
+    <section id="rooms" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-20">
+        <div class="text-center mb-8">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">CHOOSE ACCOMMODATION</span>
+            <h2 class="luxury-heading text-2xl font-bold text-luxuryText mt-1">Rooms & Tariffs</h2>
+            <div class="w-12 h-0.5 bg-luxuryGold mx-auto mt-2"></div>
+        </div>
 
-        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
+        <div class="bg-white rounded-3xl p-6 border border-gray-200/60 shadow-md space-y-6">
             
             <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
 
-            <!-- ROOM 101: FAMILY SUITE CARD -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- ROOM 101: FAMILY SUITE CARD -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
                     <div>
-                        <h4 class="text-sm font-bold text-gray-800">Family Suite</h4>
-                        <p class="text-xs text-gray-500">Max 6 Guests</p>
-                    <p class="text-xs text-gray-500 font-bold" style="color: #C5A880;">₹ <span id="price_family"></span> / night</p>
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Family Suite</h4>
+                                <p class="text-xs text-gray-500">Max 6 Guests</p>
+                                <!-- Deal Price with Strikethrough 4999 and % Off Tag -->
+                                <div class="flex items-center gap-2 mt-1.5 flex-wrap">
+                                    <span class="text-xs text-gray-400 line-through">₹ 4999</span>
+                                    <span class="text-xs font-bold" style="color: #C5A880;">₹ <span id="price_family"></span> / night</span>
+                                    <span id="discount_family" class="bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded"></span>
+                                </div>
+                            </div>
+                            <label class="relative inline-block w-12 h-7">
+                                <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
+                            <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="w-full h-full object-cover" alt="Family Room">
+                            <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">FAMILY SUITE VIEW</div>
+                        </div>
                     </div>
-                    <label class="relative inline-block w-12 h-7">
-                        <input type="checkbox" id="familySuiteToggle" onchange="handleFamilyToggleInteraction()" class="opacity-0 w-0 h-0">
-                        <span class="slider"></span>
-                    </label>
+                    <div class="mt-3 text-[11px] text-gray-500 space-y-0.5">
+                        <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 4-6 Persons | 3 Double Beds</p>
+                        <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+                    </div>
                 </div>
-                <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
-                    <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="w-full h-full object-cover" alt="Family Room">
-                    <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">FAMILY SUITE VIEW</div>
-                </div>
-                <div class="mt-2 text-[11px] text-gray-500 space-y-0.5">
-                    <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 4-6 Persons | 2 Double Beds</p>
-                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+
+                <!-- COZY STANDARD ROOMS CARD -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Cozy Standard Rooms</h4>
+                                <p class="text-xs text-gray-500">Max 3 Guests</p>
+                                <!-- Deal Price with Strikethrough 3499 and % Off Tag -->
+                                <div class="flex items-center gap-2 mt-1.5 flex-wrap">
+                                    <span class="text-xs text-gray-400 line-through">₹ 3499</span>
+                                    <span class="text-xs font-bold" style="color: #C5A880;">₹ <span id="price_standard"></span> / night</span>
+                                    <span id="discount_standard" class="bg-red-100 text-red-700 text-[10px] font-bold px-1.5 py-0.5 rounded"></span>
+                                </div>
+                            </div>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="standardRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeStandardCount(1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
+                            <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="w-full h-full object-cover" alt="Standard Room">
+                            <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">NORMAL ROOM VIEW</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-[11px] text-gray-500 space-y-0.5">
+                        <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 2-3 Persons | 1 Double Bed</p>
+                        <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- COZY STANDARD ROOMS CARD -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Cozy Standard Rooms</h4>
-                        <p class="text-xs text-gray-500">Max 3 Guests</p>
-                      <p class="text-[11px] font-medium" style="color: #C5A880;">₹ <span id="price_standard"></span> / night</p>
-                    </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStandardCount(-1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="standardRoomsCountDisplay" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStandardCount(1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
-                    </div>
-                </div>
-                <div class="relative w-full h-44 rounded-xl overflow-hidden mt-2 bg-gray-100">
-                    <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="w-full h-full object-cover" alt="Standard Room">
-                    <div class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded">NORMAL ROOM VIEW</div>
-                </div>
-                <div class="mt-2 text-[11px] text-gray-500 space-y-0.5">
-                    <p><i class="fa-solid fa-users text-luxuryGold mr-1"></i> Best for 2-3 Persons | 1 Double Bed</p>
-                    <p><i class="fa-solid fa-circle-plus text-luxuryGold mr-1"></i> Extra Mattress &amp; Heater available on request</p>
-                </div>
-            </div>
-
-            <div style="margin: 15px 0; width: 100%; text-align: center;">
+            <div style="margin: 20px 0 0 0; width: 100%; text-align: center;">
                 <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" style="display: block; width: 100%; background-color: #C5A880; color: #ffffff; padding: 14px 0; border-radius: 12px; font-weight: bold; text-transform: uppercase; text-decoration: none; font-size: 14px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     PROCEED TO BOOKING
                 </a>
@@ -340,119 +360,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ================= LOCAL STORE SECTION ================= -->
-    <section id="store" class="max-w-md mx-auto px-4 py-8 scroll-mt-20">
-        <div class="text-center mb-6">
-            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">AUTHENTIC LOCAL PRODUCTS</span>
-            <h2 class="luxury-heading text-2xl font-bold text-luxuryText mt-1">Lahauli Organic Store</h2>
-            <div class="w-12 h-0.5 bg-luxuryGold mx-auto mt-2"></div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-4 border border-gray-200/60 shadow-md space-y-5">
-            <!-- Seabuckthorn Juice 500ml -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Seabuckthorn Juice (500ml)</h4>
-                        <p class="text-xs text-luxuryGold font-bold">₹ 599</p>
-                    </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStoreQty('sb500', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="qty_sb500" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStoreQty('sb500', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
-                    </div>
-                </div>
-                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
-                    <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/n8f00vcy/IMG-4582.jpg" alt="IMG-4582" border="0"></a></span>
-                </div>
-            </div>
-
-            <!-- Seabuckthorn Juice 1L -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Seabuckthorn Juice (1 Litre)</h4>
-                        <p class="text-xs text-luxuryGold font-bold">₹ 999</p>
-                    </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStoreQty('sb1000', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="qty_sb1000" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStoreQty('sb1000', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
-                    </div>
-                </div>
-                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
-                    <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/n8f00vcy/IMG-4582.jpg" alt="IMG-4582" border="0"></a> </span>
-                </div>
-            </div>
-
-            <!-- Lahauli Handcrafted Socks -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Socks</h4>
-                        <p class="text-xs text-luxuryGold font-bold">₹ 300</p>
-                    </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStoreQty('socks', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="qty_socks" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStoreQty('socks', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
-                    </div>
-                </div>
-                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
-                    <span class="text-xs text-gray-400 font-semibold"> <img src="https://i.ibb.co/N2Cw2HtT/IMG-4592.jpg" alt="IMG-4592" border="0"></a></span>
-                </div>
-            </div>
-
-            <!-- Lahauli Handcrafted Gloves -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Gloves</h4>
-                        <p class="text-xs text-luxuryGold font-bold">₹ 250</p>
-                    </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStoreQty('gloves', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="qty_gloves" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStoreQty('gloves', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
-                    </div>
-                </div>
-                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
-                    <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/x8mHfY1B/IMG-4591.jpg" alt="IMG-4591" border="0"></a></span>
-                </div>
-            </div>
-
-            <!-- Lahauli Handcrafted Mufflers -->
-            <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Mufflers</h4>
-                        <p class="text-xs text-luxuryGold font-bold">₹ 350</p>
-                    </div>
-                    <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
-                        <button onclick="changeStoreQty('mufflers', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
-                        <span id="qty_mufflers" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
-                        <button onclick="changeStoreQty('mufflers', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
-                    </div>
-                </div>
-                <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
-                    <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/zV868yh8/IMG-4590.jpg" alt="IMG-4590" border="0"></a></span>
-                </div>
-            </div>
-
-            <!-- STORE CART SUMMARY -->
-            <div class="border-t border-gray-200 pt-3">
-                <h5 class="text-xs font-bold text-gray-700 uppercase mb-2"><i class="fa-solid fa-basket-shopping text-luxuryGold mr-1"></i> Selected Items Summary:</h5>
-                <div id="storeCartSummary" class="text-xs text-gray-600 italic bg-gray-50 p-3 rounded-xl border border-gray-100 min-h-[48px]">
-                    No items selected yet.
-                </div>
-                <button onclick="openStoreCheckoutModal()" class="mt-3 w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-lg"></i> Buy via WhatsApp 
-                </button>
-            </div>
-        </div>
-    </section>
-
 
     <!-- ================= DINE IN FOOD SECTION ================= -->
     <section id="dining" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -495,6 +402,13 @@
 
         <div class="relative w-full flex overflow-x-hidden py-2">
             <div id="reviewRow" class="flex space-x-6 whitespace-nowrap transition-transform duration-500 ease-in-out px-4"></div>
+        </div>
+
+<!-- Google Review Direct Button Added Here -->
+        <div class="text-center mt-10 px-4">
+            <a href="https://g.page/r/CaBS_LvG0eTfEBM/review" target="_blank" class="inline-flex items-center gap-2 bg-white border border-luxuryGold/40 text-luxuryText hover:bg-luxuryGold hover:text-white px-7 py-3 rounded-full font-bold text-xs tracking-wide shadow-sm transition-all">
+                <i class="fa-brands fa-google text-red-500 text-sm"></i> Leave a Review on Google
+            </a>
         </div>
     </section>
 
@@ -558,14 +472,9 @@
         </div>
 
         <div class="bg-white border border-luxuryGold/20 rounded-3xl p-4 sm:p-6 shadow-md relative">
-            <!-- Photo Frame Container -->
             <div class="relative w-full h-72 sm:h-96 rounded-2xl overflow-hidden bg-gray-900 shadow-inner group">
                 <img id="attractionImage" src="" alt="Attraction Photo" class="w-full h-full object-cover transition-opacity duration-500 ease-in-out">
-                
-                <!-- Gradient Overlay for Text Readability -->
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                <!-- Place Name Tag -->
                 <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-luxuryGold bg-black/40 px-2.5 py-1 rounded-full border border-luxuryGold/30">FEATURED SPOTS</span>
@@ -573,8 +482,6 @@
                     </div>
                     <span id="attractionCounter" class="text-xs font-semibold text-gray-300 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full self-start sm:self-auto">1 / 10</span>
                 </div>
-
-                <!-- Navigation Buttons (Prev / Next) -->
                 <button onclick="prevAttractionPhoto()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-luxuryGold text-white flex items-center justify-center transition-all border border-white/20 focus:outline-none shadow-lg">
                     <i class="fa-solid fa-chevron-left text-sm"></i>
                 </button>
@@ -582,8 +489,6 @@
                     <i class="fa-solid fa-chevron-right text-sm"></i>
                 </button>
             </div>
-
-            <!-- Thumbnail Indicators / Dots -->
             <div id="attractionDots" class="flex items-center justify-center gap-1.5 mt-4 flex-wrap"></div>
         </div>
     </section>
@@ -597,7 +502,6 @@
         </div>
         
         <div class="space-y-4">
-            <!-- Q1 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">1. What are the check-in and check-out timings?</h2>
@@ -607,7 +511,6 @@
                     Our standard check-in time is 1:00 PM and check-out time is 11:00 AM. Early check-in or late check-out is subject to availability.
                 </p>
             </details>
-            <!-- Q2 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">2. Is there a heater provided in the rooms?</h2>
@@ -617,7 +520,6 @@
                     Yes, we provide comfortable room heaters upon request to keep you warm and cozy during the cold high-altitude nights.
                 </p>
             </details>
-            <!-- Q3 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">3. Do you have a safe parking space?</h2>
@@ -627,7 +529,6 @@
                     Yes, we offer 100% safe, secure, and free private parking for all our guests' cars and bikes right at the property.
                 </p>
             </details>
-            <!-- Q4 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">4. Is internet or WiFi available at the homestay?</h2>
@@ -637,7 +538,6 @@
                     Yes, we provide free WiFi access for our guests. However, being in a high-altitude area, network speed can sometimes fluctuate.
                 </p>
             </details>
-            <!-- Q5 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">5. Do you serve authentic local Lahauli, Ladakhi food?</h2>
@@ -647,7 +547,6 @@
                     Absolutely! Our kitchen specializes in organic, local Lahauli dishes like Siddu with pure ghee, Thukpa, Mokmoks, and traditional Butter Tea.
                 </p>
             </details>
-            <!-- Q6 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">6. Are the washrooms attached and do they have hot water?</h2>
@@ -657,7 +556,6 @@
                     Yes, all our rooms feature clean, attached western washrooms equipped with geysers to ensure a 24/7 hot water supply.
                 </p>
             </details>
-            <!-- Q7 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">7. How far is Shinkula Pass from your location?</h2>
@@ -667,7 +565,6 @@
                     Shinkula Pass is approximately 38-40 km away from our homestay, making us an ideal basecamp for your journey towards the Zanskar valley.
                 </p>
             </details>
-            <!-- Q8 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">8. Do you help arrange local sightseeing and transport?</h2>
@@ -677,7 +574,6 @@
                     Yes.
                 </p>
             </details>
-            <!-- Q9 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">9. Are medical facilities available nearby?</h2>
@@ -687,7 +583,6 @@
                     Basic first aid is available at the homestay. For more serious emergencies, the nearest major health center is located in Keylong, about 32 km away.
                 </p>
             </details>
-            <!-- Q10 -->
             <details class="group border border-luxuryGold/20 rounded-xl bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
                 <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-luxuryText font-medium text-sm">
                     <h2 class="font-bold">10. Can we book the entire homestay for group trips?</h2>
@@ -715,6 +610,131 @@
             </a>
         </div>
     </section>
+
+<!-- ================= LOCAL STORE SECTION (PC side-by-side grid, Mobile vertical) ================= -->
+    <section id="store" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-20">
+        <div class="text-center mb-10">
+            <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">AUTHENTIC LOCAL PRODUCTS</span>
+            <h2 class="luxury-heading text-3xl font-bold text-luxuryText mt-1">Lahauli Organic Store</h2>
+            <div class="w-16 h-0.5 bg-luxuryGold mx-auto mt-3"></div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border border-gray-200/60 shadow-md space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Seabuckthorn Juice 500ml -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Seabuckthorn Juice (500ml)</h4>
+                                <p class="text-xs text-luxuryGold font-bold">₹ 599</p>
+                            </div>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeStoreQty('sb500', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="qty_sb500" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeStoreQty('sb500', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                            <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/n8f00vcy/IMG-4582.jpg" alt="IMG-4582" class="w-full h-full object-cover"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seabuckthorn Juice 1L -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Seabuckthorn Juice (1 Litre)</h4>
+                                <p class="text-xs text-luxuryGold font-bold">₹ 999</p>
+                            </div>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeStoreQty('sb1000', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="qty_sb1000" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeStoreQty('sb1000', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                            <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/n8f00vcy/IMG-4582.jpg" alt="IMG-4582" class="w-full h-full object-cover"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lahauli Handcrafted Socks -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Socks</h4>
+                                <p class="text-xs text-luxuryGold font-bold">₹ 300</p>
+                            </div>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeStoreQty('socks', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="qty_socks" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeStoreQty('socks', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                            <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/N2Cw2HtT/IMG-4592.jpg" alt="IMG-4592" class="w-full h-full object-cover"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lahauli Handcrafted Gloves -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Gloves</h4>
+                                <p class="text-xs text-luxuryGold font-bold">₹ 250</p>
+                            </div>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeStoreQty('gloves', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="qty_gloves" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeStoreQty('gloves', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                            <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/x8mHfY1B/IMG-4591.jpg" alt="IMG-4591" class="w-full h-full object-cover"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lahauli Handcrafted Mufflers -->
+                <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-800">Lahauli Woolen Mufflers</h4>
+                                <p class="text-xs text-luxuryGold font-bold">₹ 350</p>
+                            </div>
+                            <div class="flex items-center bg-gray-50 border border-gray-200 rounded-xl px-2 py-1 gap-3">
+                                <button onclick="changeStoreQty('mufflers', -1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">−</button>
+                                <span id="qty_mufflers" class="text-sm font-bold text-amber-600 min-w-[12px] text-center">0</span>
+                                <button onclick="changeStoreQty('mufflers', 1)" class="text-lg font-bold text-gray-600 px-1 select-none focus:outline-none">+</button>
+                            </div>
+                        </div>
+                        <div class="relative w-full h-40 rounded-xl overflow-hidden mt-2 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                            <span class="text-xs text-gray-400 font-semibold"><img src="https://i.ibb.co/zV868yh8/IMG-4590.jpg" alt="IMG-4590" class="w-full h-full object-cover"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STORE CART SUMMARY -->
+            <div class="border-t border-gray-200 pt-6">
+                <h5 class="text-xs font-bold text-gray-700 uppercase mb-2"><i class="fa-solid fa-basket-shopping text-luxuryGold mr-1"></i> Selected Items Summary:</h5>
+                <div id="storeCartSummary" class="text-xs text-gray-600 italic bg-gray-50 p-3 rounded-xl border border-gray-100 min-h-[48px]">
+                    No items selected yet.
+                </div>
+                <button onclick="openStoreCheckoutModal()" class="mt-4 w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Buy via WhatsApp 
+                </button>
+            </div>
+        </div>
+    </section>
+
 
     <!-- ================= FOOTER ================= -->
     <footer id="contact" class="bg-luxuryDarkBg text-gray-300 py-16 px-6 sm:px-8 border-t-2 border-luxuryGold/20">
@@ -794,11 +814,9 @@
     </footer>
 
     <div class="fixed bottom-7 right-6 z-50 flex flex-col items-center space-y-4">
-        <!-- Call Button (57px) -->
         <a href="tel:+919418776308" class="flex items-center justify-center w-[57px] h-[57px] rounded-full bg-blue-600 text-white shadow-xl hover:scale-110 transition-transform">
             <i class="fa-solid fa-phone text-xl"></i>
         </a>
-        <!-- WhatsApp Button (57px) -->
         <a href="https://wa.me/917876631873" target="_blank" class="flex items-center justify-center w-[57px] h-[57px] rounded-full bg-emerald-500 text-white shadow-xl hover:scale-110 transition-transform">
             <i class="fa-brands fa-whatsapp text-2xl"></i>
         </a>
@@ -829,31 +847,6 @@
         </div>
     </div>
 
-    <!-- ================= CAB CHECKOUT MODAL ================= -->
-    <div id="cabCheckoutModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
-        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border flex flex-col p-6 space-y-4 text-xs">
-            <div class="flex items-center justify-between border-b pb-3">
-                <h3 class="luxury-heading font-bold text-sm text-luxuryText"><i class="fa-solid fa-car text-luxuryGold mr-1"></i> Complete Cab Booking Request</h3>
-                <button onclick="closeCabCheckoutModal()" class="text-gray-400 hover:text-black text-lg focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div>
-                <label class="block font-bold text-gray-700 mb-1">Your Full Name</label>
-                <input type="text" id="cabCustName" placeholder="Enter your name" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base">
-            </div>
-            <div>
-                <label class="block font-bold text-gray-700 mb-1">Phone / WhatsApp Number</label>
-                <input type="tel" id="cabCustPhone" placeholder="Enter phone number" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base">
-            </div>
-            <div>
-                <label class="block font-bold text-gray-700 mb-1">Pickup Address / Hotel Location</label>
-                <textarea id="cabCustAddress" rows="2" placeholder="Enter your pickup address or hotel name" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:border-luxuryGold text-base"></textarea>
-            </div>
-            <button onclick="confirmAndSendCabInquiry()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all text-xs uppercase flex items-center justify-center gap-2">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Send Cab Request via WhatsApp
-            </button>
-        </div>
-    </div>
-
     <!-- ================= ADMIN MODAL ================= -->
     <div id="adminModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs">
         <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl border flex flex-col">
@@ -864,7 +857,6 @@
                 <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl focus:outline-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- Login Section with Inline Error -->
             <div id="adminAuthBlock" class="p-8 flex-grow flex flex-col items-center justify-center space-y-4 max-w-sm mx-auto w-full">
                 <i class="fa-solid fa-fingerprint text-4xl text-luxuryGold mb-1"></i>
                 <h4 class="luxury-heading font-bold text-xs uppercase tracking-wide">Enter Username & Password</h4>
@@ -874,12 +866,8 @@
                 <button onclick="processAdminLogin()" class="w-full bg-luxuryGold hover:bg-luxuryDarkGold text-white py-2.5 rounded-lg font-bold text-xs uppercase transition-all">Login</button>
             </div>
 
-            <!-- Dashboard Content Section -->
             <div id="adminPanelWorkspace" class="hidden flex-grow overflow-y-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-gray-50">
-                
-                <!-- Left Control Box -->
                 <div class="lg:col-span-5 bg-white p-4 rounded-2xl border border-gray-200 shadow-xs space-y-4 text-xs font-medium">
-                    
                     <div id="adminWorkspaceStatus" class="hidden text-xs font-bold p-3 rounded-xl text-center"></div>
 
                     <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1"><i class="fa-solid fa-calendar-minus text-amber-600"></i> Date Locking Operations</h4>
@@ -923,7 +911,6 @@
                     </button>
                 </div>
 
-                <!-- Right Display Grid/Registry Box -->
                 <div class="lg:col-span-7 space-y-4">
                     <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
                         <h4 class="text-sm font-bold border-b pb-2 text-gray-800 flex items-center gap-1 mb-2"><i class="fa-solid fa-list-check text-indigo-600"></i> Active Locked Blocks Registry</h4>
@@ -947,7 +934,7 @@
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT ENGINE WITH FIREBASE SYNC ================= -->
+    <!-- ================= JAVASCRIPT ENGINE WITH FIREBASE SYNC & DISCOUNT CALCULATOR ================= -->
     <script>
         let state = {
             bookings: [], 
@@ -1055,7 +1042,6 @@
             closeStoreCheckoutModal();
         }
 
-        // Nearest Attractions 10 Photos Data Array
         const attractionsData = [
             { name: "Baralacha La Pass", image: "https://i.ibb.co/F4RPCxLk/IMG-1724.jpg" },
             { name: "Shinkula Top", image: "https://i.ibb.co/PGYZJ2fB/IMG-1736.jpg" },
@@ -1191,11 +1177,34 @@
             localStorage.setItem('THE_PAHADI_GHAR_SECURE_STATE', JSON.stringify(state));
         }
 
+        // Sync UI rates and automatically calculate discount percentages against original strike prices (Family: 4999, Standard: 3499)
         function syncUIRates() {
-            document.getElementById('price_family').innerText = state.prices.family;
-            document.getElementById('price_standard').innerText = state.prices.standard;
-            document.getElementById('inputPriceFamily').value = state.prices.family;
-            document.getElementById('inputPriceStandard').value = state.prices.standard;
+            let famPrice = state.prices.family;
+            let stdPrice = state.prices.standard;
+
+            document.getElementById('price_family').innerText = famPrice;
+            document.getElementById('price_standard').innerText = stdPrice;
+            document.getElementById('inputPriceFamily').value = famPrice;
+            document.getElementById('inputPriceStandard').value = stdPrice;
+
+            const origFamily = 4999;
+            const origStandard = 3499;
+
+            if (famPrice < origFamily) {
+                let famDisc = Math.round(((origFamily - famPrice) / origFamily) * 100);
+                document.getElementById('discount_family').innerText = `${famDisc}% OFF`;
+                document.getElementById('discount_family').style.display = 'inline-block';
+            } else {
+                document.getElementById('discount_family').style.display = 'none';
+            }
+
+            if (stdPrice < origStandard) {
+                let stdDisc = Math.round(((origStandard - stdPrice) / origStandard) * 100);
+                document.getElementById('discount_standard').innerText = `${stdDisc}% OFF`;
+                document.getElementById('discount_standard').style.display = 'inline-block';
+            } else {
+                document.getElementById('discount_standard').style.display = 'none';
+            }
         }
 
         function handleFamilyToggleInteraction() {
@@ -1226,7 +1235,6 @@
         function toggleMenu() { document.getElementById('mobileDrawer').classList.toggle('hidden'); }
         document.getElementById('mobileMenuBtn').addEventListener('click', toggleMenu);
 
-        // Updated Real-time status update matching strict singular/plural format requirements
         function updateLiveStatusDisplay() {
             const selectedDateInput = document.getElementById('liveCheckDate');
             if(!selectedDateInput || !selectedDateInput.value) return;
@@ -1235,7 +1243,6 @@
             let standardBookedCount = 0;
             let familyBooked = false;
 
-            // Check bookings for the chosen date
             for(let b of state.bookings) {
                 if(new Date(selectedDate) >= new Date(b.checkIn) && new Date(selectedDate) < new Date(b.checkOut)) {
                     let rNum = Number(b.roomNum);
@@ -1287,7 +1294,6 @@
                 document.getElementById('adminAuthBlock').classList.add('hidden');
                 document.getElementById('adminPanelWorkspace').classList.remove('hidden');
                 
-                // Get exact local date string for admin inputs
                 const todayStr = new Date().toLocaleDateString('en-CA');
                 document.getElementById('calendarMatrixMonthSelector').value = todayStr.slice(0, 7);
                 document.getElementById('lockInDate').value = todayStr;
@@ -1485,7 +1491,6 @@
             }, 1500);
         }
 
-        // Auto initialize live status immediately when page scripts load
         function initPageOnLoad() {
             const todayStr = new Date().toLocaleDateString('en-CA');
             const liveDateEl = document.getElementById('liveCheckDate');
