@@ -71,7 +71,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Prevent Auto-zoom on iOS modal inputs only */
         #storeCheckoutModal input, #storeCheckoutModal textarea,
         #cabCheckoutModal input, #cabCheckoutModal textarea {
             font-size: 16px !important;
@@ -82,7 +81,7 @@
             display: block;
             width: 100%;
             max-width: 28rem;
-            margin: 16px auto 16px auto; 
+            margin: 20px auto 16px auto; 
         }
 
         @keyframes cursorBounceAnim {
@@ -127,6 +126,19 @@
             box-shadow: 0 6px 12px rgba(197,168,128,0.3);
             transition: transform 0.15s ease, background-color 0.2s ease;
             animation: btnPressEffect 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gold-pill {
+            background-color: rgba(197, 168, 128, 0.12);
+            color: #A38456;
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
     </style>
 </head>
@@ -194,45 +206,109 @@
         </div>
     </nav>
 
-    <!-- ================= LIVE STATUS BAR ================= -->
-    <section class="bg-amber-50/70 border-b border-amber-200/50 py-3 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-sm">
-            <div class="flex items-center gap-2 font-medium text-gray-700">
-                <i class="fa-solid fa-calendar-check text-luxuryDarkGold animate-pulse"></i>
-                <span>Check Live Availability</span>
+    <!-- ================= FULL WIDTH HERO SLIDER (NO CURVES) ================= -->
+    <section class="w-full relative">
+        <div class="relative w-full h-72 sm:h-[450px] bg-black">
+            <div id="heroSliderTrack" class="w-full h-full relative">
+                <!-- Slide 1 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-100">
+                    <img src="https://i.ibb.co/99Ld3nYc/IMG-1601.jpg" class="w-full h-full object-cover" alt="Family Suite Room">
+                    <div class="absolute bottom-6 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md font-medium backdrop-blur-xs">Family Suite Room</div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                    <img src="https://i.ibb.co/ZRMycKTZ/IMG-1599.jpg" class="w-full h-full object-cover" alt="Cozy Standard Room">
+                    <div class="absolute bottom-6 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md font-medium backdrop-blur-xs">Cozy Standard Room</div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                    <img src="https://i.ibb.co/gbxTfr0y/IMG-1603.jpg" class="w-full h-full object-cover" alt="Property Scenery">
+                    <div class="absolute bottom-6 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md font-medium backdrop-blur-xs">Mountain Scenery</div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                    <img src="https://i.ibb.co/Kjdy5bJg/IMG-20250609-154210736-Original.jpg" class="w-full h-full object-cover" alt="High Altitude Landscape">
+                    <div class="absolute bottom-6 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md font-medium backdrop-blur-xs">High Altitude Views</div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                    <img src="https://i.ibb.co/d4w3D4Fy/IMG-1392.jpg" class="w-full h-full object-cover" alt="Local Meals">
+                    <div class="absolute bottom-6 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md font-medium backdrop-blur-xs">Organic Lahauli Meals</div>
+                </div>
+                <!-- Slide 6 -->
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                    <img src="https://i.ibb.co/ynRYLkvH/IMG-1393.jpg" class="w-full h-full object-cover" alt="Traditional Food">
+                    <div class="absolute bottom-6 left-4 bg-black/60 text-white text-xs px-3 py-1 rounded-md font-medium backdrop-blur-xs">Authentic Delicacies</div>
+                </div>
             </div>
-            <div class="flex items-center gap-3">
-                <input type="date" id="liveCheckDate" onchange="updateLiveStatusDisplay()" class="bg-white border border-luxuryGold/30 text-xs rounded px-2 py-1 focus:outline-none">
-                <span id="liveStatusBadge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Loading slots...</span>
+
+            <!-- Slide Progress Indicators -->
+            <div id="heroSliderIndicators" class="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 px-4 z-10">
+                <div class="hero-dot w-8 h-1 rounded-full bg-white transition-all"></div>
+                <div class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></div>
+                <div class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></div>
+                <div class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></div>
+                <div class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></div>
+                <div class="hero-dot w-8 h-1 rounded-full bg-white/40 transition-all"></div>
             </div>
         </div>
     </section>
 
-    <!-- ================= STATIC INFORMATION BANNER ICONS ================= -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border border-luxuryGold/20 rounded-2xl p-4 shadow-sm text-center">
-            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-                <i class="fa-solid fa-circle-info text-luxuryGold text-lg mb-1"></i>
-                <span class="text-xs text-gray-400 font-medium">Altitude</span>
-                <span class="text-xs font-bold text-luxuryText">11,020 Feet</span>
+    <!-- ================= PROPERTY DETAILS & GOLD BADGES ================= -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-5">
+        <div class="space-y-3 bg-white p-4 rounded-2xl shadow-xs border border-luxuryGold/10">
+            <!-- Custom Gold Badges -->
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="gold-pill"><i class="fa-solid fa-heart text-[10px]"></i> Couple Friendly</span>
+                <span class="gold-pill"><i class="fa-solid fa-rotate-left text-[10px]"></i> Refundable</span>
+                <span class="gold-pill"><i class="fa-solid fa-people-group text-[10px]"></i> Family Friendly</span>
+                <span class="gold-pill"><i class="fa-solid fa-bed text-[10px]"></i> Cozy Stay</span>
+                <span class="gold-pill"><i class="fa-solid fa-shield-halved text-[10px]"></i> 100% Safe Local Homestay</span>
+                <span class="gold-pill"><i class="fa-solid fa-mountain text-[10px]"></i> Altitude: 11,020 Feet</span>
+                <span class="gold-pill"><i class="fa-solid fa-utensils text-[10px]"></i> Home Cooked Food</span>
             </div>
-            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-                <i class="fa-solid fa-bed text-luxuryGold text-lg mb-1"></i>
-                <span class="text-xs text-gray-400 font-medium">Stay</span>
-                <span class="text-xs font-bold text-luxuryText">Cozy & Comfortable Stay</span>
+
+            <!-- Title -->
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight leading-snug pt-1">
+                Pahadi Homestay Darcha
+            </h1>
+
+            <!-- Location with Google Map Link -->
+            <div class="flex items-center gap-2 text-sm text-gray-600 font-medium">
+                <span>Darcha, Himachal Pradesh</span>
+                <a href="https://maps.app.goo.gl/VjSTarWJenUzgJJQ9?g_st=ic" target="_blank" class="text-luxuryDarkGold font-bold hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-map-location-dot"></i> Map View
+                </a>
             </div>
-            <div class="flex flex-col items-center justify-center p-2 border-r border-gray-100 last:border-none">
-                <i class="fa-solid fa-shield-halved text-luxuryGold text-lg mb-1"></i>
-                <span class="text-xs text-gray-400 font-medium">Stay Format</span>
-                <span class="text-xs font-bold text-luxuryText">100% Safe Local Homestay</span>
-            </div>
-            <div class="flex flex-col items-center justify-center p-2 last:border-none">
-                <i class="fa-solid fa-route text-luxuryGold text-lg mb-1"></i>
-                <span class="text-xs text-gray-400 font-medium">Location</span>
-                <span class="text-xs font-bold text-luxuryText">Darcha, Manali-Leh Highway</span>
+
+            <!-- Rating Badge -->
+            <div class="flex items-center gap-2.5 pt-0.5">
+                <div class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-md flex items-center gap-1">
+                    <span>4.9</span> <i class="fa-solid fa-star text-[10px]"></i>
+                </div>
+                <span class="text-xs font-bold text-emerald-800">100+ Ratings</span>
             </div>
         </div>
+    </section>
 
+    <!-- ================= LIVE STATUS BAR (MOVED BELOW PHOTOS & BADGES) ================= -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div class="bg-amber-50/80 border border-luxuryGold/30 rounded-2xl py-3 px-4 shadow-xs">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-sm">
+                <div class="flex items-center gap-2 font-medium text-gray-700">
+                    <i class="fa-solid fa-calendar-check text-luxuryDarkGold animate-pulse"></i>
+                    <span>Check Live Availability</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <input type="date" id="liveCheckDate" onchange="updateLiveStatusDisplay()" class="bg-white border border-luxuryGold/30 text-xs rounded px-2 py-1 focus:outline-none">
+                    <span id="liveStatusBadge" class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">Loading slots...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BOOK YOUR STAY BUTTON ================= -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="stay-btn-wrapper">
             <a href="https://pahadihomestay.github.io/bookingform/" target="_blank" class="animated-stay-btn">
                 BOOK YOUR STAY
@@ -243,7 +319,7 @@
         </div>
     </section>
 
-    <!-- ================= CHOOSE ACCOMMODATION (PC side-by-side grid, Mobile vertical with Strikethrough & % Off Deal) ================= -->
+    <!-- ================= CHOOSE ACCOMMODATION ================= -->
     <section id="rooms" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-20">
         <div class="text-center mb-8">
             <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">CHOOSE ACCOMMODATION</span>
@@ -252,18 +328,16 @@
         </div>
 
         <div class="bg-white rounded-3xl p-6 border border-gray-200/60 shadow-md space-y-6">
-            
             <div id="bookingValidationError" class="hidden text-xs bg-red-50 text-red-700 p-2.5 rounded-xl font-semibold text-center"></div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- ROOM 101: FAMILY SUITE CARD -->
+                <!-- FAMILY SUITE CARD -->
                 <div class="border border-gray-100 bg-white rounded-xl p-4 shadow-xs flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start mb-3">
                             <div>
                                 <h4 class="text-sm font-bold text-gray-800">Family Suite</h4>
                                 <p class="text-xs text-gray-500">Max 6 Guests</p>
-                                <!-- Deal Price with Strikethrough 4999 and % Off Tag -->
                                 <div class="flex items-center gap-2 mt-1.5 flex-wrap">
                                     <span class="text-xs text-gray-400 line-through">₹ 4999</span>
                                     <span class="text-xs font-bold" style="color: #C5A880;">₹ <span id="price_family"></span> / night</span>
@@ -294,7 +368,6 @@
                             <div>
                                 <h4 class="text-sm font-bold text-gray-800">Cozy Standard Rooms</h4>
                                 <p class="text-xs text-gray-500">Max 3 Guests</p>
-                                <!-- Deal Price with Strikethrough 3499 and % Off Tag -->
                                 <div class="flex items-center gap-2 mt-1.5 flex-wrap">
                                     <span class="text-xs text-gray-400 line-through">₹ 3499</span>
                                     <span class="text-xs font-bold" style="color: #C5A880;">₹ <span id="price_standard"></span> / night</span>
@@ -399,7 +472,6 @@
             <div id="reviewRow" class="flex space-x-6 whitespace-nowrap transition-transform duration-500 ease-in-out px-4"></div>
         </div>
 
-<!-- Google Review Direct Button Added Here -->
         <div class="text-center mt-10 px-4">
             <a href="https://g.page/r/CaBS_LvG0eTfEBM/review" target="_blank" class="inline-flex items-center gap-2 bg-white border border-luxuryGold/40 text-luxuryText hover:bg-luxuryGold hover:text-white px-7 py-3 rounded-full font-bold text-xs tracking-wide shadow-sm transition-all">
                 <i class="fa-brands fa-google text-red-500 text-sm"></i> Leave a Review on Google
@@ -606,7 +678,7 @@
         </div>
     </section>
 
-<!-- ================= LOCAL STORE SECTION (PC side-by-side grid, Mobile vertical) ================= -->
+    <!-- ================= LOCAL STORE SECTION ================= -->
     <section id="store" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-20">
         <div class="text-center mb-10">
             <span class="text-xs uppercase font-extrabold tracking-widest text-luxuryGold block">AUTHENTIC LOCAL PRODUCTS</span>
@@ -729,7 +801,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- ================= FOOTER ================= -->
     <footer id="contact" class="bg-luxuryDarkBg text-gray-300 py-16 px-6 sm:px-8 border-t-2 border-luxuryGold/20">
@@ -929,7 +1000,7 @@
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT ENGINE WITH FIREBASE SYNC & DISCOUNT CALCULATOR ================= -->
+    <!-- ================= JAVASCRIPT ENGINE ================= -->
     <script>
         let state = {
             bookings: [], 
@@ -948,6 +1019,34 @@
             gloves: { name: "Lahauli Woolen Gloves", price: 250, qty: 0, image: "Woolen Gloves Photo Link" },
             mufflers: { name: "Lahauli Woolen Mufflers", price: 350, qty: 0, image: "Woolen Mufflers Photo Link" }
         };
+
+        /* 3-Second Automatic Hero Image Slider Engine */
+        let currentHeroIndex = 0;
+        let heroTimer = null;
+
+        function startHeroSlider() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.hero-dot');
+            if (!slides.length) return;
+
+            heroTimer = setInterval(() => {
+                slides[currentHeroIndex].classList.remove('opacity-100');
+                slides[currentHeroIndex].classList.add('opacity-0');
+                if (dots[currentHeroIndex]) {
+                    dots[currentHeroIndex].classList.remove('bg-white');
+                    dots[currentHeroIndex].classList.add('bg-white/40');
+                }
+
+                currentHeroIndex = (currentHeroIndex + 1) % slides.length;
+
+                slides[currentHeroIndex].classList.remove('opacity-0');
+                slides[currentHeroIndex].classList.add('opacity-100');
+                if (dots[currentHeroIndex]) {
+                    dots[currentHeroIndex].classList.remove('bg-white/40');
+                    dots[currentHeroIndex].classList.add('bg-white');
+                }
+            }, 3000);
+        }
 
         function changeStoreQty(itemKey, delta) {
             let nextQty = storeItems[itemKey].qty + delta;
@@ -1172,7 +1271,6 @@
             localStorage.setItem('THE_PAHADI_GHAR_SECURE_STATE', JSON.stringify(state));
         }
 
-        // Sync UI rates and automatically calculate discount percentages against original strike prices (Family: 4999, Standard: 3499)
         function syncUIRates() {
             let famPrice = state.prices.family;
             let stdPrice = state.prices.standard;
@@ -1496,6 +1594,7 @@
             if(liveDateEl) {
                 liveDateEl.value = todayStr;
             }
+            startHeroSlider();
             seedReviewsSliderMatrixEngine();
             initAttractionSlider();
             loadStorageState();
@@ -1511,3 +1610,4 @@
     </script>
 </body>
 </html>
+
